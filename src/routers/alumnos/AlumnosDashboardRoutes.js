@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 
-import { AlumnosHomeScreen } from '../../components/alumnos/AlumnosHomeScreen';
-import { AlumnosNavBar } from '../../components/alumnos/AlumnosNavBar';
+import { AlumnosHomeScreen } from 'components/alumnos/AlumnosHomeScreen';
+import { AlumnosNavBar } from 'components/alumnos/AlumnosNavBar';
 
 export const AlumnosDashboardRoutes = () => {
   return (
@@ -9,7 +9,7 @@ export const AlumnosDashboardRoutes = () => {
       <AlumnosNavBar />
       <Routes>
         {/* <Route path="/asistencia" element={<AlumnosHomeScreen />} /> */}
-        <Route path="/" element={<AlumnosHomeScreen />} />
+        <Route path="/alumnos" element={<AlumnosHomeScreen />} />
         {/* <Route path="/login" element={<AlumnosHomeScreen />} /> */}
         {/* <Route path="/*" element={<AlumnosDashboardRoutes />} /> */}
 
