@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 
-import { AlumnosLoginScreen } from '../../components/alumnos/AlumnosLoginScreen';
+import { AlumnosLoginScreen } from 'components/alumnos/AlumnosLoginScreen';
 import { AlumnosDashboardRoutes } from './AlumnosDashboardRoutes';
 
 

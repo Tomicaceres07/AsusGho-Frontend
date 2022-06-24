@@ -1,6 +1,6 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
-import { RedirectScreen } from '../components/redirects/RedirectScreen';
+import { RedirectScreen } from 'components/redirects/RedirectScreen';
 import { AlumnosAppRouter } from './alumnos/AlumnosAppRouter';
 import { ProfesoresAppRouter } from './profesores/ProfesoresAppRouter';
 

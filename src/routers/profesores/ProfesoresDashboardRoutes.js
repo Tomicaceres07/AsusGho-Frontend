@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 
-import { ProfesoresHomeScreen } from '../../components/profesores/ProfesoresHomeScreen';
-import { ProfesoresNavBar } from '../../components/profesores/ProfesoresNavBar';
+import { ProfesoresHomeScreen } from 'components/profesores/ProfesoresHomeScreen';
+import { ProfesoresNavBar } from 'components/profesores/ProfesoresNavBar';
 
 
 export const ProfesoresDashboardRoutes = () => {
