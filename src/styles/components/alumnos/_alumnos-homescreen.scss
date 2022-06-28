@@ -55,13 +55,45 @@ body::before {
     background-color: $gray;
     color: white;
     min-height: 100vh;
+    height: fit-content;
 
     #board-title {
+        // background-color: green;
         font-size: 3em;
-        margin-top: 50px;
-        position: relative;
+        // position: relative;
+        padding: 50px;
         text-align: center;
         text-transform: uppercase;
-        top: 2em;
+        top: 1.7em;
     }
+
+    #board-week {
+        background-color: $dark-gray;
+        margin: 0px auto;
+        text-align: center;
+        top: 10em;
+        // position: relative;
+        width: 25%;
+
+        #board-padding {
+            padding: 3em;
+
+            .board-name {
+                text-transform: uppercase;
+            }
+
+            .board-task {
+                margin-bottom: 30px;
+            }
+
+            #last-task {
+                margin-bottom: 0px!important;
+            }
+        }
+    }
+}
+
+.separator {
+    background-color: transparent;
+    height: 20em;
 }
