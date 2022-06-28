@@ -5,10 +5,22 @@ import { Link, NavLink } from 'react-router-dom';
 import logo from "assets/logo.png";
 
 export const AlumnosNavBar = () => {
+
+  
+  window.addEventListener('scroll', () => {
+    let scroll = window.pageYOffset;
+    console.log(scroll);
+    const nav = document.getElementById('nav');
+
+    (scroll > 0)
+      ? nav.classList.add('background-rgba')
+      : nav.classList.remove('background-rgba')
+  });
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav id="nav" className="navbar navbar-expand-lg navbar-dark sticky-top background-rgba">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/alumnos">
+        <Link className="navbar-brand" to="alumnos">
           <img src={logo} alt="Logo" className="logo"/>
         </Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
