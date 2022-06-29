@@ -31,7 +31,7 @@ export const AlumnosHomeScreen = () => {
               <p className="home__board-task">Examen Matemática</p>
               <h4 className="home__board-day">Martes</h4>
               <p className="home__board-task">Acto de Malvinas</p>
-              <h4 className="home__board-day">Miércoles</h4>
+              <h4 className="home__board-day">Miercoles</h4>
               <p className="home__board-task">Feriado</p>
               <h4 className="home__board-day">Jueves</h4>
               <p className="home__board-task">Visita a la UCC</p>
