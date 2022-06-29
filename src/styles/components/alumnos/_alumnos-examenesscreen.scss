@@ -1,0 +1,89 @@
+
+
+
+
+#exams__home {
+    align-items: center;
+    color: white!important;
+    justify-content: center;
+    margin: 0px auto;
+    min-height: 100vh;
+    width: 82%;
+    z-index: 3;
+    // overflow: hidden;
+
+    #exams__title {
+        font-size: 4.5em;
+        position: absolute;
+        text-transform: uppercase;
+        top: 40%;
+    }
+    
+    #exams__subtitle {
+        position: absolute;
+        top: 75%;
+        margin-left: .2em;
+    }
+}
+
+#exams__board {
+    background-color: $gray;
+    color: white;
+    height: auto;
+    padding-top: 3em;
+    padding-bottom: 3em;
+
+    #exams__board-title {
+        // background-color: green;
+        font-size: 3em;
+        // position: relative;
+        padding: 50px;
+        text-align: center;
+        text-transform: uppercase;
+        top: 1.7em;
+    }
+
+    #exams__board-week {
+        background-color: $dark-gray;
+        margin: 0px auto;
+        text-align: center;
+        top: 10em;
+        // position: relative;
+        width: 80%;
+
+        #exams__board-padding {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 2em;
+
+            .exams__board-subject-container {
+                // border: 1px solid white;
+                padding: .5em;
+                margin: 1em;
+                width: calc(100% * (1/4));
+
+                .exams__board-subject {
+                    // border: 1px solid green;
+                    font-size: 2em;
+                    margin-bottom: .5em;
+                    text-transform: uppercase;
+                }
+                
+                .exams__board-exam {
+                    background-color: transparent;
+                    border-radius: 20px;
+                    color: rgb(255, 56, 56);
+                    // padding: .5em;
+                    margin-bottom: 1em;
+                    transition: all .3s;
+                }
+            }
+        }
+    }
+}
+
+.exams__separator {
+    background-color: transparent;
+    height: 20em;
+}
