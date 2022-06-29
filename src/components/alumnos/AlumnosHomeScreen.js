@@ -27,34 +27,34 @@ export const AlumnosHomeScreen = () => {
         <h2 id="board-title">Tablero</h2>
         <div id="board-week">
           <div id="board-padding">
-              <h4 className="board-name">Lunes</h4>
+              <h4 className="board-day">Lunes</h4>
               <p className="board-task">Examen Matemática</p>
-              <h4 className="board-name">Martes</h4>
+              <h4 className="board-day">Martes</h4>
               <p className="board-task">Acto de Malvinas</p>
-              <h4 className="board-name">Miércoles</h4>
+              <h4 className="board-day">Miércoles</h4>
               <p className="board-task">Feriado</p>
-              <h4 className="board-name">Jueves</h4>
+              <h4 className="board-day">Jueves</h4>
               <p className="board-task">Visita a la UCC</p>
-              <h4 className="board-name">Viernes</h4>
+              <h4 className="board-day">Viernes</h4>
               <p id="last-task">Presentación informática</p>
           </div>
         </div>
       </section>
       <div className="separator"></div>
-      <section id="board">
-        <h2 id="board-title">Tablero</h2>
-        <div id="board-week">
-          <div id="board-padding">
-              <h4 className="board-name">Lunes</h4>
-              <p className="board-task">Examen Matemática</p>
-              <h4 className="board-name">Martes</h4>
-              <p className="board-task">Acto de Malvinas</p>
-              <h4 className="board-name">Miércoles</h4>
-              <p className="board-task">Feriado</p>
-              <h4 className="board-name">Jueves</h4>
-              <p className="board-task">Visita a la UCC</p>
-              <h4 className="board-name">Viernes</h4>
-              <p id="last-task">Presentación informática</p>
+      <section id="menu">
+        <h2 id="menu-title">Menú</h2>
+        <div id="menu-week">
+          <div id="menu-padding">
+              <h4 className="menu-day">Lunes</h4>
+              <p className="menu-name">Carne al horno con papas</p>
+              <h4 className="menu-day">Martes</h4>
+              <p className="menu-name">Ñoquis con salsa boloñesa</p>
+              <h4 className="menu-day">Miércoles</h4>
+              <p className="menu-name">Pastel de papa</p>
+              <h4 className="menu-day">Jueves</h4>
+              <p className="menu-name">Pizza</p>
+              <h4 className="menu-day">Viernes</h4>
+              <p id="last-name">Milanesa con puré</p>
           </div>
         </div>
       </section>

@@ -51,13 +51,15 @@ body::before {
     }
 }
 
-#board {
+#board, 
+#menu {
     background-color: $gray;
     color: white;
     min-height: 100vh;
     height: fit-content;
 
-    #board-title {
+    #board-title,
+    #menu-title {
         // background-color: green;
         font-size: 3em;
         // position: relative;
@@ -67,7 +69,8 @@ body::before {
         top: 1.7em;
     }
 
-    #board-week {
+    #board-week,
+    #menu-week {
         background-color: $dark-gray;
         margin: 0px auto;
         text-align: center;
@@ -75,18 +78,22 @@ body::before {
         // position: relative;
         width: 25%;
 
-        #board-padding {
+        #board-padding,
+        #menu-padding {
             padding: 3em;
 
-            .board-name {
+            .board-day,
+            .menu-day {
                 text-transform: uppercase;
             }
 
-            .board-task {
+            .board-task,
+            .menu-name {
                 margin-bottom: 30px;
             }
 
-            #last-task {
+            #last-task,
+            #last-name {
                 margin-bottom: 0px!important;
             }
         }
