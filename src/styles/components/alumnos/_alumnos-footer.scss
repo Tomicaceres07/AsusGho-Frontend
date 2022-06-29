@@ -1,0 +1,28 @@
+
+
+#footer {
+    height: 18em;
+    position: relative;
+    
+    #footer-div {
+
+        bottom: 0px;
+        left: 50%;
+        text-align: center;
+        top: 50%;
+        transform: translate(-50%, -35%);
+        position: absolute;
+
+        #footer-logo {
+            padding: 1em;
+            width: 55%;
+        }
+        
+        #footer-text {
+            color: white;
+            font-size: 1.2em;
+            text-align: center;
+            text-transform: uppercase;
+        }
+    }
+}

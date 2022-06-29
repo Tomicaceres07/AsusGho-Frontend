@@ -1,0 +1,106 @@
+
+
+body {
+    background: url('../../../assets/portada.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body::before {
+    background-color: rgba(61, 61, 61, 0.395);
+    content: "";
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    z-index: -1000;
+}
+
+#home {
+    align-items: center;
+    color: white!important;
+    justify-content: center;
+    margin: 0px auto;
+    min-height: 100vh;
+    width: 82%;
+    z-index: 3;
+    // overflow: hidden;
+
+    #title {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        text-transform: uppercase;
+        top: 40%;
+
+        #title-p1 {
+            margin-bottom: 1.4em;
+            margin-left: .2em;
+        }
+
+        #title-p2 {
+            font-size: 1.7em;
+            margin-bottom: 3em;
+        }
+    }
+    
+    #subtitle {
+        position: absolute;
+        top: 75%;
+        margin-left: .2em;
+    }
+}
+
+#board, 
+#menu {
+    background-color: $gray;
+    color: white;
+    min-height: 100vh;
+    height: fit-content;
+
+    #board-title,
+    #menu-title {
+        // background-color: green;
+        font-size: 3em;
+        // position: relative;
+        padding: 50px;
+        text-align: center;
+        text-transform: uppercase;
+        top: 1.7em;
+    }
+
+    #board-week,
+    #menu-week {
+        background-color: $dark-gray;
+        margin: 0px auto;
+        text-align: center;
+        top: 10em;
+        // position: relative;
+        width: 25%;
+
+        #board-padding,
+        #menu-padding {
+            padding: 3em;
+
+            .board-day,
+            .menu-day {
+                text-transform: uppercase;
+            }
+
+            .board-task,
+            .menu-name {
+                margin-bottom: 30px;
+            }
+
+            #last-task,
+            #last-name {
+                margin-bottom: 0px!important;
+            }
+        }
+    }
+}
+
+.separator {
+    background-color: transparent;
+    height: 20em;
+}

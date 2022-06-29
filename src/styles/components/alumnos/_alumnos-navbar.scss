@@ -18,7 +18,8 @@
 }
 
 .background-rgba {
-    background-color: rgb(43, 43, 43) !important;
+    background-color: $light-gray;
+    // background-color: rgb(43, 43, 43) !important;
     transition: all .4s ease; 
     -webkit-transition: all .4s ease;
 }

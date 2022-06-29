@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import { AlumnosHomeScreen } from 'components/alumnos/AlumnosHomeScreen';
 import { AlumnosNavBar } from 'components/alumnos/AlumnosNavBar';
+import { AlumnosFooter } from 'components/alumnos/AlumnosFooter';
 
 export const AlumnosDashboardRoutes = () => {
   return (
@@ -14,6 +15,7 @@ export const AlumnosDashboardRoutes = () => {
         {/* <Route path="/*" element={<AlumnosDashboardRoutes />} /> */}
 
       </Routes>
+      <AlumnosFooter />
     </>
   );
 }
