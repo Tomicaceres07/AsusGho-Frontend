@@ -3,3 +3,20 @@
     margin: 0px;
     padding: 0px;
 }
+
+body {
+    background: url('../../assets/portada.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body::before {
+    background-color: rgba(61, 61, 61, 0.395);
+    content: "";
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    z-index: -1000;
+}
+
