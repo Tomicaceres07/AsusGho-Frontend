@@ -5,6 +5,7 @@ import { AlumnosHomeScreen } from 'components/alumnos/AlumnosHomeScreen';
 import { AlumnosPreviasScreen } from 'components/alumnos/AlumnosPreviasScreen';
 import { AlumnosActividadesScreen } from 'components/alumnos/AlumnosActividadesScreen';
 import { AlumnosExamenesScreen } from 'components/alumnos/AlumnosExamenesScreen';
+import { AlumnosFaltasScreen } from 'components/alumnos/AlumnosFaltasScreen';
 import { AlumnosFooter } from 'components/alumnos/AlumnosFooter';
 
 export const AlumnosDashboardRoutes = () => {
@@ -17,6 +18,7 @@ export const AlumnosDashboardRoutes = () => {
         <Route path="/previas" element={<AlumnosPreviasScreen />} />
         <Route path="/actividades" element={<AlumnosActividadesScreen />} />
         <Route path="/examenes" element={<AlumnosExamenesScreen />} />
+        <Route path="/faltas" element={<AlumnosFaltasScreen />} />
         {/* <Route path="/login" element={<AlumnosHomeScreen />} /> */}
         {/* <Route path="/*" element={<AlumnosDashboardRoutes />} /> */}
 

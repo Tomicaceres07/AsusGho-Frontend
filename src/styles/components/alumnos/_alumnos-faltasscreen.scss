@@ -1,0 +1,82 @@
+
+
+
+
+#absences__home {
+    align-items: center;
+    color: white!important;
+    justify-content: center;
+    margin: 0px auto;
+    min-height: 100vh;
+    width: 82%;
+    z-index: 3;
+    // overflow: hidden;
+
+    #absences__title {
+        font-size: 4.5em;
+        position: absolute;
+        text-transform: uppercase;
+        top: 45%;
+    }
+    
+    #absences__subtitle {
+        margin-left: .2em;
+        position: absolute;
+        text-transform: uppercase;
+        top: 65%;
+    }
+}
+
+#absences__board {
+    background-color: $gray;
+    color: white;
+    min-height: 100vh;
+    height: fit-content;
+
+    #absences__board-title {
+        // background-color: green;
+        font-size: 3em;
+        // position: relative;
+        padding: 50px;
+        text-align: center;
+        text-transform: uppercase;
+        top: 1.7em;
+    }
+
+    #absences__board-week {
+        background-color: $dark-gray;
+        margin: 0px auto;
+        text-align: center;
+        top: 10em;
+        // position: relative;
+        width: 25%;
+
+        #absences__board-padding {
+            padding: 3em;
+
+            .absences__board-container {
+                // border: 1px solid red;
+
+                .absences__board-day {
+                    font-size: 1.5em;
+                    margin-bottom: .1em;
+                    text-transform: uppercase;
+                }
+    
+                .absences__board-absence {
+                    font-size: .8em;
+                    // margin-bottom: 1em;
+                }
+    
+                #absences__last-absence {
+                    margin-bottom: 0px!important;
+                }
+            }
+
+            .absences__board-unjustified {
+                color: rgb(255, 56, 56);
+            }
+
+        }
+    }
+}
