@@ -9,16 +9,16 @@ export const AlumnosNavBar = () => {
   
   window.addEventListener('scroll', () => {
     let scroll = window.pageYOffset;
-    console.log(scroll);
+    // console.log(scroll);
     const nav = document.getElementById('nav');
 
-    (scroll > 0)
+    (scroll > 10)
       ? nav.classList.add('background-rgba')
       : nav.classList.remove('background-rgba')
   });
 
   return (
-    <nav id="nav" className="navbar navbar-expand-lg navbar-dark sticky-top background-rgba">
+    <nav id="nav" className="navbar navbar-expand-lg navbar-dark sticky-top">
       <div className="container-fluid">
         <Link className="navbar-brand" to="alumnos">
           <img src={logo} alt="Logo" className="logo"/>
