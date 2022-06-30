@@ -9,6 +9,11 @@
     cursor: default;
 }
 
+.nav-link:hover {
+    border-bottom: 2px solid white;
+    transition: all .2s;
+}
+
 .nav-link-active {
     border-bottom: 2px solid white;
 }
