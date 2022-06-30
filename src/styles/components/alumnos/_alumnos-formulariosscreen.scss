@@ -2,7 +2,7 @@
 
 
 
-#previous__home {
+#forms__home {
     align-items: center;
     color: white!important;
     justify-content: center;
@@ -12,49 +12,22 @@
     z-index: 3;
     // overflow: hidden;
 
-    #previous__title {
-        display: flex;
-        flex-direction: column;
+    #forms__title {
+        font-size: 4.5em;
         position: absolute;
         text-transform: uppercase;
-        top: 40%;
-
-        #previous__title-p1 {
-            font-size: 1.7em;
-            margin-bottom: .6em;
-            // margin-left: .2em;
-        }
-
-        #previous__title-p2 {
-            font-size: 1.7em;
-            margin-bottom: 3em;
-        }
-    }
-    
-    #previous__subtitle {
-        position: absolute;
-        top: 75%;
-        margin-left: .2em;
+        top: 45%;
     }
 }
 
-#previous__board {
+#forms__board {
     background-color: $gray;
     color: white;
     height: auto;
+    padding-top: 3em;
     padding-bottom: 3em;
 
-    #previous__board-title {
-        // background-color: green;
-        font-size: 3em;
-        // position: relative;
-        padding: 50px;
-        text-align: center;
-        text-transform: uppercase;
-        top: 1.7em;
-    }
-
-    #previous__board-week {
+    #forms__board-week {
         background-color: $dark-gray;
         margin: 0px auto;
         text-align: center;
@@ -62,24 +35,29 @@
         // position: relative;
         width: 80%;
 
-        #previous__board-padding {
+        #forms__board-padding {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             padding: 2em;
 
-            .previous__board-subject-container {
+            .forms__board-form-container {
                 // border: 1px solid white;
                 padding: .5em;
                 margin: 1em;
+                width: calc(100% * (1/4));
 
-                .previous__board-subject {
+                .forms__board-form {
                     font-size: 2em;
-                    margin-bottom: .8em;
-                    text-transform: uppercase;
+                    // margin-bottom: .8em;
+                }
+
+                .forms__board-text {
+                    font-size: 1em;
+                    margin-bottom: 1.5em;
                 }
     
-                .previous__board-button-download {
+                .forms__board-button-download {
                     background-color: transparent;
                     border: 2px solid rgb(255, 56, 56);
                     border-radius: 20px;
@@ -91,7 +69,7 @@
                     transition: all .3s;
                 }
     
-                .previous__board-button-download:hover {
+                .forms__board-button-download:hover {
                     background-color: black;
                     color: white;
                     border: 2px solid white;
