@@ -1,5 +1,4 @@
 // import React, { useEffect, useState } from 'react';
-// import { AlumnosNavBar } from './components/alumnos/AlumnosNavBar';
 // const axios = require('axios').default;
 
   /* const [msj, setMsj] = useState();
