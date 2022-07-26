@@ -11,9 +11,6 @@ export const AlumnosLoginScreen = () => {
 
   const [url, setUrl] = useState();
 
-  /* const location = useLocation();
-  const navigate = useNavigate(); */
-
   useEffect(() => {
     axios.get('/api/login')
       .then(({data}) => {
@@ -32,7 +29,7 @@ export const AlumnosLoginScreen = () => {
               <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="google button" />
           </div>
           <a className="btn-text" href={url}>Sign in with google</a>
-          <p>{url}</p>
+          {/* <p>{url}</p> */}
       </div>
     </div>
   )
