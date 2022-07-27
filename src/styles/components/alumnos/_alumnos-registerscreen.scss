@@ -1,0 +1,31 @@
+
+
+#register__form{
+    background-color: rgba(5, 12, 71, 0.8);
+    border-radius: 5px;
+    color: white;
+    margin: 0px auto;
+    margin-top: 2em;
+    padding: 2.8em;
+    text-align: left;
+    width: 45%;
+
+    #register__title {
+        margin-bottom: .5em;
+    }
+
+    #register__submit {
+        // background-color: #37AF65;
+        border: none;
+        color: white;
+        text-decoration: none;
+        // padding: 1em;
+        width: 100%;
+    }
+
+    #register__submit:hover {
+        background-color: #108797;
+        color: white;
+        transition: all .3s;
+    }
+}

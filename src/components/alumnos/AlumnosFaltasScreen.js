@@ -1,34 +1,19 @@
-import React, { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
-const axios = require('axios').default;
+import { AuthContext } from 'context';
+import React, { useContext } from 'react';
 
 export const AlumnosFaltasScreen = () => {
 
-    const [user, setUser] = useState();
-
-
-    // Get id from url
-    
-    useEffect(() => {
-        axios.post('/api/getuser', {'id': 0})
-        .then(({data}) => {
-            setUser(data.user);
-        })
-        .catch((err) => {
-            setUser(err);
-        })
-    }, [])
-        
+    const { authState } = useContext( AuthContext );
+    const { user } = authState;
     
     return (
         <div>
             <section id="absences__home">
                 <h1 id="absences__title">Inasistencias</h1>
-                {/* TODO: useContext to save user, and replace this */}
-                <h2 id="absences__subtitle">{user && user[1]}</h2>
+                <h2 id="absences__subtitle">{user && user.name}</h2>
             </section>
             <section id="absences__board">
-                <h2 id="absences__board-title">Faltas: {user && user[3]}</h2>
+                <h2 id="absences__board-title">Faltas: {user && user.c_abscense}</h2>
                 <div id="absences__board-week">
                     <div id="absences__board-padding">
                         <div className="absences__board-container absences__board-unjustified">

@@ -7,18 +7,18 @@ import logo from "assets/logo.png";
 const axios = require('axios').default;
 axios.defaults.baseURL = 'http://localhost:5000'
 
-export const AlumnosLoginScreen = () => {
+export const LoginScreen = () => {
 
   const [url, setUrl] = useState();
 
   useEffect(() => {
     axios.get('/api/login')
       .then(({data}) => {
-            setUrl(data.url);
-          })
-          .catch((err) => {
-            setUrl(err);
-          })
+        setUrl(data.url);
+      })
+      .catch((err) => {
+        setUrl(err);
+      })
   }, [])
 
   return (
