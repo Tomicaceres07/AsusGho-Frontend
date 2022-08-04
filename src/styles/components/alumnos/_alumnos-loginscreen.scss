@@ -2,62 +2,79 @@ $white: #fff;
 $google-blue: #4285f4;
 $button-active-blue: #1669f2;
 
-
-.login__logo {
-    margin: .5em;
-    margin-left: 6em;
-    margin-top: 2em;
-    width: 10%;
+.login__body {
+    background: url('../../../assets/portada-login.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-.google-btn {
-    cursor: pointer;
-    // position: absolute;
-    // top: 50%;
-    // left: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 16%;
-    height: 42px;
-    background-color: $google-blue;
-    border-radius: 2px;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+.login__body::before {
+    background-color: rgba(0, 0, 0, 0.425);
+    content: "";
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    z-index: -1000;
+}
 
-    transition: box-shadow .3s ease;
+.login__container {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    
+    .login__logo {
+        margin: 0px auto;
+        margin-top: 1.8em;
+        width: 8%;
+    }
+    
+    .login__title {
+        font-size: 2.8rem;
+        margin-top: 2.9em;
+        text-transform: uppercase;
+    }
+    
+    .login__subtitle {
+        font-size: 1rem;
+        margin-top: 1em;
+        text-transform: uppercase;
+    }
 
-    .google-icon-wrapper {
-        position: absolute;
-        margin-top: 1px;
-        margin-left: 1px;
-        width: 40px;
-        height: 40px;
-        border-radius: 2px;
-        background-color: $white;
-    }
-    .google-icon {
-        position: absolute;
-        margin-top: 11px;
-        margin-left: 11px;
-        width: 18px;
-        height: 18px;
-    }
-    .btn-text {
-        float: right;
-        margin: 11px 40px 0 0;
+    .login__button {
+        background-color: #4B677C;
+        border-radius: 3em;
+        color: white;
+        margin: 0px auto;
+        margin-top: 3.2em;
+        padding: 1em;
         text-decoration: none;
-        background-color: $google-blue;
-        border: none;
-        color: $white;
-        font-size: 14px;
-        letter-spacing: 0.2px;
+        width: 12%;
     }
-    &:hover {
-        box-shadow: 0 0 6px $google-blue;
+
+    .login__button:hover {
+        background-color: #436c8a;
+        transition: all .3s;
     }
-    &:active {
-        background: $button-active-blue;
+
+    .login__paragraph {
+        font-size: .7em;
+        margin-top: 1em;
+    }
+
+    .login__icons-container {
+        flex-direction: column;
+        margin-top: 7em;
+
+        .login__icon {
+            color: white;
+            margin-top: 5em;
+            margin: 1.5em;
+        }
+
+        .login__icon:hover {
+            color: rgb(228, 228, 228);
+        }
     }
 }
-

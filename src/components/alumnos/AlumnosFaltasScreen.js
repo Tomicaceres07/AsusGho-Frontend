@@ -5,6 +5,7 @@ export const AlumnosFaltasScreen = () => {
 
     const { authState } = useContext( AuthContext );
     const { user } = authState;
+    console.log(user.c_abscence);
     
     return (
         <div>
@@ -13,7 +14,7 @@ export const AlumnosFaltasScreen = () => {
                 <h2 id="absences__subtitle">{user && user.name}</h2>
             </section>
             <section id="absences__board">
-                <h2 id="absences__board-title">Faltas: {user && user.c_abscense}</h2>
+                <h2 id="absences__board-title">Faltas: {user && user.c_abscence}</h2>
                 <div id="absences__board-week">
                     <div id="absences__board-padding">
                         <div className="absences__board-container absences__board-unjustified">
