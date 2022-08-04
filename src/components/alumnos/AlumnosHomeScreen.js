@@ -19,8 +19,10 @@ export const AlumnosHomeScreen = () => {
     axios.post('/api/getuser', {'id': id})
       .then(({data}) => {
         // Save user data in context
-        login(data.user[0], data.user[1], data.user[2], data.user[3], data.user[4]);
-        setUser(data.user);
+
+        login(data);
+        // login(data.user[0], data.user[1], data.user[2], data.user[3], data.user[4]);
+        setUser(data);
       })
       .catch((err) => {
         console.log(err);
@@ -29,14 +31,14 @@ export const AlumnosHomeScreen = () => {
         });
       })
   // TODO: Ask Juampi or Carlitos when they come back to Argentina, if I can stay like this, without [], or is better to put the 3 dependencies of the warning.
-  })
+  }, [])
   
 
   return (
     <div>
       <section id="home__home">
         <h1 id="home__title"><span id="home__title-p1">Liceo Militar</span><span id="home__title-p2">General Paz</span></h1>
-        <h2 id="home__subtitle">Bienvenido, {user && user[1]}</h2>
+        <h2 id="home__subtitle">Bienvenido, {user && user.name}</h2>
       </section>
       <section id="home__board">
         <h2 id="home__board-title">Tablero</h2>
