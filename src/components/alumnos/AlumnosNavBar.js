@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 // import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 
 import logo from "assets/logo.png";
@@ -9,6 +9,7 @@ import { AuthContext } from 'context';
 export const AlumnosNavBar = () => {
 
   const [dropdown, setDropdown] = useState(true);
+  const navigate = useNavigate();
 
   const openCloseDropdown = () => {
     setDropdown(!dropdown);
@@ -29,14 +30,21 @@ export const AlumnosNavBar = () => {
       : nav.classList.remove('background-rgba')
   });
 
-  const { authState } = useContext( AuthContext );
+  const { authState, logout } = useContext( AuthContext );
   const { user } = authState;
+
+  const onLogout = () => {
+    logout();
+    navigate('/login', {
+      replace: true
+    });
+  }
 
   return (
     <nav id="nav" className="navbar navbar-expand-lg navbar-dark sticky-top">
       <div className="container-fluid">
       {/* TODO: useContext to save user, and replace the id in to="alumnos/0" */}
-        <Link className="navbar-brand" to={`alumnos/${user.id}`}>
+        <Link className="navbar-brand" to={`alumnos/0`}>
           <img src={logo} alt="Logo" className="logo"/>
         </Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,7 +54,7 @@ export const AlumnosNavBar = () => {
           <ul className="navbar-nav ms-auto">
             <li className="nav-item mx-4">
               {/* TODO: useContext to save user, and replace the id in to="alumnos/0" */}
-              <NavLink className={({isActive}) => `nav-link ${ isActive ? 'nav-link-active text-white px-0' : 'text-white px-0'}`} aria-current="page" to={`alumnos/${user.id}`}>Home</NavLink>
+              <NavLink className={({isActive}) => `nav-link ${ isActive ? 'nav-link-active text-white px-0' : 'text-white px-0'}`} aria-current="page" to={`alumnos/0`}>Home</NavLink>
             </li>
             <li className="nav-item mx-4">
               <NavLink className={({isActive}) => `nav-link ${ isActive ? 'nav-link-active text-white px-0' : 'text-white px-0'}`} to="previas">Previas</NavLink>
@@ -75,7 +83,7 @@ export const AlumnosNavBar = () => {
                 </button>
                 <ul id="dropdown-menu" className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                   <li><NavLink className="dropdown-item" to="perfil">Ver perfil</NavLink></li>
-                  <li><NavLink className="dropdown-item" to="#">Cerrar Sesión</NavLink></li>
+                  <li><button className="dropdown-item" onClick={onLogout}>Cerrar Sesión</button></li>
                 </ul>
               </div>
             </li>

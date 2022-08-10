@@ -17,7 +17,7 @@ export const AlumnosDashboardRoutes = () => {
       <AlumnosNavBar />
       <Routes>
         {/* <Route path="/asistencia" element={<AlumnosHomeScreen />} /> */}
-        <Route path="/alumnos/:id" element={<AlumnosHomeScreen />} />
+        <Route path="/alumnos" element={<AlumnosHomeScreen />} />
         <Route path="/previas" element={<AlumnosPreviasScreen />} />
         <Route path="/actividades" element={<AlumnosActividadesScreen />} />
         <Route path="/examenes" element={<AlumnosExamenesScreen />} />

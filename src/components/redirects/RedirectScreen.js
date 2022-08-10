@@ -22,7 +22,7 @@ export const RedirectScreen = () => {
     })
       .then((data) => {
         console.log(data)
-        setMsj(data.msj);
+        // setMsj(data.msj);
       })
       .catch((err) => {
         setMsj(err);
@@ -35,7 +35,7 @@ export const RedirectScreen = () => {
         <Link to="/alumnos/alumnos">Alumnos</Link>
         <Link to="/profesores">Profesores</Link>
         <p>(esta página no se va a implementar, solo desarrollo)</p>
-        <p>{msj}</p>
+        {/* <p>{msj}</p> */}
     </div>
   )
 }
