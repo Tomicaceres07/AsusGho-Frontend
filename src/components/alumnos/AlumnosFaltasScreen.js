@@ -1,11 +1,26 @@
 import { AuthContext } from 'context';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+const axios = require('axios').default;
 
 export const AlumnosFaltasScreen = () => {
 
     const { authState } = useContext( AuthContext );
     const { user } = authState;
-    console.log(user.c_abscence);
+    
+
+    const [abscenses, setAbscenses] = useState();
+
+    useEffect(() => {
+        axios.post('/api/get_abs', {'email': user.email})
+        .then(({data}) => {
+            setAbscenses(data.db);
+            console.log(data.db);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }, [])
+
     
     return (
         <div>
@@ -14,10 +29,24 @@ export const AlumnosFaltasScreen = () => {
                 <h2 id="absences__subtitle">{user && user.name}</h2>
             </section>
             <section id="absences__board">
-                <h2 id="absences__board-title">Faltas: {user && user.c_abscence}</h2>
+                <h2 id="absences__board-title">Faltas: {abscenses && abscenses.length}</h2>
                 <div id="absences__board-week">
                     <div id="absences__board-padding">
-                        <div className="absences__board-container absences__board-unjustified">
+
+                        {
+                            abscenses && abscenses.map( item => (
+                                <div className={`${(item.justified == 0) ? 'absences__board-container absences__board-unjustified' : 'absences__board-container'}`}>
+                                    <p className="absences__board-day" key={ item.id }>
+                                        { item.date } <br />
+                                        { item.c_abscence }
+                                    </p>
+                                    <p className="absences__board-absence">{ (item.justified == 0) ? "Injustificada" : "Justificada"  }</p>
+                                </div>
+                            ))
+                        }
+
+                        {/* <h6>{abscenses.id}</h6> */}
+                        {/* <div className="absences__board-container absences__board-unjustified">
                             <p className="absences__board-day">23/07</p>
                             <p className="absences__board-absence">Injustificada</p>
                         </div>
@@ -40,7 +69,7 @@ export const AlumnosFaltasScreen = () => {
                         <div className="absences__board-container">
                             <p className="absences__board-day">07/10</p>
                             <p className="absences__board-absence">Justificada</p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </section>
