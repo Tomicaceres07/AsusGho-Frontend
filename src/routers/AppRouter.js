@@ -1,4 +1,4 @@
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 
 import { RedirectScreen } from 'components/redirects/RedirectScreen';
 import { AlumnosAppRouter } from './alumnos/AlumnosAppRouter';
@@ -46,7 +46,7 @@ export const AppRouter = () => {
           } /> */}
         
 
-        {/* <Route path="/*" element={<LoginScreen />} /> */}
+        <Route path="/*" element={<Navigate to="/login" replace={true} />} />
       </Routes>
     </BrowserRouter>
   );

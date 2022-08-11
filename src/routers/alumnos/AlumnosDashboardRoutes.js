@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { AlumnosNavBar } from 'components/alumnos/AlumnosNavBar';
 import { AlumnosHomeScreen } from 'components/alumnos/AlumnosHomeScreen';
@@ -25,7 +25,7 @@ export const AlumnosDashboardRoutes = () => {
         <Route path="/formularios" element={<AlumnosFormulariosScreen />} />
         <Route path="/perfil" element={<AlumnosPerfilScreen />} />
         {/* <Route path="/login" element={<AlumnosHomeScreen />} /> */}
-        {/* <Route path="/*" element={<AlumnosDashboardRoutes />} /> */}
+        <Route path="/*" element={<Navigate to="/alumnos/alumnos" replace={true} />} />
 
       </Routes>
       <AlumnosFooter />
