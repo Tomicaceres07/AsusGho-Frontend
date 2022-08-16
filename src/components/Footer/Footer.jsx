@@ -3,7 +3,7 @@ import React from 'react'
 import logo from "assets/logo.png";
 
 
-export const AlumnosFooter = () => {
+export const Footer = () => {
   return (
     <footer id="footer" className='separator'>
         <div id="footer-div">

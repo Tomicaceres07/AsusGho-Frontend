@@ -5,7 +5,7 @@ const axios = require('axios').default;
 
 
 
-export const AlumnosVerificarScreen = () => {
+export const VerificarScreen = () => {
     
     //   const [ user, setUser ] = useState();
     const { login } = useContext( AuthContext );
