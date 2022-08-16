@@ -1,16 +1,23 @@
+// GENERAL
 @import './base/settings';
 @import './base/base';
 
-// Components
-@import './components/alumnos/alumnos-registerscreen';
-@import './components/alumnos/alumnos-loginscreen';
-@import './components/alumnos/alumnos-navbar';
-@import './components/alumnos/alumnos-homescreen';
-@import './components/alumnos/alumnos-previasscreen';
-@import './components/alumnos/alumnos-actividadesscreen';
-@import './components/alumnos/alumnos-examenesscreen';
-@import './components/alumnos/alumnos-faltasscreen';
-@import './components/alumnos/alumnos-formulariosscreen';
-@import './components/alumnos/alumnos-perfilscreen';
-@import './components/alumnos/alumnos-footer';
-@import './components/redirect';
+
+// PAGES
+
+// Login Page
+@import 'pages/login/loginscreen';
+
+// Alumnos Pages
+@import 'pages/alumnos/Home/alumnos-homescreen';
+@import 'pages/alumnos/Previas/alumnos-previasscreen';
+@import 'pages/alumnos/Actividades/alumnos-actividadesscreen';
+@import 'pages/alumnos/Examenes/alumnos-examenesscreen';
+@import 'pages/alumnos/Faltas/alumnos-faltasscreen';
+@import 'pages/alumnos/Formularios/alumnos-formulariosscreen';
+@import 'pages/alumnos/Perfil/alumnos-perfilscreen';
+
+
+// COMPONENTS
+@import 'components/NavBar/navbar';
+@import 'components/Footer/footer';
