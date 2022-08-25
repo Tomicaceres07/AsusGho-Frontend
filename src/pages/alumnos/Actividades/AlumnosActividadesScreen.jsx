@@ -10,14 +10,14 @@ export const AlumnosActividadesScreen = () => {
             <section id="activities__activities">
                 <h2 id="activities__activities-title"><span id="activities__activities-title-p1">Calendario</span><span id="activities__activities-title-p2">De</span><span id="activities__activities-title-p3">Actividades</span></h2>
                 <div id="activities__activities-container">
-                    <div className="activities__activities-carousel">
+                    {/* <div className="activities__activities-carousel">
                         <img src="https://via.placeholder.com/100" className="activities__activities-img" alt="..." />
                         <img src="https://via.placeholder.com/100" className="activities__activities-img" alt="..." />
                         <img src="https://via.placeholder.com/100" className="activities__activities-img" alt="..." />
                         <img src="https://via.placeholder.com/100" className="activities__activities-img" alt="..." />
-                    </div>
+                    </div> */}
                     {/* In a future, I'll consume the API and do a ul.map to list them all */}
-                    <ul>
+                    <ul className="activities__activities-ul">
                         <li className="activities__activities-name-activity">Lunes 08/03 - Jura de la bandera</li>
                         <li className="activities__activities-name-activity">Miércoles 26/03 - Acto de abanderados</li>
                         <li className="activities__activities-name-activity">Miércoles 14/04 - Acto de Malvinas</li>
@@ -29,12 +29,12 @@ export const AlumnosActividadesScreen = () => {
                         <li className="activities__activities-name-activity">Miércoles 13/07 - Acto de San Martín</li>
                         <li className="activities__activities-name-activity">Martes 07/08 - Entrega de medallas de honor</li>
                     </ul>
-                    <div className="activities__activities-carousel">
+                    {/* <div className="activities__activities-carousel">
                         <img src="https://via.placeholder.com/100" className="activities__activities-img" alt="..." />
                         <img src="https://via.placeholder.com/100" className="activities__activities-img" alt="..." />
                         <img src="https://via.placeholder.com/100" className="activities__activities-img" alt="..." />
                         <img src="https://via.placeholder.com/100" className="activities__activities-img" alt="..." />
-                    </div>
+                    </div> */}
                 </div>
             </section>
         </div>

@@ -21,6 +21,7 @@ export const AlumnosHomeScreen = () => {
         <h2 id="home__board-title">Tablero</h2>
         <div id="home__board-week">
           <div id="home__board-padding">
+            {/* TODO: make this dinamically */}
               <h4 className="home__board-day">Lunes</h4>
               <p className="home__board-task">Examen Matemática</p>
               <h4 className="home__board-day">Martes</h4>

@@ -1,27 +1,32 @@
 import React, { useContext, useState } from 'react'
 
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import logo from "assets/logo.png";
 import { AuthContext } from 'context';
 
+
 export const NavBar = () => {
 
-  const [dropdown, setDropdown] = useState(true);
   const navigate = useNavigate();
 
-  const openCloseDropdown = () => {
-    setDropdown(!dropdown);
-    const dropdownMenu = document.getElementById('dropdown-menu');
+  const [expanded, setExpanded] = useState(false);
 
-    (dropdown)
-      ? dropdownMenu.classList.add('show-display')
-      : dropdownMenu.classList.remove('show-display') 
+  
+  const onLinkClicked = () => {
+    setExpanded(false);
+
+    document.getElementById('body')?.classList.remove('no-scroll-y');
   }
   
   window.addEventListener('scroll', () => {
     let scroll = window.pageYOffset;
-    // console.log(scroll);
     const nav = document.getElementById('nav');
 
     (scroll > 10)
@@ -38,7 +43,50 @@ export const NavBar = () => {
     });
   }
 
+  const onToggle = () => {
+    setExpanded(expanded ? false : "expanded")
+    const nav = document.getElementById('nav');
+    const body = document.getElementById('body');
+    let scroll = window.pageYOffset;
+
+    if(expanded !== "expanded") {
+      body.classList.add('no-scroll-y')
+      if(scroll < 10) {
+        nav.classList.add('background-rgba')
+      }
+    } else {
+      body.classList.remove('no-scroll-y')
+    }
+  }
+
   return (
+    <Navbar collapseOnSelect expand="lg" expanded={expanded} variant="dark" id="nav" className="sticky-top text-center">
+      <Container>
+        <Navbar.Brand href="#home" className="navbar-brand">
+          <img src={logo} alt="Logo" className="logo"/>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={onToggle}/>
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav id="nav-collapse" className="ms-auto">
+            <Nav.Link as={NavLink} to={"/alumnos/alumnos"} className="navlink mx-2" onClick={ onLinkClicked }>Home</Nav.Link>
+            <Nav.Link as={NavLink} to={"/alumnos/previas"} className="navlink mx-2" onClick={ onLinkClicked }>Previas</Nav.Link>
+            <Nav.Link as={NavLink} to={"/alumnos/actividades"} className="navlink mx-2" onClick={ onLinkClicked }>Actividades</Nav.Link>
+            <Nav.Link as={NavLink} to={"/alumnos/examenes"} className="navlink mx-2" onClick={ onLinkClicked }>Examenes</Nav.Link>
+            <Nav.Link as={NavLink} to={"/alumnos/faltas"} className="navlink mx-2" onClick={ onLinkClicked }>Faltas</Nav.Link>
+            <Nav.Link as={NavLink} to={"/alumnos/formularios"} className="navlink mx-2" onClick={ onLinkClicked }>Formularios</Nav.Link>
+            <NavDropdown title="Perfil" id="collasible-nav-dropdown" className="mx-4">
+              <Nav.Link as={NavLink} to={"/alumnos/perfil"} className="navlink-dropdown" onClick={ onLinkClicked }>Ver Perfil</Nav.Link>
+              <NavDropdown.Divider />
+              <Button onClick={onLogout} id="logout-button" className="w-100">Cerrar Sesión</Button>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  )
+
+  
+  /* return (
     <nav id="nav" className="navbar navbar-expand-lg navbar-dark sticky-top">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/alumnos/alumnos">
@@ -57,10 +105,10 @@ export const NavBar = () => {
             </li>
             <li className="nav-item mx-4">
               <NavLink className={({isActive}) => `nav-link ${ isActive ? 'nav-link-active text-white px-0' : 'text-white px-0'}`} to="/alumnos/actividades">Actividades</NavLink>
-            </li>
-            <li className="nav-item mx-4">
+              </li>
+              <li className="nav-item mx-4">
               <NavLink className={({isActive}) => `nav-link ${ isActive ? 'nav-link-active text-white px-0' : 'text-white px-0'}`} to="/alumnos/examenes">Examenes</NavLink>
-            </li>
+              </li>
             <li className="nav-item mx-4">
               <NavLink className={({isActive}) => `nav-link ${ isActive ? 'nav-link-active text-white px-0' : 'text-white px-0'}`} to="/alumnos/faltas">Faltas</NavLink>
             </li>
@@ -68,12 +116,7 @@ export const NavBar = () => {
               <NavLink className={({isActive}) => `nav-link ${ isActive ? 'nav-link-active text-white px-0' : 'text-white px-0'}`} to="/alumnos/formularios">Formularios</NavLink>
             </li>
             <li className="nav-item mx-4 last-link">
-              {/* <NavLink className={({isActive}) => `nav-link ${ isActive ? 'nav-link-active text-white px-0' : 'text-white px-0'}`} >
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/></svg>
-              </NavLink> */}
-              <div className="dropdown">
+            <div className="dropdown">
                 <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded={dropdown} onClick={openCloseDropdown}>
                   Perfil
                 </button>
@@ -87,5 +130,5 @@ export const NavBar = () => {
         </div>
       </div>
     </nav>
-  )
+  ) */
 }

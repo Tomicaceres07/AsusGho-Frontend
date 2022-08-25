@@ -1,7 +1,7 @@
 
 
 #footer {
-    height: 18em;
+    height: 10em;
     position: relative;
     
     #footer-div {
@@ -15,7 +15,7 @@
 
         #footer-logo {
             padding: 1em;
-            width: 55%;
+            width: 130px;
         }
         
         #footer-text {
@@ -23,6 +23,45 @@
             font-size: 1.2em;
             text-align: center;
             text-transform: uppercase;
+        }
+    }
+}
+
+
+// Media Queries
+@media(min-width: 460px) {
+    #footer {
+        #footer-div {
+
+            width: 100%;
+            #footer-text {
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media(min-width: 550px) {
+    #footer {
+        height: 12em;
+        
+        #footer-div {
+            #footer-logo {
+                width: 140px;
+            }
+        }
+    }
+}
+
+
+@media(min-width: 992px) {
+    #footer {
+        height: 16em;
+        
+        #footer-div {
+            #footer-logo {
+                width: 150px;
+            }
         }
     }
 }
