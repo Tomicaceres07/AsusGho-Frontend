@@ -49,6 +49,7 @@ export const NavBar = () => {
     const body = document.getElementById('body');
     let scroll = window.pageYOffset;
 
+
     if(expanded !== "expanded") {
       body.classList.add('no-scroll-y')
       if(scroll < 10) {
