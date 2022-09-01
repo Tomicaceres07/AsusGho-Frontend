@@ -1,4 +1,4 @@
-import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
 import { LoginScreen } from 'pages/login/LoginScreen';
 import { VerificarScreen } from 'pages/login/VerificarScreen';
@@ -7,6 +7,7 @@ import { PrivateRoute } from 'routers/PrivateRoute';
 
 // Import route.jsx
 import { routes } from './route';
+import { NotFoundScreen } from 'pages/NotFound/NotFoundScreen';
 
 export const AppRouter = () => {
 
@@ -30,10 +31,12 @@ export const AppRouter = () => {
               </PrivateRoute>
             } />
           ))}
+
         </Route>
 
 
-        <Route path="/*" element={<Navigate to="/login" replace={true} />} />
+        <Route path="/*" element={<NotFoundScreen />} />
+        {/* <Route path="/*" element={<Navigate to="/login" replace={true} />} /> */}
       </Routes>
     </BrowserRouter>
   );

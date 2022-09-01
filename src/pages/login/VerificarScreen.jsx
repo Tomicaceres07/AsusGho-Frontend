@@ -19,13 +19,18 @@ export const VerificarScreen = () => {
     useEffect(() => {
         axios.post('/api/getuser', {'id': id})
         .then(({data}) => {
+            console.log(data);
             // Save user data in context
-            if(data) {
+            if(data && data.msj !== 'invalid id') {
                 login(data);
                 navigate(pathname, {
                     replace: true
                 });  
-            } 
+            } else {
+                navigate('/login', {
+                    replace: true
+                });
+            }
 
         })
         .catch((err) => {
@@ -34,7 +39,7 @@ export const VerificarScreen = () => {
             replace: true
             });
         })
-    }, [])
+    }, [id, login, navigate, pathname])
     
 
     return (

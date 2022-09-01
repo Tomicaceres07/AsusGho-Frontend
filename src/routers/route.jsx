@@ -14,6 +14,9 @@ import { AlumnosExamenesScreen } from 'pages/alumnos/Examenes/AlumnosExamenesScr
 import { AlumnosFaltasScreen } from "pages/alumnos/Faltas/AlumnosFaltasScreen";
 import { AlumnosFormulariosScreen } from "pages/alumnos/Formularios/AlumnosFormulariosScreen";
 import { AlumnosPerfilScreen } from "pages/alumnos/Perfil/AlumnosPerfilScreen";
+import { NotFoundScreen } from "pages/NotFound/NotFoundScreen";
+import { LayoutNotFound } from "layouts/LayoutNotFound/LayoutNotFound";
+import { ProfesoresHomeScreen } from "pages/profesores/ProfesoresHomeScreen";
 
 
 const alumnoRoutes = [
@@ -52,15 +55,20 @@ const alumnoRoutes = [
         component: AlumnosPerfilScreen,
         path: "/alumnos/perfil"
     },
+    {
+        layout: LayoutNotFound,
+        component: NotFoundScreen,
+        path: "/*"
+    },
 
 ];
 
 const profesorRoutes = [
-    /* {
+    {
         layout: LayoutBasic,
-        component: AlumnosHomeScreen,
-        path: "/alumnos"
-    }, */
+        component: ProfesoresHomeScreen,
+        path: "/profesores/profesores"
+    },
 
 
 ];

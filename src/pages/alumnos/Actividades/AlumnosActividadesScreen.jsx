@@ -1,19 +1,26 @@
-import { useEffect } from "react";
+import { AuthContext } from "context";
+import { useContext, useEffect, useState } from "react";
 const axios = require('axios').default;
+
 
 
 export const AlumnosActividadesScreen = () => {
 
+    const { authState } = useContext( AuthContext );
+    const { user } = authState;
+
+    const [activities, setActivities] = useState();
+
     useEffect(() => {
-        axios.post('/api/message/read', {'type': true})
+        axios.post('/api/message/read', {'type': user.type})
         .then(({data}) => {
-            // setAbscenses(data.db);
+            setActivities(data.dict);
             console.log(data.dict);
         })
         .catch((err) => {
             console.log(err);
         })
-    }, [])
+    }, [user.type])
 
     return (
         <div>
@@ -31,7 +38,14 @@ export const AlumnosActividadesScreen = () => {
                     </div> */}
                     {/* In a future, I'll consume the API and do a ul.map to list them all */}
                     <ul className="activities__activities-ul">
-                        <li className="activities__activities-name-activity">Lunes 08/03 - Jura de la bandera</li>
+                        {
+                            activities && activities.map( (item, index) => (
+                                <li key={ index } className="activities__activities-name-activity">
+                                    { item.date } - { item.text }
+                                </li>
+                            ))
+                        }
+                        {/* <li className="activities__activities-name-activity">Lunes 08/03 - Jura de la bandera</li>
                         <li className="activities__activities-name-activity">Miércoles 26/03 - Acto de abanderados</li>
                         <li className="activities__activities-name-activity">Miércoles 14/04 - Acto de Malvinas</li>
                         <li className="activities__activities-name-activity">Martes 27/04 - Entrega de uniformados</li>
@@ -40,7 +54,7 @@ export const AlumnosActividadesScreen = () => {
                         <li className="activities__activities-name-activity">Viernes 30/05 - Aniversario del LMGP</li>
                         <li className="activities__activities-name-activity">Lunes 11/06 - Receso invernal</li>
                         <li className="activities__activities-name-activity">Miércoles 13/07 - Acto de San Martín</li>
-                        <li className="activities__activities-name-activity">Martes 07/08 - Entrega de medallas de honor</li>
+                        <li className="activities__activities-name-activity">Martes 07/08 - Entrega de medallas de honor</li> */}
                     </ul>
                     {/* <div className="activities__activities-carousel">
                         <img src="https://via.placeholder.com/100" className="activities__activities-img" alt="..." />
