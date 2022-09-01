@@ -1,6 +1,19 @@
+import { useEffect } from "react";
+const axios = require('axios').default;
 
 
 export const AlumnosActividadesScreen = () => {
+
+    useEffect(() => {
+        axios.post('/api/message/read', {'type': true})
+        .then(({data}) => {
+            // setAbscenses(data.db);
+            console.log(data.dict);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }, [])
 
     return (
         <div>
