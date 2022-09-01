@@ -1,6 +1,6 @@
+import Table from 'react-bootstrap/Table';
 import { AuthContext } from 'context';
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 const axios = require('axios').default;
 
 
@@ -11,6 +11,22 @@ export const AlumnosHomeScreen = () => {
 
   const { user } = authState;
 
+  const [ menu, setMenu ] = useState();
+  // console.log(menu);
+  // console.log(menu.JUEVES);
+
+  useEffect(() => {
+      axios.get('/api/menu')
+      .then(({data}) => {
+          // setAbscenses(data.db);
+          setMenu(data.menu.menu);
+          console.log(data.menu.menu);
+      })
+      .catch((err) => {
+          console.log(err);
+      })
+  }, [])
+  
   return (
     <div>
       <section id="home__home">
@@ -41,8 +57,56 @@ export const AlumnosHomeScreen = () => {
       <section id="home__menu">
         <h2 id="home__menu-title">Menú</h2>
         <div id="home__menu-week">
-          <div id="home__menu-padding">
-              <h4 className="home__menu-day">Lunes</h4>
+          <Table responsive striped id="home__menu-table">
+              <thead>
+                  <tr>
+                      <th className='home__menu-th'>Semana</th>
+                      <th className='home__menu-th'>Lunes</th>
+                      <th className='home__menu-th'>Martes</th>
+                      <th className='home__menu-th'>Miercoles</th>
+                      <th className='home__menu-th'>Jueves</th>
+                      <th className='home__menu-th'>Viernes</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {/* TODO: Make this with for bucle */}
+                    <tr className='home__menu-tr'>
+                        <td>1</td>
+                        <td>{ menu && menu.LUNES[0] }</td>
+                        <td>{ menu && menu.MARTES[0] }</td>
+                        <td>{ menu && menu.MIERCOLES[0] }</td>
+                        <td>{ menu && menu.JUEVES[0] }</td>
+                        <td>{ menu && menu.VIERNES[0] }</td>
+                    </tr>
+                    <tr className='home__menu-tr'>
+                        <td>2</td>
+                        <td>{ menu && menu.LUNES[1] }</td>
+                        <td>{ menu && menu.MARTES[1] }</td>
+                        <td>{ menu && menu.MIERCOLES[1] }</td>
+                        <td>{ menu && menu.JUEVES[1] }</td>
+                        <td>{ menu && menu.VIERNES[1] }</td>
+                    </tr>
+                    <tr className='home__menu-tr'>
+                        <td>3</td>
+                        <td>{ menu && menu.LUNES[2] }</td>
+                        <td>{ menu && menu.MARTES[2] }</td>
+                        <td>{ menu && menu.MIERCOLES[2] }</td>
+                        <td>{ menu && menu.JUEVES[2] }</td>
+                        <td>{ menu && menu.VIERNES[2] }</td>
+                    </tr>
+                    <tr className='home__menu-tr'>
+                        <td>4</td>
+                        <td>{ menu && menu.LUNES[3] }</td>
+                        <td>{ menu && menu.MARTES[3] }</td>
+                        <td>{ menu && menu.MIERCOLES[3] }</td>
+                        <td>{ menu && menu.JUEVES[3] }</td>
+                        <td>{ menu && menu.VIERNES[3] }</td>
+                    </tr>
+              </tbody>
+          </Table>
+
+
+              {/* <h4 className="home__menu-day">Lunes</h4>
               <p className="home__menu-name">Carne al horno con papas</p>
               <h4 className="home__menu-day">Martes</h4>
               <p className="home__menu-name">Ñoquis con salsa boloñesa</p>
@@ -51,8 +115,9 @@ export const AlumnosHomeScreen = () => {
               <h4 className="home__menu-day">Jueves</h4>
               <p className="home__menu-name">Pizza</p>
               <h4 className="home__menu-day">Viernes</h4>
-              <p id="home__last-name">Milanesa con puré</p>
-          </div>
+              <p id="home__last-name">Milanesa con puré</p> */}
+          {/* <div id="home__menu-padding">
+          </div> */}
         </div>
       </section>
     </div>
