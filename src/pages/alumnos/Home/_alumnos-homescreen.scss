@@ -25,15 +25,16 @@
         }
 
         #home__title-p2 {
-            font-size: 1.7em;
+            font-size: 1.5em;
             margin-bottom: 3em;
         }
     }
     
     #home__subtitle {
+        font-size: 1.3em;
+        margin-left: .2em;
         position: absolute;
         top: 75%;
-        margin-left: .2em;
     }
 }
 
@@ -41,8 +42,9 @@
 #home__menu {
     background-color: $gray;
     color: white;
-    min-height: 100vh;
     height: fit-content;
+    min-height: 100vh;
+    padding-bottom: 2em;
 
     #home__board-title,
     #home__menu-title {
@@ -62,7 +64,7 @@
         text-align: center;
         top: 10em;
         // position: relative;
-        width: 25%;
+        width: 240px;
 
         #home__board-padding,
         #home__menu-padding {
@@ -89,4 +91,33 @@
 .home__separator {
     background-color: transparent;
     height: 20em;
+}
+
+
+@media(min-width: 576px) {
+    #home__board, 
+    #home__menu {
+        #home__board-week,
+        #home__menu-week {
+            width: 300px;
+        }
+    }
+}
+
+@media(min-width: 992px) {
+    #home__home {
+        width: 76%;
+
+        #home__subtitle {
+            font-size: 1.5em;
+        }
+    }
+
+    #home__board, 
+    #home__menu {
+        #home__board-week,
+        #home__menu-week {
+            width: 350px;
+        }
+    }
 }

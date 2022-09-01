@@ -13,7 +13,7 @@
     // overflow: hidden;
 
     #forms__title {
-        font-size: 4.5em;
+        font-size: 2em;
         position: absolute;
         text-transform: uppercase;
         top: 45%;
@@ -38,18 +38,17 @@
         #forms__board-padding {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: space-around;
             padding: 2em;
 
             .forms__board-form-container {
                 // border: 1px solid white;
                 padding: .5em;
                 margin: 1em;
-                width: calc(100% * (1/4));
 
                 .forms__board-form {
                     font-size: 2em;
-                    // margin-bottom: .8em;
+                    // margin-bottom: .8em; 
                 }
 
                 .forms__board-text {
@@ -75,6 +74,33 @@
                     border: 2px solid white;
                 }
             }
+        }
+    }
+}
+
+@media(min-width: 450px) {
+        
+    #forms__home {
+        #forms__title {
+            font-size: 3em;
+        }
+    }
+}
+
+@media(min-width: 768px) {
+        
+    #forms__home {
+        #forms__title {
+            font-size: 4em;
+        }
+    }
+}
+
+@media(min-width: 992px) {
+        
+    #forms__home {
+        #forms__title {
+            font-size: 4.5em;
         }
     }
 }

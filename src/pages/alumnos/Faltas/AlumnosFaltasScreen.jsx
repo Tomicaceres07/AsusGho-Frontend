@@ -1,6 +1,8 @@
+import Table from 'react-bootstrap/Table';
 import { AuthContext } from 'context';
 import React, { useContext, useEffect, useState } from 'react';
 const axios = require('axios').default;
+
 
 export const AlumnosFaltasScreen = () => {
 
@@ -19,7 +21,7 @@ export const AlumnosFaltasScreen = () => {
         .catch((err) => {
             console.log(err);
         })
-    }, [])
+    }, [user.email])
 
     
     return (
@@ -30,7 +32,31 @@ export const AlumnosFaltasScreen = () => {
             </section>
             <section id="absences__board">
                 <h2 id="absences__board-title">Faltas: {abscenses && abscenses.length}</h2>
-                <div id="absences__board-week">
+                <div id="absences__board-padding">
+                    <Table striped id="absences__board-table">
+                        <thead>
+                            <tr>
+                                <th className='absences__board-th'>#</th>
+                                <th className='absences__board-th'>Fecha</th>
+                                <th className='absences__board-th'>Cantidad</th>
+                                <th className='absences__board-th'>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                abscenses && abscenses.map( (item, index) => (
+                                    <tr key={ item.id }>
+                                        <td>{ index + 1 }</td>
+                                        <td>{ item.date }</td>
+                                        <td>{ item.c_abscence }</td>
+                                        <td  className={(item.justified === 0) && 'absences__board-unjustified'}>{ (item.justified === 0) ? "Injustificada" : "Justificada"  }</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </Table>
+                </div>
+                {/* <div id="absences__board-week">
                     <div id="absences__board-padding">
 
                         {
@@ -44,34 +70,8 @@ export const AlumnosFaltasScreen = () => {
                                 </div>
                             ))
                         }
-
-                        {/* <h6>{abscenses.id}</h6> */}
-                        {/* <div className="absences__board-container absences__board-unjustified">
-                            <p className="absences__board-day">23/07</p>
-                            <p className="absences__board-absence">Injustificada</p>
-                        </div>
-                        <div className="absences__board-container">
-                            <p className="absences__board-day">15/08</p>
-                            <p className="absences__board-absence">Justificada</p>
-                        </div>
-                        <div className="absences__board-container">
-                            <p className="absences__board-day">18/08</p>
-                            <p className="absences__board-absence">Justificada</p>
-                        </div>
-                        <div className="absences__board-container absences__board-unjustified">
-                            <p className="absences__board-day">19/08</p>
-                            <p className="absences__board-absence">Injustificada</p>
-                        </div>
-                        <div className="absences__board-container">
-                            <p className="absences__board-day">20/08</p>
-                            <p className="absences__board-absence">Justificada</p>
-                        </div>
-                        <div className="absences__board-container">
-                            <p className="absences__board-day">07/10</p>
-                            <p className="absences__board-absence">Justificada</p>
-                        </div> */}
                     </div>
-                </div>
+                </div> */}
             </section>
         </div>
     );

@@ -13,13 +13,14 @@
     // overflow: hidden;
 
     #absences__title {
-        font-size: 4.5em;
+        font-size: 2em;
         position: absolute;
         text-transform: uppercase;
         top: 45%;
     }
     
     #absences__subtitle {
+        font-size: 1.3em;
         margin-left: .2em;
         position: absolute;
         text-transform: uppercase;
@@ -30,12 +31,13 @@
 #absences__board {
     background-color: $gray;
     color: white;
-    min-height: 100vh;
+    min-height: 80vh;
+    padding-bottom: 3em;
     height: fit-content;
 
     #absences__board-title {
         // background-color: green;
-        font-size: 3em;
+        font-size: 2em;
         // position: relative;
         padding: 50px;
         text-align: center;
@@ -43,40 +45,92 @@
         top: 1.7em;
     }
 
-    #absences__board-week {
-        background-color: $dark-gray;
+    #absences__board-table {
+        background-color: white;
+        text-align: center;
+        .absences__board-th {
+            text-transform: uppercase!important;
+        }
+    }
+
+    #absences__board-table {
+        background-color: white;
+        border-radius: 20px;
         margin: 0px auto;
         text-align: center;
-        top: 10em;
-        // position: relative;
-        width: 25%;
+        .absences__board-th {
+            text-transform: uppercase!important;
+        }
 
-        #absences__board-padding {
-            padding: 3em;
+        .absences__board-unjustified {
+            color: rgb(255, 56, 56);
+        }
+    }
 
-            .absences__board-container {
-                // border: 1px solid red;
+    .table>:not(caption)>*>* {
+        border-bottom-width: 0px;
+    }
+}
 
-                .absences__board-day {
-                    font-size: 1.5em;
-                    margin-bottom: .1em;
-                    text-transform: uppercase;
-                }
-    
-                .absences__board-absence {
-                    font-size: .8em;
-                    // margin-bottom: 1em;
-                }
-    
-                #absences__last-absence {
-                    margin-bottom: 0px!important;
-                }
-            }
+// Media Queries
+@media(min-width: 450px) {
+    #absences__home {
+        #absences__title {
+            font-size: 3em;
+        }
+        #absences__subtitle {
+            font-size: 1.5em;
+        }
+    }
 
-            .absences__board-unjustified {
-                color: rgb(255, 56, 56);
-            }
+    #absences__board {
+        #absences__board-title {
+            font-size: 2.5em;
+        }
+    }
+}
 
+@media(min-width: 500px) {
+    #absences__board {
+        #absences__board-title {
+            font-size: 2.5em;
+        }
+
+        #absences__board-table {
+            width: 500px;
+        }
+    }
+}
+
+@media(min-width: 650px) {
+    #absences__home {
+        #absences__title {
+            font-size: 3.5em;
+        }
+        #absences__subtitle {
+            font-size: 2em;
+        }
+    }
+
+    #absences__board {
+        #absences__board-title {
+            font-size: 3em;
+        }
+    }
+}
+
+@media(min-width: 768px) {
+    #absences__home {
+        #absences__title {
+            font-size: 4em;
+        }
+    }
+}
+
+@media(min-width: 992px) {
+    #absences__home {
+        #absences__title {
+            font-size: 4.5em;
         }
     }
 }

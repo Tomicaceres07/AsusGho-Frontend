@@ -13,16 +13,10 @@
     // overflow: hidden;
 
     #exams__title {
-        font-size: 4.5em;
+        font-size: 2em;
         position: absolute;
         text-transform: uppercase;
         top: 45%;
-    }
-    
-    #exams__subtitle {
-        position: absolute;
-        top: 75%;
-        margin-left: .2em;
     }
 }
 
@@ -43,19 +37,21 @@
 
         #exams__board-padding {
             display: flex;
+            flex-direction: row;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: center;
             padding: 2em;
 
             .exams__board-subject-container {
                 // border: 1px solid white;
                 padding: .5em;
                 margin: 1em;
-                width: calc(100% * (1/4));
+                width: 200px;
+                // width: calc(100% * (1/4));
 
                 .exams__board-subject {
                     // border: 1px solid green;
-                    font-size: 2em;
+                    font-size: 1.5em;
                     margin-bottom: .5em;
                     text-transform: uppercase;
                 }
@@ -76,4 +72,20 @@
 .exams__separator {
     background-color: transparent;
     height: 20em;
+}
+
+@media(min-width: 350px) {
+    #exams__home {
+        #exams__title {
+            font-size: 3em;
+        }
+    }
+}
+
+@media(min-width: 500px) {
+    #exams__home {
+        #exams__title {
+            font-size: 4.5em;
+        }
+    }
 }

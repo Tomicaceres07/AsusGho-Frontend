@@ -20,18 +20,20 @@
         top: 40%;
 
         #previous__title-p1 {
-            font-size: 1.7em;
+            font-size: 1em;
+            // font-size: 1.7em;
             margin-bottom: .6em;
             // margin-left: .2em;
         }
 
         #previous__title-p2 {
-            font-size: 1.7em;
+            font-size: 1em;
             margin-bottom: 3em;
         }
     }
     
     #previous__subtitle {
+        font-size: 1.2em;
         position: absolute;
         top: 75%;
         margin-left: .2em;
@@ -46,7 +48,7 @@
 
     #previous__board-title {
         // background-color: green;
-        font-size: 3em;
+        font-size: 2.5em;
         // position: relative;
         padding: 50px;
         text-align: center;
@@ -65,7 +67,7 @@
         #previous__board-padding {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: space-around;
             padding: 2em;
 
             .previous__board-subject-container {
@@ -74,7 +76,7 @@
                 margin: 1em;
 
                 .previous__board-subject {
-                    font-size: 2em;
+                    font-size: 1.8em;
                     margin-bottom: .8em;
                     text-transform: uppercase;
                 }
@@ -84,10 +86,11 @@
                     border: 2px solid rgb(255, 56, 56);
                     border-radius: 20px;
                     color: rgb(255, 56, 56);
-                    padding: .5em;
-                    padding-left: 2em;
-                    padding-right: 2em;
-                    margin-bottom: 1em;
+                    // padding: .5em;
+                    // padding-left: 2em;
+                    // padding-right: 2em;
+                    padding: 7px;
+                    margin-bottom: .5em;
                     transition: all .3s;
                 }
     
@@ -97,6 +100,34 @@
                     border: 2px solid white;
                 }
             }
+        }
+    }
+}
+
+@media(min-width: 400px) {
+    #previous__home {
+        #previous__title {
+            #previous__title-p1,
+            #previous__title-p2 {
+                font-size: 1.2em;
+            }
+        }
+        #previous__subtitle {
+            font-size: 1.4em;
+        }
+    }
+}
+
+@media(min-width: 768px) {
+    #previous__home {
+        #previous__title {
+            #previous__title-p1,
+            #previous__title-p2 {
+                font-size: 1.5em;
+            }
+        }
+        #previous__subtitle {
+            font-size: 1.5em;
         }
     }
 }
