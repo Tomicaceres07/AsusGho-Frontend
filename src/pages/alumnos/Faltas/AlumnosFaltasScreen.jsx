@@ -32,30 +32,28 @@ export const AlumnosFaltasScreen = () => {
             </section>
             <section id="absences__board">
                 <h2 id="absences__board-title">Faltas: {abscenses && abscenses.length}</h2>
-                <div id="absences__board-padding">
-                    <Table striped id="absences__board-table">
-                        <thead>
-                            <tr>
-                                <th className='absences__board-th'>#</th>
-                                <th className='absences__board-th'>Fecha</th>
-                                <th className='absences__board-th'>Cantidad</th>
-                                <th className='absences__board-th'>Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                abscenses && abscenses.map( (item, index) => (
-                                    <tr key={ item.id }>
-                                        <td>{ index + 1 }</td>
-                                        <td>{ item.date }</td>
-                                        <td>{ item.c_abscence }</td>
-                                        <td  className={(item.justified === 0) && 'absences__board-unjustified'}>{ (item.justified === 0) ? "Injustificada" : "Justificada"  }</td>
-                                    </tr>
-                                ))
-                            }
-                        </tbody>
-                    </Table>
-                </div>
+                <Table striped id="absences__board-table">
+                    <thead>
+                        <tr>
+                            <th className='absences__board-th'>#</th>
+                            <th className='absences__board-th'>Fecha</th>
+                            <th className='absences__board-th'>Cantidad</th>
+                            <th className='absences__board-th'>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            abscenses && abscenses.map( (item, index) => (
+                                <tr key={ item.id }>
+                                    <td>{ index + 1 }</td>
+                                    <td>{ item.date }</td>
+                                    <td>{ item.c_abscence }</td>
+                                    <td  className={(item.justified === 0) && 'absences__board-unjustified'}>{ (item.justified === 0) ? "Injustificada" : "Justificada"  }</td>
+                                </tr>
+                            ))
+                        }
+                    </tbody>
+                </Table>
                 {/* <div id="absences__board-week">
                     <div id="absences__board-padding">
 

@@ -57,8 +57,7 @@
         top: 1.7em;
     }
 
-    #home__board-week,
-    #home__menu-week {
+    #home__board-week {
         background-color: $dark-gray;
         margin: 0px auto;
         text-align: center;
@@ -66,25 +65,45 @@
         // position: relative;
         width: 240px;
 
-        #home__board-padding,
-        #home__menu-padding {
+        #home__board-padding {
             padding: 3em;
 
-            .home__board-day,
-            .home__menu-day {
+            .home__board-day {
                 text-transform: uppercase;
             }
 
-            .home__board-task,
-            .home__menu-name {
+            .home__board-task {
                 margin-bottom: 30px;
             }
 
-            #home__last-task,
-            #home__last-name {
+            #home__last-task {
                 margin-bottom: 0px!important;
             }
         }
+    }
+
+    #home__menu-week {
+        background-color: white;
+        border-radius: 20px;
+        margin: 0px auto;
+        text-align: center;
+        width: 70vw;
+
+        #home__menu-table {
+
+            .home__menu-th {
+                width: 120px;
+            }
+
+            .home__menu-tr {
+                height: 100px;
+                vertical-align: middle;
+            }
+        }
+    }
+
+    .table>:not(caption)>*>* {
+        border-bottom-width: 0px;
     }
 }
 
@@ -95,10 +114,8 @@
 
 
 @media(min-width: 576px) {
-    #home__board, 
-    #home__menu {
-        #home__board-week,
-        #home__menu-week {
+    #home__board {
+        #home__board-week {
             width: 300px;
         }
     }
@@ -113,10 +130,8 @@
         }
     }
 
-    #home__board, 
-    #home__menu {
-        #home__board-week,
-        #home__menu-week {
+    #home__board{
+        #home__board-week{
             width: 350px;
         }
     }
