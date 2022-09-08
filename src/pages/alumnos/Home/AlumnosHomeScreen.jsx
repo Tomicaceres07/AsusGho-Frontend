@@ -32,6 +32,7 @@ export const AlumnosHomeScreen = () => {
       <section id="home__home">
         <h1 id="home__title"><span id="home__title-p1">Liceo Militar</span><span id="home__title-p2">General Paz</span></h1>
         <h2 id="home__subtitle">Bienvenido, {user && user.name}</h2>
+        {/* <a href="http://192.168.60.43:5000/dw">Download</a> */}
       </section>
       <section id="home__board">
         <h2 id="home__board-title">Tablero</h2>
@@ -48,7 +49,6 @@ export const AlumnosHomeScreen = () => {
               <p className="home__board-task">Visita a la UCC</p>
               <h4 className="home__board-day">Viernes</h4>
               <p id="home__last-task">Presentación informática</p>
-
               {/* <h5>{msj}</h5> */}
           </div>
         </div>

@@ -14,8 +14,8 @@ export const AlumnosActividadesScreen = () => {
     useEffect(() => {
         axios.post('/api/message/read', {'type': user.type})
         .then(({data}) => {
-            setActivities(data.dict);
-            console.log(data.dict);
+            setActivities(data.element);
+            console.log(data.element);
         })
         .catch((err) => {
             console.log(err);
