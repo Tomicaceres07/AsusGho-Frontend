@@ -44,24 +44,35 @@
         text-transform: uppercase;
         top: 1.7em;
     }
-    
-    #absences__board-table {
+
+    #absences__board-container-table {
         background-color: white;
         border-radius: 20px;
         margin: 0px auto;
         text-align: center;
-        .absences__board-th {
-            text-transform: uppercase!important;
+        width: 70vw;
+        
+        #absences__board-table {
+            .absences__board-th {
+                text-transform: uppercase!important;
+                width: 120px;
+            }
+    
+            .absences__board-tr {
+                height: 100px;
+                vertical-align: middle;
+            }
+    
+            .absences__board-unjustified {
+                color: rgb(255, 56, 56);
+            }
         }
-
-        .absences__board-unjustified {
-            color: rgb(255, 56, 56);
+    
+        .table>:not(caption)>*>* {
+            border-bottom-width: 0px;
         }
     }
-
-    .table>:not(caption)>*>* {
-        border-bottom-width: 0px;
-    }
+    
 }
 
 // Media Queries
