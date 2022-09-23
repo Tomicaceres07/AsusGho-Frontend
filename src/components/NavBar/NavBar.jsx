@@ -69,16 +69,16 @@ export const NavBar = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={onToggle}/>
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav id="nav-collapse" className="ms-auto">
-            <Nav.Link as={NavLink} to={"/alumnos/alumnos"} className="navlink mx-2" onClick={ onLinkClicked }>Home</Nav.Link>
-            <Nav.Link as={NavLink} to={"/alumnos/previas"} className="navlink mx-2" onClick={ onLinkClicked }>Previas</Nav.Link>
-            <Nav.Link as={NavLink} to={"/alumnos/actividades"} className="navlink mx-2" onClick={ onLinkClicked }>Actividades</Nav.Link>
-            <Nav.Link as={NavLink} to={"/alumnos/examenes"} className="navlink mx-2" onClick={ onLinkClicked }>Examenes</Nav.Link>
-            <Nav.Link as={NavLink} to={"/alumnos/faltas"} className="navlink mx-2" onClick={ onLinkClicked }>Faltas</Nav.Link>
-            <Nav.Link as={NavLink} to={"/alumnos/formularios"} className="navlink mx-2" onClick={ onLinkClicked }>Formularios</Nav.Link>
-            <NavDropdown title="Perfil" id="collasible-nav-dropdown" className="mx-4">
-              <Nav.Link as={NavLink} to={"/alumnos/perfil"} className="navlink-dropdown" onClick={ onLinkClicked }>Ver Perfil</Nav.Link>
+            <Nav.Link as={NavLink} to={"/alumnos/alumnos"} className="navlink mx-2 text-uppercase" onClick={ onLinkClicked }>Home</Nav.Link>
+            <Nav.Link as={NavLink} to={"/alumnos/previas"} className="navlink mx-2 text-uppercase" onClick={ onLinkClicked }>Previas</Nav.Link>
+            <Nav.Link as={NavLink} to={"/alumnos/actividades"} className="navlink mx-2 text-uppercase" onClick={ onLinkClicked }>Actividades</Nav.Link>
+            <Nav.Link as={NavLink} to={"/alumnos/examenes"} className="navlink mx-2 text-uppercase" onClick={ onLinkClicked }>Examenes</Nav.Link>
+            <Nav.Link as={NavLink} to={"/alumnos/faltas"} className="navlink mx-2 text-uppercase" onClick={ onLinkClicked }>Faltas</Nav.Link>
+            <Nav.Link as={NavLink} to={"/alumnos/formularios"} className="navlink mx-2 text-uppercase" onClick={ onLinkClicked }>Formularios</Nav.Link>
+            <NavDropdown title="PERFIL" id="collasible-nav-dropdown" className="mx-4">
+              <Nav.Link as={NavLink} to={"/alumnos/perfil"} className="navlink-dropdown text-uppercase" onClick={ onLinkClicked }>Ver Perfil</Nav.Link>
               <NavDropdown.Divider />
-              <Button onClick={onLogout} id="logout-button" className="w-100">Cerrar Sesión</Button>
+              <Button onClick={onLogout} id="logout-button" className="w-100 text-uppercase">Cerrar Sesión</Button>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

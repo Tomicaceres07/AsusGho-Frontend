@@ -39,11 +39,17 @@ export const AlumnosActividadesScreen = () => {
                     {/* In a future, I'll consume the API and do a ul.map to list them all */}
                     <ul className="activities__activities-ul">
                         {
-                            activities && activities.map( (item, index) => (
+                            activities 
+                            ?   (
+                                activities.map( (item, index) => (
                                 <li key={ index } className="activities__activities-name-activity">
                                     { item.date } - { item.text }
                                 </li>
-                            ))
+                                ))
+                                )
+                            :   (
+                                    <li className="activities__activities-name-activity">No hay actividades</li>
+                                )
                         }
                         {/* <li className="activities__activities-name-activity">Lunes 08/03 - Jura de la bandera</li>
                         <li className="activities__activities-name-activity">Miércoles 26/03 - Acto de abanderados</li>

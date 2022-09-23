@@ -162,3 +162,18 @@
         }
     }
 }
+
+@media(min-width: 1200px) {
+    #activities__home {
+        #activities__title {
+            #activities__title-p1 {
+                font-size: 72px;
+                margin-bottom: .2em;
+            }
+
+            #activities__title-p2 {
+                font-size: 72px;
+            }
+        }
+    }
+}
