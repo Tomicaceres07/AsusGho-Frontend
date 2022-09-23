@@ -134,3 +134,19 @@
         }
     }
 }
+
+
+@media(min-width: 1200px) {
+    #home__home {
+        #home__title {
+            #home__title-p1 {
+                font-size: 72px;
+                margin-bottom: .2em;
+            }
+    
+            #home__title-p2 {
+                font-size: 112px;
+            }
+        }
+    }
+}
