@@ -17,7 +17,8 @@ export const AlumnosPerfilScreen = () => {
     useEffect(() => {
         axios.post('/api/division_year/course', {
             "grade": grade,
-            "division": division
+            "division": division,
+            "id_s": user.id
         })
         .then(({data}) => {
             // console.log(data.courses.length);
@@ -26,7 +27,7 @@ export const AlumnosPerfilScreen = () => {
         .catch((err) => {
             console.log(err);
         })
-    }, [grade, division])
+    }, [grade, division, user.id])
     
 
     const handleChangeGrade = event => {

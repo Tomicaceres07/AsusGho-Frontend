@@ -5,6 +5,8 @@ import { AuthContext } from 'context/AuthContext';
 
 export const PrivateRoute = ({ children }) => {
 
+    console.log(children)
+
     const { authState } = useContext( AuthContext );
     const { logged } = authState;
 
