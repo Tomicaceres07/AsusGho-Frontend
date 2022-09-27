@@ -70,9 +70,9 @@ export const NavBar = () => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav id="nav-collapse" className="ms-auto">
             <Nav.Link as={NavLink} to={"/alumnos/alumnos"} className="navlink mx-2 text-uppercase" onClick={ onLinkClicked }>Home</Nav.Link>
-            <Nav.Link as={NavLink} to={"/alumnos/previas"} className="navlink mx-2 text-uppercase" onClick={ onLinkClicked }>Previas</Nav.Link>
+            {/* <Nav.Link as={NavLink} to={"/alumnos/previas"} className="navlink mx-2 text-uppercase" onClick={ onLinkClicked }>Previas</Nav.Link> */}
             <Nav.Link as={NavLink} to={"/alumnos/actividades"} className="navlink mx-2 text-uppercase" onClick={ onLinkClicked }>Actividades</Nav.Link>
-            <Nav.Link as={NavLink} to={"/alumnos/examenes"} className="navlink mx-2 text-uppercase" onClick={ onLinkClicked }>Examenes</Nav.Link>
+            <Nav.Link as={NavLink} to={"/alumnos/materias"} className="navlink mx-2 text-uppercase" onClick={ onLinkClicked }>Materias</Nav.Link>
             <Nav.Link as={NavLink} to={"/alumnos/faltas"} className="navlink mx-2 text-uppercase" onClick={ onLinkClicked }>Faltas</Nav.Link>
             <Nav.Link as={NavLink} to={"/alumnos/formularios"} className="navlink mx-2 text-uppercase" onClick={ onLinkClicked }>Formularios</Nav.Link>
             <NavDropdown title="PERFIL" id="collasible-nav-dropdown" className="mx-4">

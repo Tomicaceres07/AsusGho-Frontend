@@ -8,9 +8,9 @@ import { LayoutBasic } from "layouts/LayoutBasic/LayoutBasic";
 //Paginas
 
 import { AlumnosHomeScreen } from 'pages/alumnos/Home/AlumnosHomeScreen';
-import { AlumnosPreviasScreen } from 'pages/alumnos/Previas/AlumnosPreviasScreen';
+// import { AlumnosPreviasScreen } from 'pages/alumnos/Previas/AlumnosPreviasScreen';
 import { AlumnosActividadesScreen } from 'pages/alumnos/Actividades/AlumnosActividadesScreen';
-import { AlumnosExamenesScreen } from 'pages/alumnos/Examenes/AlumnosExamenesScreen';
+import { AlumnosMateriasScreen } from 'pages/alumnos/Materias/AlumnosMateriasScreen';
 import { AlumnosFaltasScreen } from "pages/alumnos/Faltas/AlumnosFaltasScreen";
 import { AlumnosFormulariosScreen } from "pages/alumnos/Formularios/AlumnosFormulariosScreen";
 import { AlumnosPerfilScreen } from "pages/alumnos/Perfil/AlumnosPerfilScreen";
@@ -25,11 +25,11 @@ const alumnoRoutes = [
         component: AlumnosHomeScreen,
         path: "/alumnos/alumnos"
     },
-    {
+    /* {
         layout: LayoutBasic,
         component: AlumnosPreviasScreen,
         path: "/alumnos/previas"
-    },
+    }, */
     {
         layout: LayoutBasic,
         component: AlumnosActividadesScreen,
@@ -37,8 +37,8 @@ const alumnoRoutes = [
     },
     {
         layout: LayoutBasic,
-        component: AlumnosExamenesScreen,
-        path: "/alumnos/examenes"
+        component: AlumnosMateriasScreen,
+        path: "/alumnos/materias"
     },
     {
         layout: LayoutBasic,
