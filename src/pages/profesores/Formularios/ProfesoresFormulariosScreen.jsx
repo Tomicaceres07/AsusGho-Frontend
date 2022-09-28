@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { saveAs } from 'file-saver'
 const axios = require('axios').default;
 
-  export const AlumnosFormulariosScreen = () => {
+  export const ProfesoresFormulariosScreen = () => {
 
     // In a future, I'll do a get petition to API, and I'll receive a list of the previous subjects, so I can do a ul.map method to list them all.
 
@@ -46,20 +46,20 @@ const axios = require('axios').default;
 
     return (
       <div>
-        <section id="student__forms__home">
-          <h1 id="student__forms__title">Formularios</h1>
+        <section id="teacher__forms__home">
+          <h1 id="teacher__forms__title">Formularios</h1>
         </section>
-        <section id="student__forms__board">
-          <div id="student__forms__board-week">
-            <div id="student__forms__board-padding">
+        <section id="teacher__forms__board">
+          <div id="teacher__forms__board-week">
+            <div id="teacher__forms__board-padding">
               {
                   forms && (
                     (forms.length !== 0) 
                     ? (forms.map( (item, index) => (
-                    <div className="student__forms__board-form-container" key={index}>
-                      <h4 className="student__forms__board-form">Formulario F{item.id}</h4>
-                      <p className="student__forms__board-text">{item.name}</p>
-                      <button className="student__forms__board-button-download" onClick={() => onDownload(item.id)}>Descargar F{item.id}</button>
+                    <div className="teacher__forms__board-form-container" key={index}>
+                      <h4 className="teacher__forms__board-form">Formulario F{item.id}</h4>
+                      <p className="teacher__forms__board-text">{item.name}</p>
+                      <button className="teacher__forms__board-button-download" onClick={() => onDownload(item.id)}>Descargar F{item.id}</button>
                     </div>
                     )))
                     : <h1>No hay PDFs CRACK</h1>

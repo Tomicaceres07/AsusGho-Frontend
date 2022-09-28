@@ -81,37 +81,37 @@ export const AlumnosPreviasScreen = () => {
 
   return (
     <div>
-      <section id="previous__home">
-        <h1 id="previous__title"><span id="previous__title-p1">Examenes</span><span id="previous__title-p2">Complementarios</span></h1>
-        <h2 id="previous__subtitle">Periodo 2021 / 2022</h2>
+      <section id="student__previous__home">
+        <h1 id="student__previous__title"><span id="student__previous__title-p1">Examenes</span><span id="student__previous__title-p2">Complementarios</span></h1>
+        <h2 id="student__previous__subtitle">Periodo 2021 / 2022</h2>
       </section>
-      <section id="previous__board">
-        <h2 id="previous__board-title">Materias</h2>
-        <div id="previous__board-week">
-          <div id="previous__board-padding">
-              {/* <div className="previous__board-subject-container">
-                  <h4 className="previous__board-subject">Lengua</h4>
-                  <button className="previous__board-button-download" onClick={onDownload}>Descargar Temario y Fechas</button>
+      <section id="student__previous__board">
+        <h2 id="student__previous__board-title">Materias</h2>
+        <div id="student__previous__board-week">
+          <div id="student__previous__board-padding">
+              {/* <div className="student__previous__board-subject-container">
+                  <h4 className="student__previous__board-subject">Lengua</h4>
+                  <button className="student__previous__board-button-download" onClick={onDownload}>Descargar Temario y Fechas</button>
               </div>
-              <div className="previous__board-subject-container">
-                  <h4 className="previous__board-subject">Matematica</h4>
-                  <button className="previous__board-button-download" onClick={onDownload}>Descargar Temario y Fechas</button>
+              <div className="student__previous__board-subject-container">
+                  <h4 className="student__previous__board-subject">Matematica</h4>
+                  <button className="student__previous__board-button-download" onClick={onDownload}>Descargar Temario y Fechas</button>
               </div>
-              <div className="previous__board-subject-container">
-                  <h4 className="previous__board-subject">Historia</h4>
-                  <button className="previous__board-button-download" onClick={onDownload}>Descargar Temario y Fechas</button>
+              <div className="student__previous__board-subject-container">
+                  <h4 className="student__previous__board-subject">Historia</h4>
+                  <button className="student__previous__board-button-download" onClick={onDownload}>Descargar Temario y Fechas</button>
               </div>
-              <div className="previous__board-subject-container">
-                  <h4 className="previous__board-subject">Informatica</h4>
-                  <button className="previous__board-button-download" onClick={onDownload}>Descargar Temario y Fechas</button>
+              <div className="student__previous__board-subject-container">
+                  <h4 className="student__previous__board-subject">Informatica</h4>
+                  <button className="student__previous__board-button-download" onClick={onDownload}>Descargar Temario y Fechas</button>
               </div>
-              <div className="previous__board-subject-container">
-                  <h4 className="previous__board-subject">Geografia</h4>
-                  <button className="previous__board-button-download" onClick={onDownload}>Descargar Temario y Fechas</button>
+              <div className="student__previous__board-subject-container">
+                  <h4 className="student__previous__board-subject">Geografia</h4>
+                  <button className="student__previous__board-button-download" onClick={onDownload}>Descargar Temario y Fechas</button>
               </div> */}
-              {/* <div className="previous__board-subject-container">
-                  <h4 className="previous__board-subject">TEST</h4>
-                  <button className="previous__board-button-download" onClick={onSendPDF}>Mandar PDF</button>
+              {/* <div className="student__previous__board-subject-container">
+                  <h4 className="student__previous__board-subject">TEST</h4>
+                  <button className="student__previous__board-button-download" onClick={onSendPDF}>Mandar PDF</button>
               </div> */}
               {/* This is to upload a pdf */}
               <div className='mw-100'>

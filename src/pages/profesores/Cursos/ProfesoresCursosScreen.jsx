@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 const axios = require('axios').default;
 
 
-export const AlumnosMateriasScreen = () => {
+export const ProfesoresCursosScreen = () => {
 
     const { authState } = useContext( AuthContext );
     const { user } = authState;
@@ -32,32 +32,32 @@ export const AlumnosMateriasScreen = () => {
 
     return (
         <div>
-            <section id="student__subjects__home">
-                <h1 id="student__subjects__title">Materias</h1>
+            <section id="teacher__subjects__home">
+                <h1 id="teacher__subjects__title">Materias</h1>
             </section>
-            <section id="student__subjects__board">
-                <div id="student__subjects__board-week">
-                    <div id="student__subjects__board-padding">
+            <section id="teacher__subjects__board">
+                <div id="teacher__subjects__board-week">
+                    <div id="teacher__subjects__board-padding">
                         {
                             classes 
                             ?   (
                                 classes.map( (item, index) => (
-                                <div key={ index } className="student__subjects__board-subject-container">
-                                    <h4 className="student__subjects__board-subject">{ item.course.name } - { item.course.grade }°{ item.course.division }</h4>
+                                <div key={ index } className="teacher__subjects__board-subject-container">
+                                    <h4 className="teacher__subjects__board-subject">{ item.course.name } - { item.course.grade }°{ item.course.division }</h4>
                                 </div>
                                 ))
                                 )
                             :   (
                                     <div>
-                                        <h4 className="student__subjects__board-subject">No estás inscripto a ninguna materia</h4>
+                                        <h4 className="teacher__subjects__board-subject">No estás inscripto a ninguna materia</h4>
                                         <button onClick={ redirect }>Inscribirse</button>
                                     </div>
                                 )
                         }
                         {/*
-                        <div className="student__subjects__board-subject-container">
-                            <h4 className="student__subjects__board-subject">Historia</h4>
-                            <p className="student__subjects__board-exam">EXAMEN 23/07 - Rev. Industrial</p>
+                        <div className="teacher__subjects__board-subject-container">
+                            <h4 className="teacher__subjects__board-subject">Historia</h4>
+                            <p className="teacher__subjects__board-exam">EXAMEN 23/07 - Rev. Industrial</p>
                         </div>
                        */}
                     </div>

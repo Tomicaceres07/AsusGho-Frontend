@@ -1,5 +1,5 @@
 
-.student__perfil__container {
+.teacher__perfil__container {
     background-color: white;
     border: 1px solid black;
     display: flex;
@@ -11,7 +11,7 @@
     width: fit-content;
 }
 
-#student__perfil__form{
+#teacher__perfil__form{
     background-color: rgba(5, 12, 71, 0.8);
     border-radius: 5px;
     color: white;
@@ -21,11 +21,11 @@
     text-align: left;
     width: 100%;
 
-    #student__perfil__title {
+    #teacher__perfil__title {
         margin-bottom: .5em;
     }
 
-    #student__perfil__submit {
+    #teacher__perfil__submit {
         // background-color: #37AF65;
         border: none;
         color: white;
@@ -34,7 +34,7 @@
         width: 100%;
     }
 
-    #student__perfil__submit:hover {
+    #teacher__perfil__submit:hover {
         background-color: #108797;
         color: white;
         transition: all .3s;

@@ -2,7 +2,7 @@
 
 
 
-#student__forms__home {
+#teacher__forms__home {
     align-items: center;
     color: white!important;
     justify-content: center;
@@ -12,7 +12,7 @@
     z-index: 3;
     // overflow: hidden;
 
-    #student__forms__title {
+    #teacher__forms__title {
         font-size: 2em;
         position: absolute;
         text-transform: uppercase;
@@ -20,14 +20,14 @@
     }
 }
 
-#student__forms__board {
+#teacher__forms__board {
     background-color: $gray;
     color: white;
     height: auto;
     padding-top: 3em;
     padding-bottom: 3em;
 
-    #student__forms__board-week {
+    #teacher__forms__board-week {
         background-color: $dark-gray;
         margin: 0px auto;
         text-align: center;
@@ -35,28 +35,28 @@
         // position: relative;
         width: 80%;
 
-        #student__forms__board-padding {
+        #teacher__forms__board-padding {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
             padding: 2em;
 
-            .student__forms__board-form-container {
+            .teacher__forms__board-form-container {
                 // border: 1px solid white;
                 padding: .5em;
                 margin: 1em;
 
-                .student__forms__board-form {
+                .teacher__forms__board-form {
                     font-size: 2em;
                     // margin-bottom: .8em; 
                 }
 
-                .student__forms__board-text {
+                .teacher__forms__board-text {
                     font-size: 1em;
                     margin-bottom: 1.5em;
                 }
     
-                .student__forms__board-button-download {
+                .teacher__forms__board-button-download {
                     background-color: transparent;
                     border: 2px solid rgb(255, 56, 56);
                     border-radius: 20px;
@@ -68,7 +68,7 @@
                     transition: all .3s;
                 }
     
-                .student__forms__board-button-download:hover {
+                .teacher__forms__board-button-download:hover {
                     background-color: black;
                     color: white;
                     border: 2px solid white;
@@ -80,8 +80,8 @@
 
 @media(min-width: 450px) {
         
-    #student__forms__home {
-        #student__forms__title {
+    #teacher__forms__home {
+        #teacher__forms__title {
             font-size: 3em;
         }
     }
@@ -89,8 +89,8 @@
 
 @media(min-width: 768px) {
         
-    #student__forms__home {
-        #student__forms__title {
+    #teacher__forms__home {
+        #teacher__forms__title {
             font-size: 4em;
         }
     }
@@ -98,8 +98,8 @@
 
 @media(min-width: 992px) {
         
-    #student__forms__home {
-        #student__forms__title {
+    #teacher__forms__home {
+        #teacher__forms__title {
             font-size: 4.5em;
         }
     }
