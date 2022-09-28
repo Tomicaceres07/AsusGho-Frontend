@@ -20,12 +20,19 @@ export const VerificarScreen = () => {
         axios.post('/api/getuser', {'id': id})
         .then(({data}) => {
             console.log(data);
+            console.log(data.type)
             // Save user data in context
             if(data && data.msj !== 'invalid id') {
                 login(data);
-                navigate(pathname, {
-                    replace: true
-                });  
+                if (data.type) {
+                    navigate('/alumnos/alumnos', {
+                        replace: true
+                    });  
+                } else {
+                    navigate('/profesores/profesores', {
+                        replace: true
+                    });
+                }
             } else {
                 navigate('/login', {
                     replace: true

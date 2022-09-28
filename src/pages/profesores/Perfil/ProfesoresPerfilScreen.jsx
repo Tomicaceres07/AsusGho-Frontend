@@ -3,7 +3,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
 const axios = require('axios').default;
 
-export const AlumnosPerfilScreen = () => {
+export const ProfesoresPerfilScreen = () => {
 
     const { register, handleSubmit } = useForm();
     const [grade, setGrade] = useState(1);
@@ -93,7 +93,7 @@ export const AlumnosPerfilScreen = () => {
         e.preventDefault();
         // TODO: do a for and add one by one the subjects to student
         if (subjects.length >= 1) {
-            document.getElementById("student__perfil__error").hidden = true;
+            document.getElementById("teacher__perfil__error").hidden = true;
             // console.log(subjects)
             // I must send: user.id and subjects[i]
             // Do the for
@@ -109,17 +109,17 @@ export const AlumnosPerfilScreen = () => {
 
 
         } else {
-            document.getElementById("student__perfil__error").hidden = false;
+            document.getElementById("teacher__perfil__error").hidden = false;
         }
     }
     
     return (
-        <div className="student__perfil__container">
+        <div className="teacher__perfil__container">
             <h2>Hola, {user && user.name}</h2>
             <h2>Inscripción a materias</h2>
-            <form id="student__perfil__form" onSubmit={handleSubmit(onSubmit)}>
-                <h4 id="student__perfil__title">Seleccione el año</h4>
-                <select name="grade" {...register('grade')} onChange={handleChangeGrade} id="student__perfil__dropdown" className="w-100 mb-2 input">
+            <form id="teacher__perfil__form" onSubmit={handleSubmit(onSubmit)}>
+                <h4 id="teacher__perfil__title">Seleccione el año</h4>
+                <select name="grade" {...register('grade')} onChange={handleChangeGrade} id="teacher__perfil__dropdown" className="w-100 mb-2 input">
                     {/* <option value="0">-- Seleccione el año --</option> */}
                     <option value={1}>1ero</option>
                     <option value={2}>2do</option>
@@ -128,8 +128,8 @@ export const AlumnosPerfilScreen = () => {
                     <option value={5}>5to</option>
                     <option value={6}>6to</option>
                 </select>
-                <h4 id="student__perfil__title">Seleccione el curso</h4>
-                <select name="division" {...register('division')} onChange={handleChangeDivision} id="student__perfil__dropdown" className="w-100 mb-2 input">
+                <h4 id="teacher__perfil__title">Seleccione el curso</h4>
+                <select name="division" {...register('division')} onChange={handleChangeDivision} id="teacher__perfil__dropdown" className="w-100 mb-2 input">
                     {/* <option value="0">-- Seleccione el curso --</option> */}
                     <option value="a">A</option>
                     <option value="b">B</option>
@@ -149,7 +149,7 @@ export const AlumnosPerfilScreen = () => {
                 {
                     (subjects) && <p>{subjects}</p>
                 }
-                <div id="student__perfil__error" className='text-danger' hidden>No seleccionaste ningún curso</div>
+                <div id="teacher__perfil__error" className='text-danger' hidden>No seleccionaste ningún curso</div>
                 <button type="submit" id="register__submit" className="display-block w-100" onClick={onSubmit}>Enviar</button>
             </form>
         </div>

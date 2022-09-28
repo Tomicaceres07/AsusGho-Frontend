@@ -10,12 +10,20 @@
 
 // Alumnos Pages
 @import 'pages/alumnos/Home/alumnos-homescreen';
-@import 'pages/alumnos/Previas/alumnos-previasscreen';
+// @import 'pages/alumnos/Previas/alumnos-previasscreen';
 @import 'pages/alumnos/Actividades/alumnos-actividadesscreen';
 @import 'pages/alumnos/Materias/alumnos-materiasscreen';
 @import 'pages/alumnos/Faltas/alumnos-faltasscreen';
 @import 'pages/alumnos/Formularios/alumnos-formulariosscreen';
 @import 'pages/alumnos/Perfil/alumnos-perfilscreen';
+
+// Profes Pages
+@import 'pages/profesores/Home/profesores-homescreen';
+@import 'pages/profesores/Actividades/profesores-actividadesscreen';
+@import 'pages/profesores/Cursos/profesores-cursosscreen';
+@import 'pages/profesores/Faltas/profesores-faltasscreen';
+@import 'pages/profesores/Formularios/profesores-formulariosscreen';
+@import 'pages/profesores/Perfil/profesores-perfilscreen';
 
 
 // COMPONENTS

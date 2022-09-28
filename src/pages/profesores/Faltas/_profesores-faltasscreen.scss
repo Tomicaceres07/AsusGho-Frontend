@@ -2,7 +2,7 @@
 
 
 
-#student__absences__home {
+#teacher__absences__home {
     align-items: center;
     color: white!important;
     justify-content: center;
@@ -12,14 +12,14 @@
     z-index: 3;
     // overflow: hidden;
 
-    #student__absences__title {
+    #teacher__absences__title {
         font-size: 2em;
         position: absolute;
         text-transform: uppercase;
         top: 45%;
     }
     
-    #student__absences__subtitle {
+    #teacher__absences__subtitle {
         font-size: 1.3em;
         margin-left: .2em;
         position: absolute;
@@ -28,14 +28,14 @@
     }
 }
 
-#student__absences__board {
+#teacher__absences__board {
     background-color: $gray;
     color: white;
     min-height: 80vh;
     padding-bottom: 3em;
     height: fit-content;
 
-    #student__absences__board-title {
+    #teacher__absences__board-title {
         // background-color: green;
         font-size: 2em;
         // position: relative;
@@ -45,25 +45,25 @@
         top: 1.7em;
     }
 
-    #student__absences__board-container-table {
+    #teacher__absences__board-container-table {
         background-color: white;
         border-radius: 20px;
         margin: 0px auto;
         text-align: center;
         width: 70vw;
         
-        #student__absences__board-table {
-            .student__absences__board-th {
+        #teacher__absences__board-table {
+            .teacher__absences__board-th {
                 text-transform: uppercase!important;
                 width: 120px;
             }
     
-            .student__absences__board-tr {
+            .teacher__absences__board-tr {
                 height: 100px;
                 vertical-align: middle;
             }
     
-            .student__absences__board-unjustified {
+            .teacher__absences__board-unjustified {
                 color: rgb(255, 56, 56);
             }
         }
@@ -77,58 +77,58 @@
 
 // Media Queries
 @media(min-width: 450px) {
-    #student__absences__home {
-        #student__absences__title {
+    #teacher__absences__home {
+        #teacher__absences__title {
             font-size: 3em;
         }
-        #student__absences__subtitle {
+        #teacher__absences__subtitle {
             font-size: 1.5em;
         }
     }
 
-    #student__absences__board {
-        #student__absences__board-title {
+    #teacher__absences__board {
+        #teacher__absences__board-title {
             font-size: 2.5em;
         }
     }
 }
 
 @media(min-width: 500px) {
-    #student__absences__board {
-        #student__absences__board-title {
+    #teacher__absences__board {
+        #teacher__absences__board-title {
             font-size: 2.5em;
         }
     }
 }
 
 @media(min-width: 650px) {
-    #student__absences__home {
-        #student__absences__title {
+    #teacher__absences__home {
+        #teacher__absences__title {
             font-size: 3.5em;
         }
-        #student__absences__subtitle {
+        #teacher__absences__subtitle {
             font-size: 2em;
         }
     }
 
-    #student__absences__board {
-        #student__absences__board-title {
+    #teacher__absences__board {
+        #teacher__absences__board-title {
             font-size: 3em;
         }
     }
 }
 
 @media(min-width: 768px) {
-    #student__absences__home {
-        #student__absences__title {
+    #teacher__absences__home {
+        #teacher__absences__title {
             font-size: 4em;
         }
     }
 }
 
 @media(min-width: 992px) {
-    #student__absences__home {
-        #student__absences__title {
+    #teacher__absences__home {
+        #teacher__absences__title {
             font-size: 4.5em;
         }
     }

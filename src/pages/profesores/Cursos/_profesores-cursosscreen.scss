@@ -2,7 +2,7 @@
 
 
 
-#student__subjects__home {
+#teacher__subjects__home {
     align-items: center;
     color: white!important;
     justify-content: center;
@@ -12,7 +12,7 @@
     z-index: 3;
     // overflow: hidden;
 
-    #student__subjects__title {
+    #teacher__subjects__title {
         font-size: 2em;
         position: absolute;
         text-transform: uppercase;
@@ -20,14 +20,14 @@
     }
 }
 
-#student__subjects__board {
+#teacher__subjects__board {
     background-color: $gray;
     color: white;
     height: auto;
     padding-top: 3em;
     padding-bottom: 3em;
 
-    #student__subjects__board-week {
+    #teacher__subjects__board-week {
         background-color: $dark-gray;
         margin: 0px auto;
         text-align: center;
@@ -35,28 +35,28 @@
         // position: relative;
         width: 80%;
 
-        #student__subjects__board-padding {
+        #teacher__subjects__board-padding {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
             justify-content: center;
             padding: 2em;
 
-            .student__subjects__board-subject-container {
+            .teacher__subjects__board-subject-container {
                 // border: 1px solid white;
                 padding: .5em;
                 margin: 1em;
                 width: 200px;
                 // width: calc(100% * (1/4));
 
-                .student__subjects__board-subject {
+                .teacher__subjects__board-subject {
                     // border: 1px solid green;
                     font-size: 1.5em;
                     margin-bottom: .5em;
                     text-transform: uppercase;
                 }
                 
-                .student__subjects__board-exam {
+                .teacher__subjects__board-exam {
                     background-color: transparent;
                     border-radius: 20px;
                     color: rgb(255, 56, 56);
@@ -69,22 +69,22 @@
     }
 }
 
-.student__subjects__separator {
+.teacher__subjects__separator {
     background-color: transparent;
     height: 20em;
 }
 
 @media(min-width: 350px) {
-    #student__subjects__home {
-        #student__subjects__title {
+    #teacher__subjects__home {
+        #teacher__subjects__title {
             font-size: 3em;
         }
     }
 }
 
 @media(min-width: 500px) {
-    #student__subjects__home {
-        #student__subjects__title {
+    #teacher__subjects__home {
+        #teacher__subjects__title {
             font-size: 4.5em;
         }
     }

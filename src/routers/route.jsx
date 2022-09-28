@@ -1,6 +1,8 @@
 //Layouts
 
 import { LayoutBasic } from "layouts/LayoutBasic/LayoutBasic";
+import { LayoutProfes } from "layouts/LayoutProfes/LayoutProfes";
+import { LayoutNotFound } from "layouts/LayoutNotFound/LayoutNotFound";
 
 
 
@@ -14,10 +16,16 @@ import { AlumnosMateriasScreen } from 'pages/alumnos/Materias/AlumnosMateriasScr
 import { AlumnosFaltasScreen } from "pages/alumnos/Faltas/AlumnosFaltasScreen";
 import { AlumnosFormulariosScreen } from "pages/alumnos/Formularios/AlumnosFormulariosScreen";
 import { AlumnosPerfilScreen } from "pages/alumnos/Perfil/AlumnosPerfilScreen";
-import { NotFoundScreen } from "pages/NotFound/NotFoundScreen";
-import { LayoutNotFound } from "layouts/LayoutNotFound/LayoutNotFound";
-import { ProfesoresHomeScreen } from "pages/profesores/ProfesoresHomeScreen";
 
+import { ProfesoresHomeScreen } from "pages/profesores/Home/ProfesoresHomeScreen";
+import { ProfesoresActividadesScreen } from "pages/profesores/Actividades/ProfesoresActividadesScreen";
+import { ProfesoresCursosScreen } from "pages/profesores/Cursos/ProfesoresCursosScreen";
+import { ProfesoresFaltasScreen } from "pages/profesores/Faltas/ProfesoresFaltasScreen";
+import { ProfesoresFormulariosScreen } from "pages/profesores/Formularios/ProfesoresFormulariosScreen";
+import { ProfesoresPerfilScreen } from "pages/profesores/Perfil/ProfesoresPerfilScreen";
+
+
+import { NotFoundScreen } from "pages/NotFound/NotFoundScreen";
 
 const alumnoRoutes = [
     {
@@ -65,12 +73,35 @@ const alumnoRoutes = [
 
 const profesorRoutes = [
     {
-        layout: LayoutBasic,
+        layout: LayoutProfes,
         component: ProfesoresHomeScreen,
         path: "/profesores/profesores"
     },
-
-
+    {
+        layout: LayoutProfes,
+        component: ProfesoresActividadesScreen,
+        path: "/profesores/actividades"
+    },
+    {
+        layout: LayoutProfes,
+        component: ProfesoresCursosScreen,
+        path: "/profesores/cursos"
+    },
+    {
+        layout: LayoutProfes,
+        component: ProfesoresFaltasScreen,
+        path: "/profesores/faltas"
+    },
+    {
+        layout: LayoutProfes,
+        component: ProfesoresFormulariosScreen,
+        path: "/profesores/formularios"
+    },
+    {
+        layout: LayoutProfes,
+        component: ProfesoresPerfilScreen,
+        path: "/profesores/perfil"
+    },
 ];
 
 

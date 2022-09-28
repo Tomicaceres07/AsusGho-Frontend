@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 const axios = require('axios').default;
 
 
-export const AlumnosFaltasScreen = () => {
+export const ProfesoresFaltasScreen = () => {
 
     const { authState } = useContext( AuthContext );
     const { user } = authState;
@@ -26,20 +26,20 @@ export const AlumnosFaltasScreen = () => {
     
     return (
         <div>
-            <section id="student__absences__home">
-                <h1 id="student__absences__title">Inasistencias</h1>
-                <h2 id="student__absences__subtitle">{user && user.name}</h2>
+            <section id="teacher__absences__home">
+                <h1 id="teacher__absences__title">Inasistencias</h1>
+                <h2 id="teacher__absences__subtitle">{user && user.name}</h2>
             </section>
-            <section id="student__absences__board">
-                <h2 id="student__absences__board-title">Faltas: {abscenses && abscenses.length}</h2>
-                <div id="student__absences__board-container-table">
-                    <Table responsive striped id="student__absences__board-table">
+            <section id="teacher__absences__board">
+                <h2 id="teacher__absences__board-title">Faltas: {abscenses && abscenses.length}</h2>
+                <div id="teacher__absences__board-container-table">
+                    <Table responsive striped id="teacher__absences__board-table">
                         <thead>
                             <tr>
-                                <th className='student__absences__board-th'>#</th>
-                                <th className='student__absences__board-th'>Fecha</th>
-                                <th className='student__absences__board-th'>Cantidad</th>
-                                <th className='student__absences__board-th'>Estado</th>
+                                <th className='teacher__absences__board-th'>#</th>
+                                <th className='teacher__absences__board-th'>Fecha</th>
+                                <th className='teacher__absences__board-th'>Cantidad</th>
+                                <th className='teacher__absences__board-th'>Estado</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,7 +49,7 @@ export const AlumnosFaltasScreen = () => {
                                         <td>{ index + 1 }</td>
                                         <td>{ item.date }</td>
                                         <td>{ item.c_abscence }</td>
-                                        <td  className={(item.justified === 0) && 'student__absences__board-unjustified'}>{ (item.justified === 0) ? "Injustificada" : "Justificada"  }</td>
+                                        <td  className={(item.justified === 0) && 'teacher__absences__board-unjustified'}>{ (item.justified === 0) ? "Injustificada" : "Justificada"  }</td>
                                     </tr>
                                 ))
                             }
