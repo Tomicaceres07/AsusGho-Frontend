@@ -109,6 +109,7 @@ export const ProfesoresPerfilScreen = () => {
             <h2>Hola, {user && user.name}</h2>
             <h2>Inscripción a materias</h2>
             <form id="teacher__perfil__form" onSubmit={handleSubmit(onSubmit)}>
+                {/* TODO: Change id for class */}
                 <h4 id="teacher__perfil__title">Seleccione el año</h4>
                 <select name="grade" {...register('grade')} onChange={handleChangeGrade} id="teacher__perfil__dropdown" className="w-100 mb-2 input">
                     {/* <option value="0">-- Seleccione el año --</option> */}
@@ -119,6 +120,7 @@ export const ProfesoresPerfilScreen = () => {
                     <option value={5}>5to</option>
                     <option value={6}>6to</option>
                 </select>
+                {/* TODO: Change id for class */}
                 <h4 id="teacher__perfil__title">Seleccione el curso</h4>
                 <select name="division" {...register('division')} onChange={handleChangeDivision} id="teacher__perfil__dropdown" className="w-100 mb-2 input">
                     {/* <option value="0">-- Seleccione el curso --</option> */}
