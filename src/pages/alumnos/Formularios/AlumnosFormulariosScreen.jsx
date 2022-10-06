@@ -10,7 +10,7 @@ const axios = require('axios').default;
     const [forms, setForms] = useState();
 
     useEffect(() => {
-      axios.post('/api/pdf/arrread', {"type":false})
+      axios.post('/api/pdf/arrread', {"type":true})
           .then(({data}) => {
             setForms(data.element);
             console.log(data.element);

@@ -11,18 +11,41 @@ export const AlumnosHomeScreen = () => {
 
   const { user } = authState;
 
+  const [ activities, setActivities ] = useState();
   const [ menu, setMenu ] = useState();
 
-
-  useEffect(() => {
-      axios.get('/api/menu')
-      .then(({data}) => {
-          setMenu(data.menu.menu);
-          console.log(data.menu.menu);
+  const getActivities = async() => {
+    await axios.post('/api/message_week/read', {"type": true})
+      .then((data) => {
+          setActivities(data.data.element);
+          // console.log(data)
+          /* if (data.status === 200) {
+            getMenu();
+          } */
+          // console.log(data.element);
       })
       .catch((err) => {
           console.log(err);
       })
+
+  }
+
+  const getMenu = async() => {
+    await axios.get('/api/menu')
+    .then(({data}) => {
+        setMenu(data.menu.menu);
+        // console.log(data.menu.menu);
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+  }
+
+  
+  useEffect(() => {
+      getActivities();
+      
+      getMenu();
   }, [])
   
   return (
@@ -36,7 +59,47 @@ export const AlumnosHomeScreen = () => {
         <div id="student__home__board-week">
           <div id="student__home__board-padding">
             {/* TODO: make this dinamically */}
-              <h4 className="student__home__board-day">Lunes</h4>
+              {
+                activities && activities.length !== 0
+                ?   (
+                      activities.map((item, index) => (
+                        <div key={index}>
+                          <h4 className="student__home__board-day">
+                            {
+                              (item.name === "Friday")
+                                ? "Viernes"
+                                : (item.name === "Saturday") 
+                                    ? "Sabado"
+                                    : (item.name === "Sunday") 
+                                      ? "Domingo"
+                                      : (item.name === "Monday")
+                                          ? "Lunes"
+                                          : (item.name === "Tuesday") 
+                                              ? "Martes"
+                                              : (item.name === "Wednesday") 
+                                                  ? "Miercoles"
+                                                  : (item.name === "Thursday") && "Jueves"
+                            }
+                          </h4>
+                          {
+                            item.messages && item.messages.length !== 0
+                            ?   (
+                                  item.messages.map( (item, index) => (
+                                    <p key={index} className="student__home__board-task">{item.text}</p>
+                                  ))
+                                )
+                            :   (
+                                  <p className="student__home__board-task"></p>
+                                )
+                          }
+                        </div>
+                      ))
+                    )
+                :   (
+                      <h2>Cargando...</h2>
+                    )
+              }
+              {/* <h4 className="student__home__board-day">Lunes</h4>
               <p className="student__home__board-task">Examen Matemática</p>
               <h4 className="student__home__board-day">Martes</h4>
               <p className="student__home__board-task">Acto de Malvinas</p>
@@ -45,7 +108,7 @@ export const AlumnosHomeScreen = () => {
               <h4 className="student__home__board-day">Jueves</h4>
               <p className="student__home__board-task">Visita a la UCC</p>
               <h4 className="student__home__board-day">Viernes</h4>
-              <p id="student__home__last-task">Presentación informática</p>
+              <p id="student__home__last-task">Presentación informática</p> */}
           </div>
         </div>
       </section>

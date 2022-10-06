@@ -39,7 +39,7 @@ export const AlumnosActividadesScreen = () => {
                     {/* In a future, I'll consume the API and do a ul.map to list them all */}
                     <ul className="student__activities__activities-ul">
                         {
-                            activities 
+                            activities && activities.length !== 0
                             ?   (
                                 activities.map( (item, index) => (
                                 <li key={ index } className="student__activities__activities-name-activity">
