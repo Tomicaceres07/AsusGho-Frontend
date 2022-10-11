@@ -13,9 +13,10 @@ export const ProfesoresCursosScreen = () => {
     const { user } = authState;
     
     // States years and classes
-    const [resApi, setResApi] = useState();
     const [years, setYears] = useState([]);
     const [classes, setClasses] = useState();
+
+    const [activities, setActivities] = useState();
     
     // Form upload
     const { register, handleSubmit } = useForm();
@@ -32,7 +33,6 @@ export const ProfesoresCursosScreen = () => {
     useEffect(() => {
         axios.post('/api/read/person_roll', {'id_p': user.id})
         .then(({data}) => {
-            setResApi(data.class);
             setYears(Object.keys(data.class))
             console.log(Object.keys(data.class))
 
@@ -54,10 +54,6 @@ export const ProfesoresCursosScreen = () => {
             replace: true
         });
     }
-
-    useEffect(() => {
-        console.log(title)
-    }, [title])
     
 
     const hasGrade = () => {
@@ -103,16 +99,14 @@ export const ProfesoresCursosScreen = () => {
 
     // This is for read PDF
     const getPdfClass = (p_id) => {
+        setActivities("");
+
         const id = p_id.toString();
         
         axios.post('/api/id/course', {'id_c': id})
         .then(({data}) => {
             if (data.activities.length >= 1) {
-                console.log("tiene algo")
-                data.activities.map((item, index) => {
-
-                    console.log(item.pdf_id, ' ', item.title);
-                })
+                setActivities(data.activities);
             }
             console.log(data)
         })
@@ -122,7 +116,7 @@ export const ProfesoresCursosScreen = () => {
     }
 
     // This is for Upload PDFs
-    const processIdActivity = async () => {
+    const processIdActivity = async (id_c) => {
         // TODO: recieve the id_c by parameter
         const petition = await axios({
         method: 'post',
@@ -131,20 +125,23 @@ export const ProfesoresCursosScreen = () => {
             'Content-Type': 'application/json'
         },
         data: {
-            "id_c": id,
+            "id_c": id_c,
             "title": title
         }
         })
 
         const { data } = petition;
-        const id = data.id[0][0];
+        console.log(data)
+        const id = data.id;
+        console.log(id)
 
         return id;
     }
     
-    async function getIdActivity() {
+    async function getIdActivity(id_c) {
 
-        const id = await processIdActivity()
+        console.log(id_c)
+        const id = await processIdActivity(id_c)
 
         
         console.log(id);
@@ -183,18 +180,23 @@ export const ProfesoresCursosScreen = () => {
     const onSubmit = async ({grade, subject}) => {
         console.log("onSubmit");
         console.log(grade, subject);
+        let id_c;
+        let id;
         if (grade !== undefined && subject !== undefined) {
-            const id = await getIdCourse(grade, subject);
-            console.log(id);
+            id_c = await getIdCourse(grade, subject);
         }
-        // const id = await getIdActivity();
+        console.log(id_c);
+        if (id_c !== undefined) {
+            id = await getIdActivity(id_c);
+        }
+        console.log(id)
         // console.log(id);
 
-        /* const formData = new FormData();
+        const formData = new FormData();
 
         formData.append('a', selectedFile);
 
-        axios.post(`/api/pdf/insert/${id}`, formData)
+        axios.post(`/api/add/activity/${id}`, formData)
             .then((res) => {
                 console.log(res);
             })
@@ -202,7 +204,7 @@ export const ProfesoresCursosScreen = () => {
                 console.log(err);
             })
 
-        window.location.reload(); */
+        window.location.reload();
     };
 
     return (
@@ -223,10 +225,22 @@ export const ProfesoresCursosScreen = () => {
                                             <Accordion>
                                                 {
                                                     classes[index].map((item, index) => (
-                                                        <Accordion.Item key={index} eventKey={index} onClick={() => getPdfClass(item.id)}>
+                                                        <Accordion.Item key={index} eventKey={index} onClick={() => getPdfClass(item.id)} >
                                                             <Accordion.Header>{item.name}</Accordion.Header>
                                                             <Accordion.Body>
-                                                                Contenido
+                                                                {
+                                                                    activities && activities.length !== 0
+                                                                    ? (
+                                                                        activities.map((item, index) => (
+                                                                            <div key={index}>
+                                                                                <h4>{item.title}</h4>
+                                                                            </div>
+                                                                        ))
+                                                                    )
+                                                                    : (
+                                                                        <div>No hay material</div>
+                                                                    )
+                                                                }
                                                             </Accordion.Body>
                                                         </Accordion.Item>
                                                     ))
