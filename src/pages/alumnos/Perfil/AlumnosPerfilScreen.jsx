@@ -1,6 +1,7 @@
 import { AuthContext } from 'context';
 import React, { useContext, useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
+import { useNavigate } from 'react-router-dom';
 const axios = require('axios').default;
 
 export const AlumnosPerfilScreen = () => {
@@ -13,6 +14,8 @@ export const AlumnosPerfilScreen = () => {
 
     const { authState } = useContext( AuthContext );
     const { user } = authState;
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.post('/api/division_year/course', {
@@ -106,6 +109,9 @@ export const AlumnosPerfilScreen = () => {
                 // }, 2000);
             })
 
+            navigate('/alumnos/materias', {
+                replace: true
+            });
 
 
         } else {
@@ -144,10 +150,6 @@ export const AlumnosPerfilScreen = () => {
                             </div>
                         ))
                         : <p>No hay cursos</p>
-                }
-
-                {
-                    (subjects) && <p>{subjects}</p>
                 }
                 <div id="student__perfil__error" className='text-danger' hidden>No seleccionaste ningún curso</div>
                 <button type="submit" id="register__submit" className="display-block w-100" onClick={onSubmit}>Enviar</button>

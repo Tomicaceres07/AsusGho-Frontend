@@ -1,6 +1,7 @@
 import { AuthContext } from 'context';
 import React, { useContext, useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
+import { useNavigate } from 'react-router-dom';
 const axios = require('axios').default;
 
 export const ProfesoresPerfilScreen = () => {
@@ -14,11 +15,13 @@ export const ProfesoresPerfilScreen = () => {
     const { authState } = useContext( AuthContext );
     const { user } = authState;
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         axios.post('/api/division_year/course', {
             "grade": grade,
             "division": division,
-            "id_s": user.id
+            "id_p": user.id
         })
         .then(({data}) => {
             // console.log(data.courses.length);
@@ -43,36 +46,22 @@ export const ProfesoresPerfilScreen = () => {
     };  
     
     const handleChangeSubjects = event => {
-        // setDivision(event.target.value);
-        // console.log("cambié")
-        // console.log(courses.length)
-        // console.log(event)
         const id = parseInt(event.target.name)
-        // console.log(event.target.checked)
+
         const isFounded = subjects.find(subject => subject === id);
-        // console.log(isFounded);
+
         if (!isFounded && event.target.checked) {
-            /* setSubjects(...subjects, {
-                id_c: event.target.id,
-                id_s: user.id
-            }) */
             setSubjects([...subjects, id]);
         } else if(isFounded && !event.target.checked) {
             setSubjects(subjects.filter(subject => subject !== id));
         }
-        
-        /* if (subjects.length >= 0) {
-            document.getElementById('register__submit').disabled = false;
-        } else {
-            document.getElementById('register__submit').disabled = true;
-        } */
 
     };  
 
-    const addStudentRoll = async(subj) => {
-        const petition = await axios.post('/api/add/student_roll', {
+    const addPersonRoll = async(subj) => {
+        const petition = await axios.post('/api/add/person_roll', {
             "id_c": subj,
-            "id_s": user.id
+            "id_p": user.id
         })
         .then((res) => {
             console.log(res);
@@ -98,7 +87,7 @@ export const ProfesoresPerfilScreen = () => {
             // I must send: user.id and subjects[i]
             // Do the for
             subjects.forEach(subj => {
-                const res = addStudentRoll(subj)
+                const res = addPersonRoll(subj)
                 console.log(res);
                 // console.log("foreach", subj)
                 // setInterval(() => {
@@ -106,7 +95,9 @@ export const ProfesoresPerfilScreen = () => {
                 // }, 2000);
             })
 
-
+            navigate('/profesores/cursos', {
+                replace: true
+            });
 
         } else {
             document.getElementById("teacher__perfil__error").hidden = false;
@@ -118,6 +109,7 @@ export const ProfesoresPerfilScreen = () => {
             <h2>Hola, {user && user.name}</h2>
             <h2>Inscripción a materias</h2>
             <form id="teacher__perfil__form" onSubmit={handleSubmit(onSubmit)}>
+                {/* TODO: Change id for class */}
                 <h4 id="teacher__perfil__title">Seleccione el año</h4>
                 <select name="grade" {...register('grade')} onChange={handleChangeGrade} id="teacher__perfil__dropdown" className="w-100 mb-2 input">
                     {/* <option value="0">-- Seleccione el año --</option> */}
@@ -128,6 +120,7 @@ export const ProfesoresPerfilScreen = () => {
                     <option value={5}>5to</option>
                     <option value={6}>6to</option>
                 </select>
+                {/* TODO: Change id for class */}
                 <h4 id="teacher__perfil__title">Seleccione el curso</h4>
                 <select name="division" {...register('division')} onChange={handleChangeDivision} id="teacher__perfil__dropdown" className="w-100 mb-2 input">
                     {/* <option value="0">-- Seleccione el curso --</option> */}
@@ -146,9 +139,6 @@ export const ProfesoresPerfilScreen = () => {
                         : <p>No hay cursos</p>
                 }
 
-                {
-                    (subjects) && <p>{subjects}</p>
-                }
                 <div id="teacher__perfil__error" className='text-danger' hidden>No seleccionaste ningún curso</div>
                 <button type="submit" id="register__submit" className="display-block w-100" onClick={onSubmit}>Enviar</button>
             </form>

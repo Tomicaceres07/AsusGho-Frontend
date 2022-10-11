@@ -11,12 +11,13 @@ export const AlumnosFaltasScreen = () => {
     
 
     const [abscenses, setAbscenses] = useState();
+    const [totalAbscenses, setTotalAbscenses] = useState();
 
     useEffect(() => {
         axios.post('/api/get_abs', {'email': user.email})
         .then(({data}) => {
             setAbscenses(data.db);
-            console.log(data.db);
+            setTotalAbscenses(data.abs);
         })
         .catch((err) => {
             console.log(err);
@@ -31,7 +32,7 @@ export const AlumnosFaltasScreen = () => {
                 <h2 id="student__absences__subtitle">{user && user.name}</h2>
             </section>
             <section id="student__absences__board">
-                <h2 id="student__absences__board-title">Faltas: {abscenses && abscenses.length}</h2>
+                <h2 id="student__absences__board-title">Faltas: {totalAbscenses && totalAbscenses}</h2>
                 <div id="student__absences__board-container-table">
                     <Table responsive striped id="student__absences__board-table">
                         <thead>
