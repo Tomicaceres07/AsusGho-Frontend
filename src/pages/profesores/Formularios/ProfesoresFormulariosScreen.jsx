@@ -137,21 +137,15 @@ export const ProfesoresFormulariosScreen = () => {
                 )
             }
           </div>
+          <hr />
           <div className='mw-100'>
-              {/* <label htmlFor="teacher__forms__input-file">Choose a File</label> */}
-              <input type="file" id="teacher__forms__input-file" name="file" onChange={changeHandler}  className='mw-100' />
-              {isFilePicked ? (
+              <h2>Agregar Formulario</h2>
+              <label className="btn btn-primary my-2" htmlFor="teacher__forms__input-file">Seleccionar Archivo</label>
+              <input type="file" name="file" onChange={changeHandler} id="teacher__forms__input-file" className='mw-100' hidden/>
+              {isFilePicked && (
                 <div>
-                  <p>Filename: {selectedFile.name}</p>
-                  <p>Filetype: {selectedFile.type}</p>
-                  <p>Size in bytes: {selectedFile.size}</p>
-                  <p>
-                    lastModifiedDate:{' '}
-                    {selectedFile.lastModifiedDate.toLocaleDateString()}
-                  </p>
+                  <p>Nombre del archivo: {selectedFile.name}</p>
                 </div>
-              ) : (
-                <p>Select a file to show details</p>
               )}
               {
                 isFilePicked && (

@@ -15,14 +15,14 @@ import { AlumnosActividadesScreen } from 'pages/alumnos/Actividades/AlumnosActiv
 import { AlumnosMateriasScreen } from 'pages/alumnos/Materias/AlumnosMateriasScreen';
 import { AlumnosFaltasScreen } from "pages/alumnos/Faltas/AlumnosFaltasScreen";
 import { AlumnosFormulariosScreen } from "pages/alumnos/Formularios/AlumnosFormulariosScreen";
-import { AlumnosPerfilScreen } from "pages/alumnos/Perfil/AlumnosPerfilScreen";
+import { AlumnosInscripcionScreen } from "pages/alumnos/Inscripcion/AlumnosInscripcionScreen";
 
 import { ProfesoresHomeScreen } from "pages/profesores/Home/ProfesoresHomeScreen";
 import { ProfesoresActividadesScreen } from "pages/profesores/Actividades/ProfesoresActividadesScreen";
 import { ProfesoresCursosScreen } from "pages/profesores/Cursos/ProfesoresCursosScreen";
 import { ProfesoresFaltasScreen } from "pages/profesores/Faltas/ProfesoresFaltasScreen";
 import { ProfesoresFormulariosScreen } from "pages/profesores/Formularios/ProfesoresFormulariosScreen";
-import { ProfesoresPerfilScreen } from "pages/profesores/Perfil/ProfesoresPerfilScreen";
+import { ProfesoresInscripcionScreen } from "pages/profesores/Inscripcion/ProfesoresInscripcionScreen";
 
 
 import { NotFoundScreen } from "pages/NotFound/NotFoundScreen";
@@ -60,8 +60,8 @@ const alumnoRoutes = [
     },
     {
         layout: LayoutBasic,
-        component: AlumnosPerfilScreen,
-        path: "/alumnos/perfil"
+        component: AlumnosInscripcionScreen,
+        path: "/alumnos/inscripcion"
     },
     {
         layout: LayoutNotFound,
@@ -99,8 +99,8 @@ const profesorRoutes = [
     },
     {
         layout: LayoutProfes,
-        component: ProfesoresPerfilScreen,
-        path: "/profesores/perfil"
+        component: ProfesoresInscripcionScreen,
+        path: "/profesores/inscripcion"
     },
 ];
 

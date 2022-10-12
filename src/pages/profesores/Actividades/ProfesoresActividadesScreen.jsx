@@ -16,7 +16,7 @@ export const ProfesoresActividadesScreen = () => {
     // console.log(moment().format('DD/MM/YYYY'))
 
     useEffect(() => {
-        setIsLoading(true);
+        setIsLoading(true); 
         axios.post('/api/message/read', {'type': user.type})
         .then(({data}) => {
             setActivities(data.element);

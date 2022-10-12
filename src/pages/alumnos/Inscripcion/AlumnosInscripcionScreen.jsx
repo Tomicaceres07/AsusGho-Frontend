@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 const axios = require('axios').default;
 
-export const AlumnosPerfilScreen = () => {
+export const AlumnosInscripcionScreen = () => {
 
     const { register, handleSubmit } = useForm();
     const [grade, setGrade] = useState(1);

@@ -34,7 +34,8 @@ export const NavBar = () => {
       : nav.classList.remove('background-rgba')
   });
 
-  const { logout } = useContext( AuthContext );
+  const { authState, logout } = useContext( AuthContext );
+  const { user } = authState;
 
   const onLogout = () => {
     logout();
@@ -75,8 +76,8 @@ export const NavBar = () => {
             <Nav.Link as={NavLink} to={"/alumnos/materias"} className="navlink mx-2 text-uppercase" onClick={ onLinkClicked }>Materias</Nav.Link>
             <Nav.Link as={NavLink} to={"/alumnos/faltas"} className="navlink mx-2 text-uppercase" onClick={ onLinkClicked }>Faltas</Nav.Link>
             <Nav.Link as={NavLink} to={"/alumnos/formularios"} className="navlink mx-2 text-uppercase" onClick={ onLinkClicked }>Formularios</Nav.Link>
-            <NavDropdown title="PERFIL" id="collasible-nav-dropdown" className="mx-4">
-              <Nav.Link as={NavLink} to={"/alumnos/perfil"} className="navlink-dropdown text-uppercase" onClick={ onLinkClicked }>Ver Perfil</Nav.Link>
+            <NavDropdown title={user && user.name} id="collasible-nav-dropdown" className="mx-4">
+              <Nav.Link as={NavLink} to={"/alumnos/inscripcion"} className="navlink-dropdown text-uppercase" onClick={ onLinkClicked }>Inscribirse a Materias</Nav.Link>
               <NavDropdown.Divider />
               <Button onClick={onLogout} id="logout-button" className="w-100 text-uppercase">Cerrar Sesión</Button>
             </NavDropdown>

@@ -62,7 +62,7 @@ const axios = require('axios').default;
                       <button className="student__forms__board-button-download" onClick={() => onDownload(item.id)}>Descargar F{item.id}</button>
                     </div>
                     )))
-                    : <h1>No hay PDFs CRACK</h1>
+                    : <h2>No hay formularios</h2>
                   )
               }
             </div>
