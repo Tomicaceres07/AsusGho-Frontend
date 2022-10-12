@@ -1,5 +1,6 @@
-import { useForm } from "react-hook-form";
+import Spinner from 'react-bootstrap/Spinner';
 import Accordion from 'react-bootstrap/Accordion';
+import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from 'context';
 import React, { useContext, useEffect, useState } from 'react';
@@ -220,7 +221,7 @@ export const ProfesoresCursosScreen = () => {
                 <div id="teacher__subjects__board-week">
                     <div id="teacher__subjects__board-padding">
                         {
-                            (!isLoading) 
+                            !isLoading
                             ?   (years && years.length !== 0)
                                 ?   ( 
                                         years.map( (item, index) => (
@@ -261,7 +262,7 @@ export const ProfesoresCursosScreen = () => {
                                         </div>
                                     )
                             : (
-                                <div>Cargando...</div>
+                                <Spinner animation="border" variant="light" />
                             )
                         }
                         <hr />

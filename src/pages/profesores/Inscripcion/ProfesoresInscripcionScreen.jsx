@@ -1,3 +1,4 @@
+import Spinner from 'react-bootstrap/Spinner';
 import { AuthContext } from 'context';
 import React, { useContext, useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
@@ -16,8 +17,10 @@ export const ProfesoresInscripcionScreen = () => {
     const { user } = authState;
 
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        setIsLoading(true); 
         axios.post('/api/division_year/course', {
             "grade": grade,
             "division": division,
@@ -26,6 +29,7 @@ export const ProfesoresInscripcionScreen = () => {
         .then(({data}) => {
             // console.log(data.courses.length);
             setCourses(data.courses);
+            setIsLoading(false); 
         })
         .catch((err) => {
             console.log(err);
@@ -82,7 +86,7 @@ export const ProfesoresInscripcionScreen = () => {
         e.preventDefault();
         // TODO: do a for and add one by one the subjects to student
         if (subjects.length >= 1) {
-            document.getElementById("teacher__perfil__error").hidden = true;
+            document.getElementById("teacher__inscription__error").hidden = true;
             // console.log(subjects)
             // I must send: user.id and subjects[i]
             // Do the for
@@ -100,24 +104,24 @@ export const ProfesoresInscripcionScreen = () => {
             });
 
         } else {
-            document.getElementById("teacher__perfil__error").hidden = false;
+            document.getElementById("teacher__inscription__error").hidden = false;
         }
     }
     
     return (
         <div>
-            <section id="teacher__perfil__home">
-                <h1 id="teacher__perfil__home-title">Inscripciones</h1>
+            <section id="teacher__inscription__home">
+                <h1 id="teacher__inscription__home-title">Inscripciones</h1>
             </section>
-            <section id="teacher__perfil__board">
-                <div id="teacher__perfil__board-week">
-                    <div id="teacher__perfil__board-padding">
+            <section id="teacher__inscription__board">
+                <div id="teacher__inscription__board-week">
+                    <div id="teacher__inscription__board-padding">
                         <h2 className="pt-3">Hola, {user && user.name}</h2>
                         <h2>Inscripción a materias</h2>
-                        <form id="teacher__perfil__form" onSubmit={handleSubmit(onSubmit)}>
+                        <form id="teacher__inscription__form" onSubmit={handleSubmit(onSubmit)}>
                             {/* TODO: Change id for class */}
-                            <h4 id="teacher__perfil__title">Seleccione el año</h4>
-                            <select name="grade" {...register('grade')} onChange={handleChangeGrade} id="teacher__perfil__dropdown" className="w-100 mb-2 input">
+                            <h4 id="teacher__inscription__title">Seleccione el año</h4>
+                            <select name="grade" {...register('grade')} onChange={handleChangeGrade} id="teacher__inscription__dropdown" className="w-100 mb-2 input">
                                 {/* <option value="0">-- Seleccione el año --</option> */}
                                 <option value={1}>1ero</option>
                                 <option value={2}>2do</option>
@@ -127,14 +131,17 @@ export const ProfesoresInscripcionScreen = () => {
                                 <option value={6}>6to</option>
                             </select>
                             {/* TODO: Change id for class */}
-                            <h4 id="teacher__perfil__title">Seleccione el curso</h4>
-                            <select name="division" {...register('division')} onChange={handleChangeDivision} id="teacher__perfil__dropdown" className="w-100 mb-2 input">
+                            <h4 id="teacher__inscription__title">Seleccione el curso</h4>
+                            <select name="division" {...register('division')} onChange={handleChangeDivision} id="teacher__inscription__dropdown" className="w-100 mb-2 input">
                                 {/* <option value="0">-- Seleccione el curso --</option> */}
                                 <option value="a">A</option>
                                 <option value="b">B</option>
                                 <option value="c">C</option>
                             </select>
                             {
+                                !isLoading
+                                ? (
+
                                 (courses && courses.length >= 1)
                                     ? courses.map( (item, index) => (
                                         <div key={index}>
@@ -143,9 +150,13 @@ export const ProfesoresInscripcionScreen = () => {
                                         </div>
                                     ))
                                     : <p>No hay cursos</p>
+                                )
+                                : (
+                                    <Spinner animation="border" variant="light" />
+                                )
                             }
 
-                            <div id="teacher__perfil__error" className='text-danger' hidden>No seleccionaste ningún curso</div>
+                            <div id="teacher__inscription__error" className='text-danger' hidden>No seleccionaste ningún curso</div>
                             <button type="submit" className="display-block px-4 mx-auto mb-3 btn btn-primary" onClick={onSubmit}>Enviar</button>
                         </form>
                     </div>

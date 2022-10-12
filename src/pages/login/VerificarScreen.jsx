@@ -1,3 +1,4 @@
+import Spinner from 'react-bootstrap/Spinner';
 import { AuthContext } from 'context';
 import React, { useContext, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -50,8 +51,8 @@ export const VerificarScreen = () => {
     
 
     return (
-        <div>
-        <h1>Cargando...</h1>
+        <div className='verificate__spinner-div'>
+            <Spinner animation="border" variant="light" className='verificate__spinner'/>
         </div>
     );
     }

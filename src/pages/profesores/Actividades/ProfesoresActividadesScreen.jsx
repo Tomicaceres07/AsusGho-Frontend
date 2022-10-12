@@ -1,3 +1,4 @@
+import Spinner from 'react-bootstrap/Spinner';
 import moment from 'moment';
 import { AuthContext } from "context";
 import { useContext, useEffect, useState } from "react";
@@ -90,7 +91,7 @@ export const ProfesoresActividadesScreen = () => {
                                     )
                             )
                             :   (
-                                <div>Cargando...</div>
+                                <Spinner animation="border" variant="light" />
                             )
                         }
                     </ul>

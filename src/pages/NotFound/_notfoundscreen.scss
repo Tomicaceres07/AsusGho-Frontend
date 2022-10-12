@@ -1,0 +1,42 @@
+
+
+.notfound__first-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    margin: 0px auto;
+    width: 190px;
+
+    .notfound__div-message {
+        background-color: #212529;
+        color: white;
+        text-align: center;
+        padding: 1.5em;
+        border-radius: 1em;
+    }
+}
+
+@media(min-width: 410px) {
+    .notfound__first-div {
+        width: 250px;
+    }
+}
+
+@media(min-width: 600px) {
+    .notfound__first-div {
+        width: 300px;
+    }
+}
+
+@media(min-width: 992px) {
+    .notfound__first-div {
+        width: 350px;
+    }
+}
+
+@media(min-width: 1200px) {
+    .notfound__first-div {
+        width: 400px;
+    }
+}

@@ -1,3 +1,4 @@
+import Spinner from 'react-bootstrap/Spinner';
 import Accordion from 'react-bootstrap/Accordion';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from 'context';
@@ -11,14 +12,17 @@ export const AlumnosMateriasScreen = () => {
 
     const [years, setYears] = useState([]);
     const [classes, setClasses] = useState();
+    const [isLoading, setIsLoading] = useState(true);
 
     const navigate = useNavigate();
 
     useEffect(() => {
+        setIsLoading(true); 
         axios.post('/api/read/student_roll', {'id_s': user.id})
         .then(({data}) => {
             setYears(Object.keys(data.class))
             setClasses(Object.values(data.class));
+            setIsLoading(false); 
         })
         .catch((err) => {
             console.log(err);
@@ -41,33 +45,39 @@ export const AlumnosMateriasScreen = () => {
                     <div id="student__subjects__board-padding" className='d-flex'>
                     
                         {
-                            years && years.length !== 0
+                            !isLoading
                             ?   (
-                                    years.map( (item, index) => (
-                                        <div key={ index }  className="w-25 mx-auto">
+                                years && years.length !== 0
+                                ?   (
+                                        years.map( (item, index) => (
+                                            <div key={ index }  className="w-25 mx-auto">
 
-                                            <h4 className='text-uppercase my-4'>{ item }</h4>
-                                            <Accordion>
-                                                {
-                                                    classes[index].map((item, index) => (
-                                                        <Accordion.Item key={index} eventKey={index}>
-                                                            <Accordion.Header>{item.name}</Accordion.Header>
-                                                            <Accordion.Body>
-                                                                Contenido
-                                                            </Accordion.Body>
-                                                        </Accordion.Item>
-                                                    ))
-                                                }
-                                            </Accordion>
+                                                <h4 className='text-uppercase my-4'>{ item }</h4>
+                                                <Accordion>
+                                                    {
+                                                        classes[index].map((item, index) => (
+                                                            <Accordion.Item key={index} eventKey={index}>
+                                                                <Accordion.Header>{item.name}</Accordion.Header>
+                                                                <Accordion.Body>
+                                                                    Contenido
+                                                                </Accordion.Body>
+                                                            </Accordion.Item>
+                                                        ))
+                                                    }
+                                                </Accordion>
+                                            </div>
+                                        ))
+                                    )
+                                :   (
+                                        <div>
+                                            <h4 className="student__subjects__board-subject">No estás inscripto a ninguna materia</h4>
+                                            <button onClick={ redirect }>Inscribirse</button>
                                         </div>
-                                    ))
-                                )
+                                    )
+                            )
                             :   (
-                                    <div>
-                                        <h4 className="student__subjects__board-subject">No estás inscripto a ninguna materia</h4>
-                                        <button onClick={ redirect }>Inscribirse</button>
-                                    </div>
-                                )
+                                <Spinner animation="border" variant="light" />
+                            )
                         }
                         {/* {
                             classes && classes.length !== 0

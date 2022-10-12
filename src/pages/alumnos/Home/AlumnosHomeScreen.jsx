@@ -1,3 +1,4 @@
+import Spinner from 'react-bootstrap/Spinner';
 import Table from 'react-bootstrap/Table';
 import { AuthContext } from 'context';
 import React, { useContext, useEffect, useState } from 'react';
@@ -96,7 +97,7 @@ export const AlumnosHomeScreen = () => {
                       ))
                     )
                 :   (
-                      <h2>Cargando...</h2>
+                      <Spinner animation="border" variant="light" />
                     )
               }
               {/* <h4 className="student__home__board-day">Lunes</h4>

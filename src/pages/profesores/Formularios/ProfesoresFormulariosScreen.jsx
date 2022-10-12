@@ -1,3 +1,4 @@
+import Spinner from 'react-bootstrap/Spinner';
 import { useState, useEffect } from "react";
 import { saveAs } from 'file-saver'
 const axios = require('axios').default;
@@ -8,14 +9,17 @@ export const ProfesoresFormulariosScreen = () => {
   
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   
   //  This is for Read PDFs
   useEffect(() => {
-    axios.post('/api/pdf/arrread', {"type":false})
+      setIsLoading(true); 
+      axios.post('/api/pdf/arrread', {"type":false})
         .then(({data}) => {
           setForms(data.element);
           console.log(data.element);
           console.log(data.element.length);
+          setIsLoading(false); 
         })
         .catch((err) => {
           console.log(err);
@@ -123,8 +127,9 @@ export const ProfesoresFormulariosScreen = () => {
         <div id="teacher__forms__board-week">
           <div id="teacher__forms__board-padding">
             {
-                forms && (
-                  (forms.length !== 0) 
+              !isLoading 
+              ? (
+                forms && forms.length !== 0
                   ? (forms.map( (item, index) => (
                   <div className="teacher__forms__board-form-container" key={index}>
                     <h4 className="teacher__forms__board-form">Formulario F{item.id}</h4>
@@ -133,8 +138,14 @@ export const ProfesoresFormulariosScreen = () => {
                     <button className="btn btn-danger" onClick={() => onDelete(item.id)}>Borrar</button>
                   </div>
                   )))
-                  : <h1>No hay PDFs CRACK</h1>
-                )
+                  : (
+                    <h2>No hay formularios</h2>
+                  )
+              )
+              : (
+                <Spinner animation="border" variant="light" />
+              )
+                
             }
           </div>
           <hr />

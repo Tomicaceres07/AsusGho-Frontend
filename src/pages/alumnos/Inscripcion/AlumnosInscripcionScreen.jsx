@@ -1,3 +1,4 @@
+import Spinner from 'react-bootstrap/Spinner';
 import { AuthContext } from 'context';
 import React, { useContext, useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
@@ -16,8 +17,10 @@ export const AlumnosInscripcionScreen = () => {
     const { user } = authState;
 
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        setIsLoading(true); 
         axios.post('/api/division_year/course', {
             "grade": grade,
             "division": division,
@@ -26,6 +29,7 @@ export const AlumnosInscripcionScreen = () => {
         .then(({data}) => {
             // console.log(data.courses.length);
             setCourses(data.courses);
+            setIsLoading(false); 
         })
         .catch((err) => {
             console.log(err);
@@ -96,7 +100,7 @@ export const AlumnosInscripcionScreen = () => {
         e.preventDefault();
         // TODO: do a for and add one by one the subjects to student
         if (subjects.length >= 1) {
-            document.getElementById("student__perfil__error").hidden = true;
+            document.getElementById("student__inscription__error").hidden = true;
             // console.log(subjects)
             // I must send: user.id and subjects[i]
             // Do the for
@@ -115,45 +119,63 @@ export const AlumnosInscripcionScreen = () => {
 
 
         } else {
-            document.getElementById("student__perfil__error").hidden = false;
+            document.getElementById("student__inscription__error").hidden = false;
         }
     }
     
     return (
-        <div className="student__perfil__container">
-            <h2>Hola, {user && user.name}</h2>
-            <h2>Inscripción a materias</h2>
-            <form id="student__perfil__form" onSubmit={handleSubmit(onSubmit)}>
-                <h4 id="student__perfil__title">Seleccione el año</h4>
-                <select name="grade" {...register('grade')} onChange={handleChangeGrade} id="student__perfil__dropdown" className="w-100 mb-2 input">
-                    {/* <option value="0">-- Seleccione el año --</option> */}
-                    <option value={1}>1ero</option>
-                    <option value={2}>2do</option>
-                    <option value={3}>3ero</option>
-                    <option value={4}>4to</option>
-                    <option value={5}>5to</option>
-                    <option value={6}>6to</option>
-                </select>
-                <h4 id="student__perfil__title">Seleccione el curso</h4>
-                <select name="division" {...register('division')} onChange={handleChangeDivision} id="student__perfil__dropdown" className="w-100 mb-2 input">
-                    {/* <option value="0">-- Seleccione el curso --</option> */}
-                    <option value="a">A</option>
-                    <option value="b">B</option>
-                    <option value="c">C</option>
-                </select>
-                {
-                    (courses && courses.length >= 1)
-                        ? courses.map( (item, index) => (
-                            <div key={index}>
-                                <input type="checkbox" name={item.id} onChange={handleChangeSubjects}/>
-                                <label htmlFor={item.id}>{item.name}</label>
-                            </div>
-                        ))
-                        : <p>No hay cursos</p>
-                }
-                <div id="student__perfil__error" className='text-danger' hidden>No seleccionaste ningún curso</div>
-                <button type="submit" id="register__submit" className="display-block w-100" onClick={onSubmit}>Enviar</button>
-            </form>
+        <div>
+            <section id="student__inscription__home">
+                <h1 id="student__inscription__home-title">Inscripciones</h1>
+            </section>
+            <section id="student__inscription__board">
+                <div id="student__inscription__board-week">
+                    <div id="student__inscription__board-padding">
+                        <h2 className="pt-3">Hola, {user && user.name}</h2>
+                        <h2>Inscripción a materias</h2>
+                        <form id="student__inscription__form" onSubmit={handleSubmit(onSubmit)}>
+                            {/* TODO: Change id for class */}
+                            <h4 id="student__inscription__title">Seleccione el año</h4>
+                            <select name="grade" {...register('grade')} onChange={handleChangeGrade} id="student__inscription__dropdown" className="w-100 mb-2 input">
+                                {/* <option value="0">-- Seleccione el año --</option> */}
+                                <option value={1}>1ero</option>
+                                <option value={2}>2do</option>
+                                <option value={3}>3ero</option>
+                                <option value={4}>4to</option>
+                                <option value={5}>5to</option>
+                                <option value={6}>6to</option>
+                            </select>
+                            {/* TODO: Change id for class */}
+                            <h4 id="student__inscription__title">Seleccione el curso</h4>
+                            <select name="division" {...register('division')} onChange={handleChangeDivision} id="student__inscription__dropdown" className="w-100 mb-2 input">
+                                {/* <option value="0">-- Seleccione el curso --</option> */}
+                                <option value="a">A</option>
+                                <option value="b">B</option>
+                                <option value="c">C</option>
+                            </select>
+                            {
+                                !isLoading
+                                ?   (
+                                    (courses && courses.length >= 1)
+                                        ? courses.map( (item, index) => (
+                                            <div key={index}>
+                                                <input type="checkbox" name={item.id} onChange={handleChangeSubjects}/>
+                                                <label htmlFor={item.id}>{item.name}</label>
+                                            </div>
+                                        ))
+                                        : <p>No hay cursos</p>
+                                )
+                                :   (
+                                    <Spinner animation="border" variant="light" />
+                                )
+                            }
+
+                            <div id="student__inscription__error" className='text-danger' hidden>No seleccionaste ningún curso</div>
+                            <button type="submit" className="display-block px-4 mx-auto mb-3 btn btn-primary" onClick={onSubmit}>Enviar</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
         </div>
     )
 }

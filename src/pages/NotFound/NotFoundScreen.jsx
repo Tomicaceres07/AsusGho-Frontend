@@ -12,7 +12,6 @@ export const NotFoundScreen = () => {
 
     const { authState } = useContext( AuthContext );
     const { user, logged } = authState;
-    console.log(user, logged);
 
     const handleClick = () => {
         if (logged && user.type) {
@@ -28,9 +27,11 @@ export const NotFoundScreen = () => {
     } 
 
     return (
-        <div>
-            <h1>Error 404</h1>
-            <Button onClick={ handleClick } className="">Volver</Button>
+        <div className='notfound__first-div'>
+            <div className='notfound__div-message'>
+                <h1>Página no encontrada</h1>
+                <Button onClick={ handleClick } className="">Volver</Button>
+            </div>
         </div>
     );
     }

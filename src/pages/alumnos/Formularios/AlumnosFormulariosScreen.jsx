@@ -1,3 +1,4 @@
+import Spinner from 'react-bootstrap/Spinner';
 import { useState, useEffect } from "react";
 import { saveAs } from 'file-saver'
 const axios = require('axios').default;
@@ -8,13 +9,16 @@ const axios = require('axios').default;
 
     //  This is for Read PDFs
     const [forms, setForms] = useState();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+      setIsLoading(true); 
       axios.post('/api/pdf/arrread', {"type":true})
           .then(({data}) => {
             setForms(data.element);
             console.log(data.element);
             console.log(data.element.length);
+            setIsLoading(false); 
           })
           .catch((err) => {
             console.log(err);
@@ -53,16 +57,21 @@ const axios = require('axios').default;
           <div id="student__forms__board-week">
             <div id="student__forms__board-padding">
               {
-                  forms && (
-                    (forms.length !== 0) 
-                    ? (forms.map( (item, index) => (
-                    <div className="student__forms__board-form-container" key={index}>
-                      <h4 className="student__forms__board-form">Formulario F{item.id}</h4>
-                      <p className="student__forms__board-text">{item.name}</p>
-                      <button className="student__forms__board-button-download" onClick={() => onDownload(item.id)}>Descargar F{item.id}</button>
-                    </div>
-                    )))
-                    : <h2>No hay formularios</h2>
+                  !isLoading
+                  ?   (forms && (
+                        (forms.length !== 0) 
+                        ? (forms.map( (item, index) => (
+                        <div className="student__forms__board-form-container" key={index}>
+                          <h4 className="student__forms__board-form">Formulario F{item.id}</h4>
+                          <p className="student__forms__board-text">{item.name}</p>
+                          <button className="student__forms__board-button-download" onClick={() => onDownload(item.id)}>Descargar F{item.id}</button>
+                        </div>
+                        )))
+                        : <h2>No hay formularios</h2>
+                      )
+                  )
+                  :   (
+                    <Spinner animation="border" variant="light" />
                   )
               }
             </div>
