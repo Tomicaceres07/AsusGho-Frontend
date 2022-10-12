@@ -7,6 +7,7 @@
 
 // Login Page
 @import 'pages/login/loginscreen';
+@import 'pages/login/verificarscreen';
 
 // Alumnos Pages
 @import 'pages/alumnos/Home/alumnos-homescreen';
@@ -15,7 +16,7 @@
 @import 'pages/alumnos/Materias/alumnos-materiasscreen';
 @import 'pages/alumnos/Faltas/alumnos-faltasscreen';
 @import 'pages/alumnos/Formularios/alumnos-formulariosscreen';
-@import 'pages/alumnos/Perfil/alumnos-perfilscreen';
+@import 'pages/alumnos/Inscripcion/alumnos-inscripcionscreen';
 
 // Profes Pages
 @import 'pages/profesores/Home/profesores-homescreen';
@@ -23,8 +24,10 @@
 @import 'pages/profesores/Cursos/profesores-cursosscreen';
 @import 'pages/profesores/Faltas/profesores-faltasscreen';
 @import 'pages/profesores/Formularios/profesores-formulariosscreen';
-@import 'pages/profesores/Perfil/profesores-perfilscreen';
+@import 'pages/profesores/Inscripcion/profesores-inscripcionscreen';
 
+// NotFound Page
+@import 'pages/NotFound/notfoundscreen';
 
 // COMPONENTS
 @import 'components/NavBar/navbar';

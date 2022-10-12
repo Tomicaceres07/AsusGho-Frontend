@@ -1,5 +1,6 @@
-import { useForm } from "react-hook-form";
+import Spinner from 'react-bootstrap/Spinner';
 import Accordion from 'react-bootstrap/Accordion';
+import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from 'context';
 import React, { useContext, useEffect, useState } from 'react';
@@ -27,10 +28,13 @@ export const ProfesoresCursosScreen = () => {
 
     const [selectedFile, setSelectedFile] = useState();
     const [isFilePicked, setIsFilePicked] = useState(false);
+
+    const [isLoading, setIsLoading] = useState(true);
     
     const navigate = useNavigate();
 
     useEffect(() => {
+        setIsLoading(true);
         axios.post('/api/read/person_roll', {'id_p': user.id})
         .then(({data}) => {
             setYears(Object.keys(data.class))
@@ -41,6 +45,7 @@ export const ProfesoresCursosScreen = () => {
             setClasses(Object.values(data.class));
             console.log(Object.values(data.class));
 
+            setIsLoading(false);
             // setSubject(Object.values(data.class)[0][0].name);
         })
         .catch((err) => {
@@ -210,53 +215,58 @@ export const ProfesoresCursosScreen = () => {
     return (
         <div>
             <section id="teacher__subjects__home">
-                <h1 id="teacher__subjects__title">Materias</h1>
+                <h1 id="teacher__subjects__title">Cursos</h1>
             </section>
             <section id="teacher__subjects__board">
                 <div id="teacher__subjects__board-week">
-                    <div id="teacher__subjects__board-padding" className='d-flex flex-column'>
+                    <div id="teacher__subjects__board-padding">
                         {
-                            years && years.length !== 0
-                            ?   (
-                                    years.map( (item, index) => (
-                                        <div key={ index }  className="w-25 mx-auto">
+                            !isLoading
+                            ?   (years && years.length !== 0)
+                                ?   ( 
+                                        years.map( (item, index) => (
+                                            <div key={`years-${index}`}  className="mx-auto">
 
-                                            <h4 className='text-uppercase my-4'>{ item }</h4>
-                                            <Accordion>
-                                                {
-                                                    classes[index].map((item, index) => (
-                                                        <Accordion.Item key={index} eventKey={index} onClick={() => getPdfClass(item.id)} >
-                                                            <Accordion.Header>{item.name}</Accordion.Header>
-                                                            <Accordion.Body>
-                                                                {
-                                                                    activities && activities.length !== 0
-                                                                    ? (
-                                                                        activities.map((item, index) => (
-                                                                            <div key={index}>
-                                                                                <h4>{item.title}</h4>
-                                                                            </div>
-                                                                        ))
-                                                                    )
-                                                                    : (
-                                                                        <div>No hay material</div>
-                                                                    )
-                                                                }
-                                                            </Accordion.Body>
-                                                        </Accordion.Item>
-                                                    ))
-                                                }
-                                            </Accordion>
+                                                <h4 className='text-uppercase my-4'>{ item }</h4>
+                                                <Accordion>
+                                                    {
+                                                        classes[index].map((item, index) => (
+                                                            <Accordion.Item key={`classes-${index}`} eventKey={index} onClick={() => getPdfClass(item.id)} >
+                                                                <Accordion.Header>{item.name}</Accordion.Header>
+                                                                <Accordion.Body>
+                                                                    {
+                                                                        activities && activities.length !== 0
+                                                                        ? (
+                                                                            activities.map((item, index) => (
+                                                                                <div key={`activities-${index}`}>
+                                                                                    <h4>{item.title}</h4>
+                                                                                </div>
+                                                                            ))
+                                                                        )
+                                                                        : (
+                                                                            <div>No hay material</div>
+                                                                        )
+                                                                    }
+                                                                </Accordion.Body>
+                                                            </Accordion.Item>
+                                                        ))
+                                                    }
+                                                </Accordion>
+                                            </div>
+                                        ))
+                                    )
+                                :   (
+                                        <div>
+                                            <h4 className="teacher__subjects__board-subject">No estás inscripto a ninguna materia</h4>
+                                            <button onClick={ redirect }>Inscribirse</button>
                                         </div>
-                                    ))
-                                )
-                            :   (
-                                    <div>
-                                        <h4 className="teacher__subjects__board-subject">No estás inscripto a ninguna materia</h4>
-                                        <button onClick={ redirect }>Inscribirse</button>
-                                    </div>
-                                )
+                                    )
+                            : (
+                                <Spinner animation="border" variant="light" />
+                            )
                         }
                         <hr />
+                        <h2>Agregar Actividad</h2>
                         <form id="teacher__subjects__form" onSubmit={handleSubmit(onSubmit)} className="w-25 mx-auto">
                             <h4 className="mt-2">Seleccione el año</h4>
                             <select name="grade" {...register('grade')} onChange={handleChangeGrade} id="teacher__subjects__dropdown" className="w-100 mb-2 input">
@@ -292,16 +302,12 @@ export const ProfesoresCursosScreen = () => {
                             <h4>Nombre de la actividad</h4>
                             <input type="text" className="w-100" value={title} onChange={(e) => setTitle(e.target.value)}/>
 
-                            <input type="file" id="teacher__forms__input-file" name="file" onChange={changeHandler}  className='mw-100 mt-5' />
+														
+                            <label className="btn btn-primary mt-4 mb-2" htmlFor="teacher__subjects__input-file">Seleccionar Archivo</label>
+                            <input type="file" id="teacher__subjects__input-file" name="file" onChange={changeHandler}  className='mw-100' hidden/>
                             {isFilePicked && (
                                 <div>
-                                <p>Filename: {selectedFile.name}</p>
-                                <p>Filetype: {selectedFile.type}</p>
-                                <p>Size in bytes: {selectedFile.size}</p>
-                                <p>
-                                    lastModifiedDate:{' '}
-                                    {selectedFile.lastModifiedDate.toLocaleDateString()}
-                                </p>
+                                <p>Nombre del archivo: {selectedFile.name}</p>
                                 </div>
                             )}
                             {

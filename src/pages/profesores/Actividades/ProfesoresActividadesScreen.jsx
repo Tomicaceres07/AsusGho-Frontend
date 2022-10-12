@@ -1,3 +1,4 @@
+import Spinner from 'react-bootstrap/Spinner';
 import moment from 'moment';
 import { AuthContext } from "context";
 import { useContext, useEffect, useState } from "react";
@@ -16,7 +17,7 @@ export const ProfesoresActividadesScreen = () => {
     // console.log(moment().format('DD/MM/YYYY'))
 
     useEffect(() => {
-        setIsLoading(true);
+        setIsLoading(true); 
         axios.post('/api/message/read', {'type': user.type})
         .then(({data}) => {
             setActivities(data.element);
@@ -90,7 +91,7 @@ export const ProfesoresActividadesScreen = () => {
                                     )
                             )
                             :   (
-                                <div>Cargando...</div>
+                                <Spinner animation="border" variant="light" />
                             )
                         }
                     </ul>
