@@ -1,6 +1,6 @@
 import Spinner from 'react-bootstrap/Spinner';
 import { useState, useEffect } from "react";
-import { saveAs } from 'file-saver'
+import { saveAs } from 'file-saver';
 const axios = require('axios').default;
 
 export const ProfesoresFormulariosScreen = () => {
@@ -47,7 +47,7 @@ export const ProfesoresFormulariosScreen = () => {
     return id;
   }
   
-  async function getIdForm() {
+  const getIdForm = async () => {
 
     const id = await processIdForm()
 
@@ -101,6 +101,7 @@ export const ProfesoresFormulariosScreen = () => {
 
   async function onDownload(id) {
     const { data } = await getForm(id)
+    console.log(data);
     const blob = new Blob([data], { type: 'application/pdf' })
     saveAs(blob, `Formulario F${id}.pdf`)
   }

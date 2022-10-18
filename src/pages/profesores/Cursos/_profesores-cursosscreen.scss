@@ -42,27 +42,11 @@
             justify-content: center;
             padding: 2em;
 
-            .teacher__subjects__board-subject-container {
-                // border: 1px solid white;
-                padding: .5em;
-                margin: 1em;
-                width: 200px;
-                // width: calc(100% * (1/4));
+            .teacher__subjects__accordion {
+                width: 100%;
 
-                .teacher__subjects__board-subject {
-                    // border: 1px solid green;
-                    font-size: 1.5em;
-                    margin-bottom: .5em;
-                    text-transform: uppercase;
-                }
-                
-                .teacher__subjects__board-exam {
-                    background-color: transparent;
-                    border-radius: 20px;
-                    color: rgb(255, 56, 56);
-                    // padding: .5em;
-                    margin-bottom: 1em;
-                    transition: all .3s;
+                .teacher__subjects__accordion-year {
+                    font-size: 2em;
                 }
             }
         }
@@ -86,6 +70,20 @@
     #teacher__subjects__home {
         #teacher__subjects__title {
             font-size: 4.5em;
+        }
+    }
+
+    #teacher__subjects__board {
+        #teacher__subjects__board-week {
+            #teacher__subjects__board-padding {
+                .teacher__subjects__accordion {
+                    width: 20em;
+
+                    .teacher__subjects__accordion-year {
+                        font-size: 3em;
+                    }
+                }
+            }
         }
     }
 }
