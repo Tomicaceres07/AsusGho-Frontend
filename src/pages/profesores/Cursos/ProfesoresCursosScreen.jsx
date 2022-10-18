@@ -1,3 +1,4 @@
+import { saveAs } from 'file-saver';
 import Spinner from "react-bootstrap/Spinner";
 import Accordion from "react-bootstrap/Accordion";
 import { useForm } from "react-hook-form";
@@ -13,15 +14,15 @@ export const ProfesoresCursosScreen = () => {
 
   // States years and classes
   const [years, setYears] = useState([]);
-  const [classes, setClasses] = useState();
+  const [classes, setClasses] = useState([]);
 
   const [activities, setActivities] = useState({});
 
   // Form upload
   const { register, handleSubmit } = useForm();
 
-  const [grade, setGrade] = useState();
-  const [subject, setSubject] = useState();
+  const [grade, setGrade] = useState("0");
+  const [subject, setSubject] = useState("0");
   const [title, setTitle] = useState("");
 
   const [selectedFile, setSelectedFile] = useState();
@@ -59,34 +60,13 @@ export const ProfesoresCursosScreen = () => {
     });
   };
 
-  const hasGrade = () => {
-    let res;
-    grade !== undefined
-      ? grade !== "0"
-        ? (res = true)
-        : (res = false)
-      : (res = false);
+  const hasGrade = () => grade !== "0";
 
-    return res;
-  };
+  const hasSubject = () => subject !== "0";
 
-  const hasSubject = () => {
-    let res;
-    subject !== undefined
-      ? subject !== "0"
-        ? (res = true)
-        : (res = false)
-      : (res = false);
-
-    return res;
-  };
-
-  const hasTitle = () => {
-    let res;
-    title !== "" ? (res = true) : (res = false);
-
-    return res;
-  };
+  /* const hasTitle = () => {
+    return title !== "";
+  }; */
 
   // Form to Upload PDF depending grade and class
   const handleChangeGrade = (event) => {
@@ -96,6 +76,12 @@ export const ProfesoresCursosScreen = () => {
 
   const handleChangeSubject = (event) => {
     setSubject(event.target.value);
+  };
+
+  const changeHandler = (event) => {
+    console.log(event.target.files[0]);
+    setSelectedFile(event.target.files[0]);
+    setIsFilePicked(true);
   };
 
   // This is for read PDF
@@ -118,8 +104,31 @@ export const ProfesoresCursosScreen = () => {
       });
   };
 
+  // This is for Download PDFs
+  const getActivity = async(pdf_id) => {
+    const id = pdf_id.toString();
+    console.log(id);
+    return axios({
+      method: 'post',
+      url: "/api/activity/pdf",
+      headers: {
+        'Content-Type': 'application/json'
+      }, 
+      responseType: 'arraybuffer',
+      data: {
+        "id": id
+      }
+    })
+  }
+
+  const onDownload = async(pdf_id) => {
+    const { data } = await getActivity(pdf_id)
+    const blob = new Blob([data], { type: 'application/pdf' })
+    saveAs(blob, "Actividad.pdf")
+  }
+
   // This is for Upload PDFs
-  const processIdActivity = async (id_c) => {
+  const processIdActivity = async(id_c) => {
     // TODO: recieve the id_c by parameter
     const petition = await axios({
       method: "post",
@@ -150,15 +159,7 @@ export const ProfesoresCursosScreen = () => {
     return id;
   }
 
-  const changeHandler = (event) => {
-    console.log(event.target.files[0]);
-    setSelectedFile(event.target.files[0]);
-    setIsFilePicked(true);
-  };
-
   const getIdCourse = async (grade, subject) => {
-    // const grade = Array.from(grade)[0];
-    // console.log(Array.from(grade)[0]);
     let id = "";
     years.map((item, index) => {
       classes[index].map((item, index) => {
@@ -170,12 +171,6 @@ export const ProfesoresCursosScreen = () => {
     });
 
     return id;
-    /* Object.keys(resApi).map((item, index) => {
-            console.log(item)
-        })
-        if(Object.keys(resApi).includes(grade)) {
-            console.log("encontrado")
-        } */
   };
 
   const onSubmit = async ({ grade, subject }) => {
@@ -191,13 +186,13 @@ export const ProfesoresCursosScreen = () => {
       id = await getIdActivity(id_c);
     }
     console.log(id);
-    // console.log(id);
 
     const formData = new FormData();
 
-    formData.append("a", selectedFile);
+    formData.append('a', selectedFile);
 
-    axios
+    if (id !== undefined) {
+      axios
       .post(`/api/add/activity/${id}`, formData)
       .then((res) => {
         console.log(res);
@@ -205,8 +200,9 @@ export const ProfesoresCursosScreen = () => {
       .catch((err) => {
         console.log(err);
       });
-
-    window.location.reload();
+      
+      window.location.reload();
+    }
   };
 
   return (
@@ -218,7 +214,7 @@ export const ProfesoresCursosScreen = () => {
         <div id="teacher__subjects__board-week">
           <div id="teacher__subjects__board-padding">
             {!isLoading ? (
-              years && years.length !== 0 ? (
+              years && years.length ? (
                 <Accordion alwaysOpen={false}>
                   {years.map((year, yearIndex) => (
                     <div key={`years-${yearIndex}`} className="mx-auto">
@@ -233,11 +229,12 @@ export const ProfesoresCursosScreen = () => {
                           <Accordion.Body>
                             {activities &&
                               activities.id === classItem.id &&
-                              (activities.activities.length !== 0 ? (
+                              (activities.activities.length ? (
                                 activities.activities.map(
                                   (activity, activityIndex) => (
                                     <div key={`activity-${activityIndex}`}>
                                       <h4>{activity.title}</h4>
+                                      <button className="btn btn-success" onClick={() => onDownload(activity.pdf_id)}>Descargar</button> <br /> 
                                     </div>
                                   )
                                 )
@@ -333,10 +330,10 @@ export const ProfesoresCursosScreen = () => {
               />
               {isFilePicked && (
                 <div>
-                  <p>Nombre del archivo: {selectedFile.name}</p>
+                  <p>Nombre del archivo: {selectedFile && selectedFile.name}</p>
                 </div>
               )}
-              {hasGrade() && hasSubject() && hasTitle() && isFilePicked && (
+              {hasGrade() && hasSubject() && title && isFilePicked && (
                 <div>
                   <button className="btn btn-success" onClick={onSubmit}>
                     Agregar

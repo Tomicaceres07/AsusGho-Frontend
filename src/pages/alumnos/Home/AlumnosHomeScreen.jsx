@@ -2,6 +2,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import Table from 'react-bootstrap/Table';
 import { AuthContext } from 'context';
 import React, { useContext, useEffect, useState } from 'react';
+import { weekDayMapper } from 'utils/alumnos/weekDayMapper';
 const axios = require('axios').default;
 
 
@@ -17,8 +18,8 @@ export const AlumnosHomeScreen = () => {
 
   const getActivities = async() => {
     await axios.post('/api/message_week/read', {"type": true})
-      .then((data) => {
-          setActivities(data.data.element);
+      .then(({data}) => {
+          setActivities(data.element);
           // console.log(data)
           /* if (data.status === 200) {
             getMenu();
@@ -66,21 +67,7 @@ export const AlumnosHomeScreen = () => {
                       activities.map((item, index) => (
                         <div key={index}>
                           <h4 className="student__home__board-day">
-                            {
-                              (item.name === "Friday")
-                                ? "Viernes"
-                                : (item.name === "Saturday") 
-                                    ? "Sabado"
-                                    : (item.name === "Sunday") 
-                                      ? "Domingo"
-                                      : (item.name === "Monday")
-                                          ? "Lunes"
-                                          : (item.name === "Tuesday") 
-                                              ? "Martes"
-                                              : (item.name === "Wednesday") 
-                                                  ? "Miercoles"
-                                                  : (item.name === "Thursday") && "Jueves"
-                            }
+                            {weekDayMapper[item]}
                           </h4>
                           {
                             item.messages && item.messages.length !== 0
@@ -129,38 +116,18 @@ export const AlumnosHomeScreen = () => {
                   </tr>
               </thead>
               <tbody>
-                    <tr className='student__home__menu-tr'>
-                        <td>1</td>
-                        <td>{ menu && menu.LUNES[0] }</td>
-                        <td>{ menu && menu.MARTES[0] }</td>
-                        <td>{ menu && menu.MIERCOLES[0] }</td>
-                        <td>{ menu && menu.JUEVES[0] }</td>
-                        <td>{ menu && menu.VIERNES[0] }</td>
-                    </tr>
-                    <tr className='student__home__menu-tr'>
-                        <td>2</td>
-                        <td>{ menu && menu.LUNES[1] }</td>
-                        <td>{ menu && menu.MARTES[1] }</td>
-                        <td>{ menu && menu.MIERCOLES[1] }</td>
-                        <td>{ menu && menu.JUEVES[1] }</td>
-                        <td>{ menu && menu.VIERNES[1] }</td>
-                    </tr>
-                    <tr className='student__home__menu-tr'>
-                        <td>3</td>
-                        <td>{ menu && menu.LUNES[2] }</td>
-                        <td>{ menu && menu.MARTES[2] }</td>
-                        <td>{ menu && menu.MIERCOLES[2] }</td>
-                        <td>{ menu && menu.JUEVES[2] }</td>
-                        <td>{ menu && menu.VIERNES[2] }</td>
-                    </tr>
-                    <tr className='student__home__menu-tr'>
-                        <td>4</td>
-                        <td>{ menu && menu.LUNES[3] }</td>
-                        <td>{ menu && menu.MARTES[3] }</td>
-                        <td>{ menu && menu.MIERCOLES[3] }</td>
-                        <td>{ menu && menu.JUEVES[3] }</td>
-                        <td>{ menu && menu.VIERNES[3] }</td>
-                    </tr>
+                  {
+                    [0, 1, 2, 3].map(week => (
+                      <tr className='student__home__menu-tr'>
+                          <td>{week+1}</td>
+                          <td>{ menu && menu.LUNES[week] }</td>
+                          <td>{ menu && menu.MARTES[week] }</td>
+                          <td>{ menu && menu.MIERCOLES[week] }</td>
+                          <td>{ menu && menu.JUEVES[week] }</td>
+                          <td>{ menu && menu.VIERNES[week] }</td>
+                      </tr>
+                    ))
+                  }
               </tbody>
           </Table>
         </div>
