@@ -215,10 +215,10 @@ export const ProfesoresCursosScreen = () => {
           <div id="teacher__subjects__board-padding">
             {!isLoading ? (
               years && years.length ? (
-                <Accordion alwaysOpen={false}>
+                <Accordion alwaysOpen={false} className="teacher__subjects__accordion mx-auto">
                   {years.map((year, yearIndex) => (
                     <div key={`years-${yearIndex}`} className="mx-auto">
-                      <h4 className="text-uppercase my-4">{year}</h4>
+                      <h4 className="teacher__subjects__accordion-year text-uppercase my-4">{year}</h4>
                       {classes[yearIndex].map((classItem, classIndex) => (
                         <Accordion.Item
                           key={`classes-${classItem.id}`}
@@ -261,16 +261,14 @@ export const ProfesoresCursosScreen = () => {
             <hr />
             <h2>Agregar Actividad</h2>
             <form
-              id="teacher__subjects__form"
               onSubmit={handleSubmit(onSubmit)}
-              className="w-25 mx-auto"
+              className="mx-auto"
             >
               <h4 className="mt-2">Seleccione el año</h4>
               <select
                 name="grade"
                 {...register("grade")}
                 onChange={handleChangeGrade}
-                id="teacher__subjects__dropdown"
                 className="w-100 mb-2 input"
               >
                 <option value="0">-- Seleccione el año --</option>
@@ -289,7 +287,6 @@ export const ProfesoresCursosScreen = () => {
                     name="subject"
                     {...register("subject")}
                     onChange={handleChangeSubject}
-                    id="teacher__subjects__dropdown"
                     className="w-100 mb-2 input"
                   >
                     <option value="0">-- Seleccione la materia --</option>
