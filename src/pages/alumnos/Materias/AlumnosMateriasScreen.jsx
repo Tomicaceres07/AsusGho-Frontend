@@ -80,6 +80,8 @@ export const AlumnosMateriasScreen = () => {
     saveAs(blob, "Actividad.pdf")
   }
 
+  
+
   return (
     <div>
       <section id="student__subjects__home">
@@ -146,93 +148,6 @@ export const AlumnosMateriasScreen = () => {
             ) : (
               <Spinner animation="border" variant="light" />
             )}
-            {/* {
-                            classes && classes.length !== 0
-                            ?   (
-                                classes.map( (item, index) => (
-                                <div key={ index } className="student__subjects__board-subject-container">
-                                    <h4 className="student__subjects__board-subject"></h4>
-                                </div>
-                                ))
-                                )
-                            :   (
-                                    <div>
-                                        <h4 className="student__subjects__board-subject">No estás inscripto a ninguna materia</h4>
-                                        <button onClick={ redirect }>Inscribirse</button>
-                                    </div>
-                                )
-                        } */}
-            {/* {
-                            classes && classes.length !== 0
-                            ?   (
-                                classes.map( (item, index) => (
-                                    <div key={index}>
-
-                                        {
-                                            Object.values(item).map((item, index) => {
-                                                <div key={index}>
-                                                    {
-                                                        item.map( (item, index) => (
-                                                            <div key={index}>
-                                                            {
-                                                                item.name.length >= 1 && <h4 className="student__subjects__board-subject">{item.name && item.name}</h4>
-                                                            }
-
-                                                            </div>
-                                                        ))
-                                                    }
-                                                </div>
-                                            })
-                                        }
-                                    </div>
-                                ))
-                                )
-                            :   (
-                                    <div>
-                                        <h4 className="student__subjects__board-subject">No estás inscripto a ninguna materia</h4>
-                                        <button onClick={ redirect }>Inscribirse</button>
-                                    </div>
-                                )
-                        } */}
-
-            {/* {
-                            classes && classes.length !== 0
-                            ?   (
-                                    grades.map((item, index) => (
-                                    <div>
-                                    <h5>{item}</h5>
-                                        {
-                                            
-                                        divisions.map((item, index) => (
-                                            <div>
-                                            <h5>{item}</h5>
-                                            <Accordion key={index}>
-                                                <Accordion.Item eventKey="0">
-                                                    <Accordion.Header>Accordion Item #1</Accordion.Header>
-                                                    <Accordion.Body>
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                                    aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                                    culpa qui officia deserunt mollit anim id est laborum.
-                                                    </Accordion.Body>
-                                                </Accordion.Item>
-                                            </Accordion>
-                                            </div>
-                                        ))
-                                        }
-                                    </div>
-                                    ))
-                                )
-                            :   (
-                                    <div>
-                                        <h4 className="student__subjects__board-subject">No estás inscripto a ninguna materia</h4>
-                                        <button onClick={ redirect }>Inscribirse</button>
-                                    </div>
-                                )
-                        } */}
           </div>
         </div>
       </section>

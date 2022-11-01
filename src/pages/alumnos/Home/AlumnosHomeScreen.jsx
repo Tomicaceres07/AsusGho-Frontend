@@ -64,16 +64,30 @@ export const AlumnosHomeScreen = () => {
               {
                 activities && activities.length !== 0
                 ?   (
-                      activities.map((item, index) => (
-                        <div key={index}>
+                      activities.map((item, activityIndex) => (
+                        <div key={activityIndex}>
                           <h4 className="student__home__board-day">
-                            {weekDayMapper[item]}
+                            {
+                              (item.name === "Friday")
+                                ? "Viernes"
+                                : (item.name === "Saturday") 
+                                    ? "Sabado"
+                                    : (item.name === "Sunday") 
+                                      ? "Domingo"
+                                      : (item.name === "Monday")
+                                          ? "Lunes"
+                                          : (item.name === "Tuesday") 
+                                              ? "Martes"
+                                              : (item.name === "Wednesday") 
+                                                  ? "Miercoles"
+                                                  : (item.name === "Thursday") && "Jueves"
+                            }
                           </h4>
                           {
                             item.messages && item.messages.length !== 0
                             ?   (
-                                  item.messages.map( (item, index) => (
-                                    <p key={index} className="student__home__board-task">{item.text}</p>
+                                  item.messages.map( (item, messageIndex) => (
+                                    <p key={messageIndex} className="student__home__board-task">{item.text}</p>
                                   ))
                                 )
                             :   (

@@ -1,4 +1,4 @@
-import { saveAs } from 'file-saver';
+import { saveAs } from "file-saver";
 import Spinner from "react-bootstrap/Spinner";
 import Accordion from "react-bootstrap/Accordion";
 import { useForm } from "react-hook-form";
@@ -105,31 +105,30 @@ export const ProfesoresCursosScreen = () => {
   };
 
   // This is for Download PDFs
-  const getActivity = async(pdf_id) => {
+  const getActivity = async (pdf_id) => {
     const id = pdf_id.toString();
     console.log(id);
     return axios({
-      method: 'post',
+      method: "post",
       url: "/api/activity/pdf",
       headers: {
-        'Content-Type': 'application/json'
-      }, 
-      responseType: 'arraybuffer',
+        "Content-Type": "application/json",
+      },
+      responseType: "arraybuffer",
       data: {
-        "id": id
-      }
-    })
-  }
+        id: id,
+      },
+    });
+  };
 
-  const onDownload = async(pdf_id) => {
-    const { data } = await getActivity(pdf_id)
-    const blob = new Blob([data], { type: 'application/pdf' })
-    saveAs(blob, "Actividad.pdf")
-  }
+  const onDownload = async (pdf_id) => {
+    const { data } = await getActivity(pdf_id);
+    const blob = new Blob([data], { type: "application/pdf" });
+    saveAs(blob, "Actividad.pdf");
+  };
 
   // This is for Upload PDFs
-  const processIdActivity = async(id_c) => {
-    // TODO: recieve the id_c by parameter
+  const processIdActivity = async (id_c) => {
     const petition = await axios({
       method: "post",
       url: "/api/add/activity",
@@ -150,7 +149,7 @@ export const ProfesoresCursosScreen = () => {
     return id;
   };
 
-  async function getIdActivity(id_c) {
+  const getIdActivity = async(id_c) => {
     console.log(id_c);
     const id = await processIdActivity(id_c);
 
@@ -189,20 +188,35 @@ export const ProfesoresCursosScreen = () => {
 
     const formData = new FormData();
 
-    formData.append('a', selectedFile);
+    formData.append("a", selectedFile);
 
     if (id !== undefined) {
       axios
-      .post(`/api/add/activity/${id}`, formData)
-      .then((res) => {
-        console.log(res);
+        .post(`/api/add/activity/${id}`, formData)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      // window.location.reload();
+    }
+  };
+
+  // This is for Delete PDFs
+  const onDelete = (act_id) => {
+    console.log(act_id);
+
+    axios
+      .post("/api/delete/activity", { id: act_id })
+      .then(({ data }) => {
+        console.log(data);
+        // window.location.reload();
       })
       .catch((err) => {
         console.log(err);
       });
-      
-      window.location.reload();
-    }
   };
 
   return (
@@ -215,11 +229,16 @@ export const ProfesoresCursosScreen = () => {
           <div id="teacher__subjects__board-padding">
             {!isLoading ? (
               years && years.length ? (
-                <Accordion alwaysOpen={false} className="teacher__subjects__accordion mx-auto">
+                <Accordion
+                  alwaysOpen={false}
+                  className="teacher__subjects__accordion mx-auto"
+                >
                   {years.map((year, yearIndex) => (
                     <div key={`years-${yearIndex}`} className="mx-auto">
-                      <h4 className="teacher__subjects__accordion-year text-uppercase my-4">{year}</h4>
-                      {classes[yearIndex].map((classItem, classIndex) => (
+                      <h4 className="teacher__subjects__accordion-year text-uppercase my-4">
+                        {year}
+                      </h4>
+                      {classes[yearIndex].map((classItem) => (
                         <Accordion.Item
                           key={`classes-${classItem.id}`}
                           eventKey={classItem.id}
@@ -234,7 +253,23 @@ export const ProfesoresCursosScreen = () => {
                                   (activity, activityIndex) => (
                                     <div key={`activity-${activityIndex}`}>
                                       <h4>{activity.title}</h4>
-                                      <button className="btn btn-success" onClick={() => onDownload(activity.pdf_id)}>Descargar</button> <br /> 
+                                      <button
+                                        className="btn btn-success"
+                                        onClick={() =>
+                                          onDownload(activity.pdf_id)
+                                        }
+                                      >
+                                        Descargar
+                                      </button>{" "}
+                                      <button
+                                        className="btn btn-danger"
+                                        onClick={() =>
+                                          onDelete(activity.pdf_id)
+                                        }
+                                      >
+                                        Borrar
+                                      </button>{" "}
+                                      <br />
                                     </div>
                                   )
                                 )
@@ -260,10 +295,7 @@ export const ProfesoresCursosScreen = () => {
             )}
             <hr />
             <h2>Agregar Actividad</h2>
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="mx-auto"
-            >
+            <form onSubmit={handleSubmit(onSubmit)} className="mx-auto">
               <h4 className="mt-2">Seleccione el año</h4>
               <select
                 name="grade"
@@ -341,13 +373,6 @@ export const ProfesoresCursosScreen = () => {
                 No seleccionaste ningún curso
               </div>
             </form>
-
-            {/*
-                        <div className="teacher__subjects__board-subject-container">
-                            <h4 className="teacher__subjects__board-subject">Historia</h4>
-                            <p className="teacher__subjects__board-exam">EXAMEN 23/07 - Rev. Industrial</p>
-                        </div>
-                       */}
           </div>
         </div>
       </section>
