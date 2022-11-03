@@ -17,6 +17,7 @@ export const ProfesoresCursosScreen = () => {
   const [classes, setClasses] = useState([]);
 
   const [activities, setActivities] = useState({});
+  const [classId, setClassId] = useState(0);
 
   // Form upload
   const { register, handleSubmit } = useForm();
@@ -29,6 +30,8 @@ export const ProfesoresCursosScreen = () => {
   const [isFilePicked, setIsFilePicked] = useState(false);
 
   const [isLoading, setIsLoading] = useState(true);
+  const [rerender, setRerender] = useState(false);
+
 
   const navigate = useNavigate();
 
@@ -37,17 +40,10 @@ export const ProfesoresCursosScreen = () => {
     axios
       .post("/api/read/person_roll", { id_p: user.id })
       .then(({ data }) => {
-        console.log(data);
         setYears(Object.keys(data.class));
-        console.log(Object.keys(data.class));
-
-        // setGrade(Object.keys(data.class)[0]);
-
         setClasses(Object.values(data.class));
-        console.log(Object.values(data.class));
 
         setIsLoading(false);
-        // setSubject(Object.values(data.class)[0][0].name);
       })
       .catch((err) => {
         console.log(err);
@@ -86,9 +82,9 @@ export const ProfesoresCursosScreen = () => {
 
   // This is for read PDF
   const getPdfClass = (p_id) => {
-    setActivities({});
+    setClassId(p_id);
 
-    const id = p_id.toString();
+    const id = p_id.toString()
 
     axios
       .post("/api/id/course", { id_c: id })
@@ -98,10 +94,19 @@ export const ProfesoresCursosScreen = () => {
           id: p_id,
           activities: data.activities,
         });
+
+        return (<RenderActivities id={p_id} />)
       })
       .catch((err) => {
         console.log(err);
       });
+
+    // if (classId !== p_id) {
+      // setActivities({});
+
+      /* const newActivities = getNewActivities(p_id);
+      console.log(newActivities); */
+    // }
   };
 
   // This is for Download PDFs
@@ -195,6 +200,7 @@ export const ProfesoresCursosScreen = () => {
         .post(`/api/add/activity/${id}`, formData)
         .then((res) => {
           console.log(res);
+          getPdfClass(id_c);
         })
         .catch((err) => {
           console.log(err);
@@ -205,19 +211,49 @@ export const ProfesoresCursosScreen = () => {
   };
 
   // This is for Delete PDFs
-  const onDelete = (act_id) => {
-    console.log(act_id);
-
+  const onDelete = (act_id, p_class_id) => {
     axios
       .post("/api/delete/activity", { id: act_id })
       .then(({ data }) => {
-        console.log(data);
-        // window.location.reload();
+        if (data.status.msj === 'DB correctly') {
+          getPdfClass(p_class_id);
+        }
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+  const RenderActivities = ({id}) => {
+    console.log(id);
+
+    return (
+      activities.activities.map(
+        (activity, activityIndex) => (
+          <div key={`activity-${activityIndex}`}>
+            <h4>{activity.title}</h4>
+            <button
+              className="btn btn-success"
+              onClick={() =>
+                onDownload(activity.pdf_id)
+              }
+            >
+              Descargar
+            </button>{" "}
+            <button
+              className="btn btn-danger"
+              onClick={() =>
+                onDelete(activity.pdf_id, id)
+              }
+            >
+              Borrar
+            </button>{" "}
+            <br />
+          </div>
+        )
+      )
+    )
+  }
 
   return (
     <div>
@@ -245,34 +281,11 @@ export const ProfesoresCursosScreen = () => {
                           onClick={() => getPdfClass(classItem.id)}
                         >
                           <Accordion.Header>{classItem.name}</Accordion.Header>
-                          <Accordion.Body>
+                          <Accordion.Body id={`acc-body${classItem.id}`}>
                             {activities &&
                               activities.id === classItem.id &&
                               (activities.activities.length ? (
-                                activities.activities.map(
-                                  (activity, activityIndex) => (
-                                    <div key={`activity-${activityIndex}`}>
-                                      <h4>{activity.title}</h4>
-                                      <button
-                                        className="btn btn-success"
-                                        onClick={() =>
-                                          onDownload(activity.pdf_id)
-                                        }
-                                      >
-                                        Descargar
-                                      </button>{" "}
-                                      <button
-                                        className="btn btn-danger"
-                                        onClick={() =>
-                                          onDelete(activity.pdf_id)
-                                        }
-                                      >
-                                        Borrar
-                                      </button>{" "}
-                                      <br />
-                                    </div>
-                                  )
-                                )
+                                <RenderActivities id={classItem.id} />
                               ) : (
                                 <div>No hay material</div>
                               ))}
