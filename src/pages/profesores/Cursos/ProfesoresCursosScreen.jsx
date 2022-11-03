@@ -17,10 +17,9 @@ export const ProfesoresCursosScreen = () => {
   const [classes, setClasses] = useState([]);
 
   const [activities, setActivities] = useState({});
-  const [classId, setClassId] = useState(0);
 
   // Form upload
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const [grade, setGrade] = useState("0");
   const [subject, setSubject] = useState("0");
@@ -29,8 +28,9 @@ export const ProfesoresCursosScreen = () => {
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
 
+  const [uploadedSuccessfully, setUploadedSuccessfully] = useState(false);
+
   const [isLoading, setIsLoading] = useState(true);
-  const [rerender, setRerender] = useState(false);
 
 
   const navigate = useNavigate();
@@ -68,28 +68,27 @@ export const ProfesoresCursosScreen = () => {
   const handleChangeGrade = (event) => {
     setGrade(event.target.value);
     setSubject("0");
+    setUploadedSuccessfully(false);
   };
 
   const handleChangeSubject = (event) => {
     setSubject(event.target.value);
+    setUploadedSuccessfully(false);
   };
 
   const changeHandler = (event) => {
-    console.log(event.target.files[0]);
     setSelectedFile(event.target.files[0]);
     setIsFilePicked(true);
+    setUploadedSuccessfully(false);
   };
 
   // This is for read PDF
   const getPdfClass = (p_id) => {
-    setClassId(p_id);
-
     const id = p_id.toString()
 
     axios
       .post("/api/id/course", { id_c: id })
       .then(({ data }) => {
-        console.log("data ", data);
         setActivities({
           id: p_id,
           activities: data.activities,
@@ -100,19 +99,11 @@ export const ProfesoresCursosScreen = () => {
       .catch((err) => {
         console.log(err);
       });
-
-    // if (classId !== p_id) {
-      // setActivities({});
-
-      /* const newActivities = getNewActivities(p_id);
-      console.log(newActivities); */
-    // }
   };
 
   // This is for Download PDFs
   const getActivity = async (pdf_id) => {
     const id = pdf_id.toString();
-    console.log(id);
     return axios({
       method: "post",
       url: "/api/activity/pdf",
@@ -147,19 +138,13 @@ export const ProfesoresCursosScreen = () => {
     });
 
     const { data } = petition;
-    console.log(data);
     const id = data.id;
-    console.log(id);
 
     return id;
   };
 
   const getIdActivity = async(id_c) => {
-    console.log(id_c);
     const id = await processIdActivity(id_c);
-
-    console.log(id);
-
     return id;
   }
 
@@ -178,18 +163,14 @@ export const ProfesoresCursosScreen = () => {
   };
 
   const onSubmit = async ({ grade, subject }) => {
-    console.log("onSubmit");
-    console.log(grade, subject);
     let id_c;
     let id;
     if (grade !== undefined && subject !== undefined) {
       id_c = await getIdCourse(grade, subject);
     }
-    console.log(id_c);
     if (id_c !== undefined) {
       id = await getIdActivity(id_c);
     }
-    console.log(id);
 
     const formData = new FormData();
 
@@ -199,10 +180,15 @@ export const ProfesoresCursosScreen = () => {
       axios
         .post(`/api/add/activity/${id}`, formData)
         .then((res) => {
-          console.log(res);
           getPdfClass(id_c);
+          reset();
+          setTitle("");
+          setSelectedFile();
+          setIsFilePicked(false);
+          setUploadedSuccessfully(true);
         })
         .catch((err) => {
+          setUploadedSuccessfully(false);
           console.log(err);
         });
 
@@ -225,7 +211,6 @@ export const ProfesoresCursosScreen = () => {
   };
 
   const RenderActivities = ({id}) => {
-    console.log(id);
 
     return (
       activities.activities.map(
@@ -382,6 +367,13 @@ export const ProfesoresCursosScreen = () => {
                   </button>
                 </div>
               )}
+                {
+                  uploadedSuccessfully && (
+                    <h5 className="text-success">
+                      Agregado correctamente
+                    </h5>
+                  )
+                }
               <div id="teacher__subjects__error" className="text-danger" hidden>
                 No seleccionaste ningún curso
               </div>
