@@ -11,7 +11,7 @@ export const ProfesoresActividadesScreen = () => {
     const { authState } = useContext( AuthContext );
     const { user } = authState;
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, resetField } = useForm();
     const [activities, setActivities] = useState();
     const [isLoading, setIsLoading] = useState(true);
     // console.log(moment().format('DD/MM/YYYY'))
@@ -41,7 +41,17 @@ export const ProfesoresActividadesScreen = () => {
         .then(({data}) => {
             console.log(data.msj.msj);
             if (data.msj.msj === 'DB correctly') {
-                window.location.reload();
+                setIsLoading(true); 
+                axios.post('/api/message/read', {'type': user.type})
+                .then(({data}) => {
+                    setActivities(data.element);
+                    console.log(data.element);
+                    resetField('text');
+                    setIsLoading(false);
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
             }
         })
         .catch((err) => {
@@ -55,7 +65,16 @@ export const ProfesoresActividadesScreen = () => {
         axios.post('/api/message/delete', {'id': id})
         .then(({data}) => {
             if (data.element.msj === 'DB correctly') {
-                window.location.reload();
+                setIsLoading(true); 
+                axios.post('/api/message/read', {'type': user.type})
+                .then(({data}) => {
+                    setActivities(data.element);
+                    console.log(data.element);
+                    setIsLoading(false);
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
             }
         })
         .catch((err) => {

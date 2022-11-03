@@ -1,4 +1,4 @@
-import { saveAs } from 'file-saver';
+import { saveAs } from "file-saver";
 import Spinner from "react-bootstrap/Spinner";
 import Accordion from "react-bootstrap/Accordion";
 import { useForm } from "react-hook-form";
@@ -19,7 +19,7 @@ export const ProfesoresCursosScreen = () => {
   const [activities, setActivities] = useState({});
 
   // Form upload
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const [grade, setGrade] = useState("0");
   const [subject, setSubject] = useState("0");
@@ -28,7 +28,10 @@ export const ProfesoresCursosScreen = () => {
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
 
+  const [uploadedSuccessfully, setUploadedSuccessfully] = useState(false);
+
   const [isLoading, setIsLoading] = useState(true);
+
 
   const navigate = useNavigate();
 
@@ -37,17 +40,10 @@ export const ProfesoresCursosScreen = () => {
     axios
       .post("/api/read/person_roll", { id_p: user.id })
       .then(({ data }) => {
-        console.log(data);
         setYears(Object.keys(data.class));
-        console.log(Object.keys(data.class));
-
-        // setGrade(Object.keys(data.class)[0]);
-
         setClasses(Object.values(data.class));
-        console.log(Object.values(data.class));
 
         setIsLoading(false);
-        // setSubject(Object.values(data.class)[0][0].name);
       })
       .catch((err) => {
         console.log(err);
@@ -72,32 +68,33 @@ export const ProfesoresCursosScreen = () => {
   const handleChangeGrade = (event) => {
     setGrade(event.target.value);
     setSubject("0");
+    setUploadedSuccessfully(false);
   };
 
   const handleChangeSubject = (event) => {
     setSubject(event.target.value);
+    setUploadedSuccessfully(false);
   };
 
   const changeHandler = (event) => {
-    console.log(event.target.files[0]);
     setSelectedFile(event.target.files[0]);
     setIsFilePicked(true);
+    setUploadedSuccessfully(false);
   };
 
   // This is for read PDF
   const getPdfClass = (p_id) => {
-    setActivities({});
-
-    const id = p_id.toString();
+    const id = p_id.toString()
 
     axios
       .post("/api/id/course", { id_c: id })
       .then(({ data }) => {
-        console.log("data ", data);
         setActivities({
           id: p_id,
           activities: data.activities,
         });
+
+        return (<RenderActivities id={p_id} />)
       })
       .catch((err) => {
         console.log(err);
@@ -105,31 +102,29 @@ export const ProfesoresCursosScreen = () => {
   };
 
   // This is for Download PDFs
-  const getActivity = async(pdf_id) => {
+  const getActivity = async (pdf_id) => {
     const id = pdf_id.toString();
-    console.log(id);
     return axios({
-      method: 'post',
+      method: "post",
       url: "/api/activity/pdf",
       headers: {
-        'Content-Type': 'application/json'
-      }, 
-      responseType: 'arraybuffer',
+        "Content-Type": "application/json",
+      },
+      responseType: "arraybuffer",
       data: {
-        "id": id
-      }
-    })
-  }
+        id: id,
+      },
+    });
+  };
 
-  const onDownload = async(pdf_id) => {
-    const { data } = await getActivity(pdf_id)
-    const blob = new Blob([data], { type: 'application/pdf' })
-    saveAs(blob, "Actividad.pdf")
-  }
+  const onDownload = async (pdf_id) => {
+    const { data } = await getActivity(pdf_id);
+    const blob = new Blob([data], { type: "application/pdf" });
+    saveAs(blob, "Actividad.pdf");
+  };
 
   // This is for Upload PDFs
-  const processIdActivity = async(id_c) => {
-    // TODO: recieve the id_c by parameter
+  const processIdActivity = async (id_c) => {
     const petition = await axios({
       method: "post",
       url: "/api/add/activity",
@@ -143,19 +138,13 @@ export const ProfesoresCursosScreen = () => {
     });
 
     const { data } = petition;
-    console.log(data);
     const id = data.id;
-    console.log(id);
 
     return id;
   };
 
-  async function getIdActivity(id_c) {
-    console.log(id_c);
+  const getIdActivity = async(id_c) => {
     const id = await processIdActivity(id_c);
-
-    console.log(id);
-
     return id;
   }
 
@@ -174,36 +163,82 @@ export const ProfesoresCursosScreen = () => {
   };
 
   const onSubmit = async ({ grade, subject }) => {
-    console.log("onSubmit");
-    console.log(grade, subject);
     let id_c;
     let id;
     if (grade !== undefined && subject !== undefined) {
       id_c = await getIdCourse(grade, subject);
     }
-    console.log(id_c);
     if (id_c !== undefined) {
       id = await getIdActivity(id_c);
     }
-    console.log(id);
 
     const formData = new FormData();
 
-    formData.append('a', selectedFile);
+    formData.append("a", selectedFile);
 
     if (id !== undefined) {
       axios
-      .post(`/api/add/activity/${id}`, formData)
-      .then((res) => {
-        console.log(res);
+        .post(`/api/add/activity/${id}`, formData)
+        .then((res) => {
+          getPdfClass(id_c);
+          reset();
+          setTitle("");
+          setSelectedFile();
+          setIsFilePicked(false);
+          setUploadedSuccessfully(true);
+        })
+        .catch((err) => {
+          setUploadedSuccessfully(false);
+          console.log(err);
+        });
+
+      // window.location.reload();
+    }
+  };
+
+  // This is for Delete PDFs
+  const onDelete = (act_id, p_class_id) => {
+    axios
+      .post("/api/delete/activity", { id: act_id })
+      .then(({ data }) => {
+        if (data.status.msj === 'DB correctly') {
+          getPdfClass(p_class_id);
+        }
       })
       .catch((err) => {
         console.log(err);
       });
-      
-      window.location.reload();
-    }
   };
+
+  const RenderActivities = ({id}) => {
+
+    return (
+      activities.activities.map(
+        (activity, activityIndex) => (
+          <div key={`activity-${activityIndex}`}>
+            <h4>{activity.title}</h4>
+            <button
+              className="btn btn-success"
+              onClick={() =>
+                onDownload(activity.pdf_id)
+              }
+            >
+              Descargar
+            </button>{" "}
+            <button
+              className="btn btn-danger"
+              onClick={() =>
+                onDelete(activity.pdf_id, id)
+              }
+            >
+              Borrar
+            </button>{" "}
+            <br />
+          </div>
+        )
+      )
+    )
+  }
 
   return (
     <div>
@@ -215,29 +250,27 @@ export const ProfesoresCursosScreen = () => {
           <div id="teacher__subjects__board-padding">
             {!isLoading ? (
               years && years.length ? (
-                <Accordion alwaysOpen={false} className="teacher__subjects__accordion mx-auto">
+                <Accordion
+                  alwaysOpen={false}
+                  className="teacher__subjects__accordion mx-auto"
+                >
                   {years.map((year, yearIndex) => (
                     <div key={`years-${yearIndex}`} className="mx-auto">
-                      <h4 className="teacher__subjects__accordion-year text-uppercase my-4">{year}</h4>
-                      {classes[yearIndex].map((classItem, classIndex) => (
+                      <h4 className="teacher__subjects__accordion-year text-uppercase my-4">
+                        {year}
+                      </h4>
+                      {classes[yearIndex].map((classItem) => (
                         <Accordion.Item
                           key={`classes-${classItem.id}`}
                           eventKey={classItem.id}
                           onClick={() => getPdfClass(classItem.id)}
                         >
                           <Accordion.Header>{classItem.name}</Accordion.Header>
-                          <Accordion.Body>
+                          <Accordion.Body id={`acc-body${classItem.id}`}>
                             {activities &&
                               activities.id === classItem.id &&
                               (activities.activities.length ? (
-                                activities.activities.map(
-                                  (activity, activityIndex) => (
-                                    <div key={`activity-${activityIndex}`}>
-                                      <h4>{activity.title}</h4>
-                                      <button className="btn btn-success" onClick={() => onDownload(activity.pdf_id)}>Descargar</button> <br /> 
-                                    </div>
-                                  )
-                                )
+                                <RenderActivities id={classItem.id} />
                               ) : (
                                 <div>No hay material</div>
                               ))}
@@ -260,10 +293,7 @@ export const ProfesoresCursosScreen = () => {
             )}
             <hr />
             <h2>Agregar Actividad</h2>
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="mx-auto"
-            >
+            <form onSubmit={handleSubmit(onSubmit)} className="mx-auto">
               <h4 className="mt-2">Seleccione el año</h4>
               <select
                 name="grade"
@@ -337,17 +367,17 @@ export const ProfesoresCursosScreen = () => {
                   </button>
                 </div>
               )}
+                {
+                  uploadedSuccessfully && (
+                    <h5 className="text-success">
+                      Agregado correctamente
+                    </h5>
+                  )
+                }
               <div id="teacher__subjects__error" className="text-danger" hidden>
                 No seleccionaste ningún curso
               </div>
             </form>
-
-            {/*
-                        <div className="teacher__subjects__board-subject-container">
-                            <h4 className="teacher__subjects__board-subject">Historia</h4>
-                            <p className="teacher__subjects__board-exam">EXAMEN 23/07 - Rev. Industrial</p>
-                        </div>
-                       */}
           </div>
         </div>
       </section>
