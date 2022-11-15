@@ -38,6 +38,12 @@
     .teacher__absences__searcher-container {
         margin: 0px auto;
         width: fit-content;
+
+        .teacher__absences__msg-no-abs {
+            background-color: green;
+            color: white;
+            text-align: center;
+        }
     }
 
     .teacher__absences__board-title {
@@ -77,6 +83,8 @@
         .teacher__absences__board-unjustified {
             color: rgb(255, 56, 56);
         }
+
+        
     }
     
     .teacher__absences__people-button {
