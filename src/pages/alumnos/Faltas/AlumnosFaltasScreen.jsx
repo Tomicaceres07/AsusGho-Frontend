@@ -50,29 +50,13 @@ export const AlumnosFaltasScreen = () => {
                                         <td>{ index + 1 }</td>
                                         <td>{ item.date }</td>
                                         <td>{ item.c_abscence }</td>
-                                        <td  className={(item.justified === 0) && 'student__absences__board-unjustified'}>{ (item.justified === 0) ? "Injustificada" : "Justificada"  }</td>
+                                        <td className={(item.justified === 0) ? "student__absences__board-unjustified" : ""}>{ (item.justified === 0) ? "Injustificada" : "Justificada" }</td>
                                     </tr>
                                 ))
                             }
                         </tbody>
                     </Table>
                 </div>
-                {/* <div id="absences__board-week">
-                    <div id="absences__board-padding">
-
-                        {
-                            abscenses && abscenses.map( item => (
-                                <div className={`${(item.justified == 0) ? 'absences__board-container absences__board-unjustified' : 'absences__board-container'}`}>
-                                    <p className="absences__board-day" key={ item.id }>
-                                        { item.date } <br />
-                                        { item.c_abscence }
-                                    </p>
-                                    <p className="absences__board-absence">{ (item.justified == 0) ? "Injustificada" : "Justificada"  }</p>
-                                </div>
-                            ))
-                        }
-                    </div>
-                </div> */}
             </section>
         </div>
     );

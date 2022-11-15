@@ -14,12 +14,13 @@ export const ProfesoresFormulariosScreen = () => {
   //  This is for Read PDFs
   useEffect(() => {
       setIsLoading(true); 
+      // type false is for teachers
       axios.post('/api/pdf/arrread', {"type":false})
         .then(({data}) => {
           setForms(data.element);
           console.log(data.element);
           console.log(data.element.length);
-          setIsLoading(false); 
+          setIsLoading(false);
         })
         .catch((err) => {
           console.log(err);

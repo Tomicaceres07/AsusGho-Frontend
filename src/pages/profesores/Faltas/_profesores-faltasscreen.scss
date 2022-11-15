@@ -2,7 +2,7 @@
 
 
 
-#teacher__absences__home {
+.teacher__absences__home {
     align-items: center;
     color: white!important;
     justify-content: center;
@@ -12,14 +12,14 @@
     z-index: 3;
     // overflow: hidden;
 
-    #teacher__absences__title {
+    .teacher__absences__title {
         font-size: 2em;
         position: absolute;
         text-transform: uppercase;
         top: 45%;
     }
     
-    #teacher__absences__subtitle {
+    .teacher__absences__subtitle {
         font-size: 1.3em;
         margin-left: .2em;
         position: absolute;
@@ -28,14 +28,19 @@
     }
 }
 
-#teacher__absences__board {
+.teacher__absences__board {
     background-color: $gray;
     color: white;
     min-height: 80vh;
     padding-bottom: 3em;
     height: fit-content;
 
-    #teacher__absences__board-title {
+    .teacher__absences__searcher-container {
+        margin: 0px auto;
+        width: fit-content;
+    }
+
+    .teacher__absences__board-title {
         // background-color: green;
         font-size: 2em;
         // position: relative;
@@ -45,14 +50,14 @@
         top: 1.7em;
     }
 
-    #teacher__absences__board-container-table {
+    .teacher__absences__board-container-table {
         background-color: white;
         border-radius: 20px;
         margin: 0px auto;
         text-align: center;
         width: 70vw;
         
-        #teacher__absences__board-table {
+        .teacher__absences__board-table {
             .teacher__absences__board-th {
                 text-transform: uppercase!important;
                 width: 120px;
@@ -63,72 +68,85 @@
                 vertical-align: middle;
             }
     
-            .teacher__absences__board-unjustified {
-                color: rgb(255, 56, 56);
-            }
         }
-    
+        
         .table>:not(caption)>*>* {
             border-bottom-width: 0px;
         }
+
+        .teacher__absences__board-unjustified {
+            color: rgb(255, 56, 56);
+        }
     }
     
+    .teacher__absences__people-button {
+        background: none;
+        border: none;
+        border-bottom: 1px solid transparent;
+        color: white;
+        margin-bottom: 1em;
+    }
+    
+    .teacher__absences__people-button:hover {
+        border-bottom: 1px solid white;
+        transition: border-bottom .3s ease;
+    }
 }
 
 // Media Queries
 @media(min-width: 450px) {
-    #teacher__absences__home {
-        #teacher__absences__title {
+    .teacher__absences__home {
+        .teacher__absences__title {
             font-size: 3em;
         }
-        #teacher__absences__subtitle {
+        .teacher__absences__subtitle {
             font-size: 1.5em;
         }
     }
 
-    #teacher__absences__board {
-        #teacher__absences__board-title {
+    .teacher__absences__board {
+        .teacher__absences__board-title {
             font-size: 2.5em;
         }
     }
 }
 
 @media(min-width: 500px) {
-    #teacher__absences__board {
-        #teacher__absences__board-title {
+    .teacher__absences__board {
+        .teacher__absences__board-title {
             font-size: 2.5em;
         }
     }
 }
 
 @media(min-width: 650px) {
-    #teacher__absences__home {
-        #teacher__absences__title {
+    .teacher__absences__home {
+        .teacher__absences__title {
             font-size: 3.5em;
         }
-        #teacher__absences__subtitle {
+        .teacher__absences__subtitle {
             font-size: 2em;
         }
     }
 
-    #teacher__absences__board {
-        #teacher__absences__board-title {
+    .teacher__absences__board {
+        .teacher__absences__board-title {
             font-size: 3em;
         }
     }
 }
 
 @media(min-width: 768px) {
-    #teacher__absences__home {
-        #teacher__absences__title {
+    .teacher__absences__home {
+        .teacher__absences__title {
             font-size: 4em;
         }
     }
 }
 
 @media(min-width: 992px) {
-    #teacher__absences__home {
-        #teacher__absences__title {
+    .teacher__absences__home {
+        .teacher__absences__title {
             font-size: 4.5em;
         }
     }

@@ -13,6 +13,7 @@ const axios = require('axios').default;
 
     useEffect(() => {
       setIsLoading(true); 
+      // type true is for alumns
       axios.post('/api/pdf/arrread', {"type":true})
           .then(({data}) => {
             setForms(data.element);
