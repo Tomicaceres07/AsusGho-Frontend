@@ -97,7 +97,9 @@ export const ProfesoresFaltasScreen = () => {
   }
 
   const getAbsencesFromEmail = (email, name) => {
-    setRealName(name);
+    if (name !== undefined) {
+      setRealName(name);
+    }
     setActualEmail(email);
     axios
       .post("/api/get_abs", { email: email })

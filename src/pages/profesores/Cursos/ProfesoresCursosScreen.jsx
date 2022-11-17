@@ -51,7 +51,7 @@ export const ProfesoresCursosScreen = () => {
   }, [user.id]);
 
   const redirect = () => {
-    navigate("/profesores/perfil", {
+    navigate("/profesores/inscripcion", {
       replace: true,
     });
   };
@@ -216,7 +216,7 @@ export const ProfesoresCursosScreen = () => {
       activities.activities.map(
         (activity, activityIndex) => (
           <div key={`activity-${activityIndex}`}>
-            <h4>{activity.title}</h4>
+            <h4 className="mt-3">{activity.title}</h4>
             <button
               className="btn btn-success"
               onClick={() =>
@@ -266,14 +266,16 @@ export const ProfesoresCursosScreen = () => {
                           onClick={() => getPdfClass(classItem.id)}
                         >
                           <Accordion.Header>{classItem.name}</Accordion.Header>
-                          <Accordion.Body id={`acc-body${classItem.id}`}>
+                          <Accordion.Body className="pt-0" id={`acc-body${classItem.id}`}>
                             {activities &&
                               activities.id === classItem.id &&
                               (activities.activities.length ? (
                                 <RenderActivities id={classItem.id} />
                               ) : (
-                                <div>No hay material</div>
+                                <p className='mt-4'>No hay material</p>
                               ))}
+                              <hr className="my-4"/>
+                              <button className="btn btn-dark teacher__subjects__accordion-button-exit">Salir</button>
                           </Accordion.Body>
                         </Accordion.Item>
                       ))}
@@ -285,7 +287,7 @@ export const ProfesoresCursosScreen = () => {
                   <h4 className="teacher__subjects__board-subject">
                     No estás inscripto a ninguna materia
                   </h4>
-                  <button onClick={redirect}>Inscribirse</button>
+                  <button className="btn btn-success" onClick={redirect}>Inscribirse</button>
                 </div>
               )
             ) : (

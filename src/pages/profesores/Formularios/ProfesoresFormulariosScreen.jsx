@@ -1,26 +1,47 @@
 import Spinner from 'react-bootstrap/Spinner';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { saveAs } from 'file-saver';
+import { AuthContext } from 'context';
 const axios = require('axios').default;
 
 export const ProfesoresFormulariosScreen = () => {
+  const { authState } = useContext(AuthContext);
+  const { user } = authState;
   
-  const [forms, setForms] = useState();
+  const [formsTeachers, setFormsTeachers] = useState();
+  const [formsAlumns, setFormsAlumns] = useState();
   
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingTeachers, setIsLoadingTeachers] = useState(true);
+  const [isLoadingAlumns, setIsLoadingAlumns] = useState(true);
   
-  //  This is for Read PDFs
+  const [person, setPerson] = useState(false);
+
+  const [error, setError] = useState(false);
+
+  //  This is for Read Teachers PDFs 
   useEffect(() => {
-      setIsLoading(true); 
+      setIsLoadingTeachers(true); 
       // type false is for teachers
       axios.post('/api/pdf/arrread', {"type":false})
         .then(({data}) => {
-          setForms(data.element);
-          console.log(data.element);
-          console.log(data.element.length);
-          setIsLoading(false);
+          setFormsTeachers(data.element);
+          setIsLoadingTeachers(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+  }, [])
+  
+  //  This is for Read Alumns PDFs 
+  useEffect(() => {
+      setIsLoadingAlumns(true); 
+      // type true is for alumns
+      axios.post('/api/pdf/arrread', {"type":true})
+        .then(({data}) => {
+          setFormsAlumns(data.element);
+          setIsLoadingAlumns(false);
         })
         .catch((err) => {
           console.log(err);
@@ -38,11 +59,19 @@ export const ProfesoresFormulariosScreen = () => {
       },
       data: {
         "name": selectedFile.name,
-        "type": false
+        "type": person
       }
     })
 
+    console.log(petition)
+
+
     const { data } = petition;
+
+    if (data.msj === 'pdf already exist') {
+      setError(true)
+      return null;
+    }
     const id = data.id[0][0];
 
     return id;
@@ -52,14 +81,10 @@ export const ProfesoresFormulariosScreen = () => {
 
     const id = await processIdForm()
 
-    
-    console.log(id);
-
     return id;
   }
 
   const changeHandler = (event) => {
-    console.log(event.target.files[0]);
     setSelectedFile(event.target.files[0]);
     setIsFilePicked(true);
   };
@@ -81,7 +106,7 @@ export const ProfesoresFormulariosScreen = () => {
             console.log(err);
         })
 
-    window.location.reload();
+    error && window.location.reload();
   };
 
   
@@ -119,6 +144,10 @@ export const ProfesoresFormulariosScreen = () => {
         })
   }
 
+  const handleChangePerson = (event) => {
+    console.log(event.target.value);
+    setPerson(event.target.value);
+  };
 
   return (
     <div>
@@ -127,12 +156,18 @@ export const ProfesoresFormulariosScreen = () => {
       </section>
       <section id="teacher__forms__board">
         <div id="teacher__forms__board-week">
+
+          {
+            user.p_type === 1 && (
+              <h2 className='pt-5 mb-0'>Formularios de los Profes</h2>
+            )
+          }
           <div id="teacher__forms__board-padding">
             {
-              !isLoading 
+              !isLoadingTeachers 
               ? (
-                forms && forms.length !== 0
-                  ? (forms.map( (item, index) => (
+                formsTeachers && formsTeachers.length !== 0
+                  ? (formsTeachers.map( (item, index) => (
                   <div className="teacher__forms__board-form-container" key={index}>
                     <h4 className="teacher__forms__board-form">Formulario F{item.id}</h4>
                     <p className="teacher__forms__board-text">{item.name}</p>
@@ -147,14 +182,65 @@ export const ProfesoresFormulariosScreen = () => {
               : (
                 <Spinner animation="border" variant="light" />
               )
-                
             }
           </div>
+
+          {
+            user.p_type === 1 && (
+              <>
+                <hr />
+                <h2 className='pt-4 mb-0'>Formularios de los Alumnos</h2>
+                <div id="teacher__forms__board-padding">
+                  {
+                    !isLoadingAlumns 
+                    ? (
+                      formsAlumns && formsAlumns.length !== 0
+                        ? (formsAlumns.map( (item, index) => (
+                        <div className="teacher__forms__board-form-container" key={index}>
+                          <h4 className="teacher__forms__board-form">Formulario F{item.id}</h4>
+                          <p className="teacher__forms__board-text">{item.name}</p>
+                          <button className="teacher__forms__board-button-download" onClick={() => onDownload(item.id)}>Descargar F{item.id}</button> <br />  
+                          <button className="btn btn-danger" onClick={() => onDelete(item.id)}>Borrar</button>
+                        </div>
+                        )))
+                        : (
+                          <h2>No hay formularios</h2>
+                        )
+                    )
+                    : (
+                      <Spinner animation="border" variant="light" />
+                    )
+                  }
+                </div>
+              </>
+            )
+          }
           <hr />
           <div className='mw-100'>
               <h2>Agregar Formulario</h2>
+              {
+                user.p_type === 1 && (
+                  <form className="mx-auto">
+                    <h4 className="mt-2">¿Para quien es?</h4>
+                    <select
+                      name="person"
+                      value={person}
+                      onChange={handleChangePerson}
+                      className="mb-2 input"
+                    >
+                      <option value={false}>Profesores</option>
+                      <option value={true}>Alumnos</option>
+                    </select>
+                  </form>
+                )
+              }
               <label className="btn btn-primary my-2" htmlFor="teacher__forms__input-file">Seleccionar Archivo</label>
               <input type="file" name="file" onChange={changeHandler} id="teacher__forms__input-file" className='mw-100' hidden/>
+              {
+                error && (
+                  <h5>Ya existe un PDF con el mismo nombre.</h5>
+                )
+              }
               {isFilePicked && (
                 <div>
                   <p>Nombre del archivo: {selectedFile.name}</p>
