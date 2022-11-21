@@ -151,18 +151,18 @@ export const ProfesoresFormulariosScreen = () => {
 
   return (
     <div>
-      <section id="teacher__forms__home">
-        <h1 id="teacher__forms__title">Formularios</h1>
+      <section className="teacher__forms__home">
+        <h1 className="teacher__forms__title">Formularios</h1>
       </section>
-      <section id="teacher__forms__board">
-        <div id="teacher__forms__board-week">
+      <section className="teacher__forms__board">
+        <div className="teacher__forms__board-week">
 
           {
             user.p_type === 1 && (
               <h2 className='pt-5 mb-0'>Formularios de los Profes</h2>
             )
           }
-          <div id="teacher__forms__board-padding">
+          <div className="teacher__forms__board-padding">
             {
               !isLoadingTeachers 
               ? (
@@ -190,7 +190,7 @@ export const ProfesoresFormulariosScreen = () => {
               <>
                 <hr />
                 <h2 className='pt-4 mb-0'>Formularios de los Alumnos</h2>
-                <div id="teacher__forms__board-padding">
+                <div className="teacher__forms__board-padding">
                   {
                     !isLoadingAlumns 
                     ? (

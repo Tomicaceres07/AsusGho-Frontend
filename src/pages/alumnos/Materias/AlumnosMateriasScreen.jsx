@@ -95,10 +95,6 @@ export const AlumnosMateriasScreen = () => {
   }
 
   const desrollClass = (class_id) => {
-    console.log("click desrollClass");
-    console.log("user ", user.id);
-    console.log("class ",class_id);
-
     axios
       .post("/api/delete/student_roll", {
         id: user.id,
@@ -115,12 +111,12 @@ export const AlumnosMateriasScreen = () => {
 
   return (
     <div>
-      <section id="student__subjects__home">
-        <h1 id="student__subjects__title">Materias</h1>
+      <section className="student__subjects__home">
+        <h1 className="student__subjects__title">Materias</h1>
       </section>
-      <section id="student__subjects__board">
-        <div id="student__subjects__board-week">
-          <div id="student__subjects__board-padding" className="d-flex">
+      <section className="student__subjects__board">
+        <div className="student__subjects__board-week">
+          <div className="student__subjects__board-padding d-flex">
             {!isLoading ? (
               years && years.length ? (
                 <Accordion

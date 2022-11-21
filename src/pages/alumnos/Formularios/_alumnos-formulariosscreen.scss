@@ -2,7 +2,7 @@
 
 
 
-#student__forms__home {
+.student__forms__home {
     align-items: center;
     color: white!important;
     justify-content: center;
@@ -12,7 +12,7 @@
     z-index: 3;
     // overflow: hidden;
 
-    #student__forms__title {
+    .student__forms__title {
         font-size: 2em;
         position: absolute;
         text-transform: uppercase;
@@ -20,14 +20,14 @@
     }
 }
 
-#student__forms__board {
+.student__forms__board {
     background-color: $gray;
     color: white;
     height: auto;
     padding-top: 3em;
     padding-bottom: 3em;
 
-    #student__forms__board-week {
+    .student__forms__board-week {
         background-color: $dark-gray;
         margin: 0px auto;
         text-align: center;
@@ -35,7 +35,7 @@
         // position: relative;
         width: 80%;
 
-        #student__forms__board-padding {
+        .student__forms__board-padding {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
@@ -80,8 +80,8 @@
 
 @media(min-width: 450px) {
         
-    #student__forms__home {
-        #student__forms__title {
+    .student__forms__home {
+        .student__forms__title {
             font-size: 3em;
         }
     }
@@ -89,8 +89,8 @@
 
 @media(min-width: 768px) {
         
-    #student__forms__home {
-        #student__forms__title {
+    .student__forms__home {
+        .student__forms__title {
             font-size: 4em;
         }
     }
@@ -98,8 +98,8 @@
 
 @media(min-width: 992px) {
         
-    #student__forms__home {
-        #student__forms__title {
+    .student__forms__home {
+        .student__forms__title {
             font-size: 4.5em;
         }
     }

@@ -27,7 +27,6 @@ export const AlumnosInscripcionScreen = () => {
             "id_s": user.id
         })
         .then(({data}) => {
-            // console.log(data.courses.length);
             setCourses(data.courses);
             setIsLoading(false); 
         })
@@ -50,30 +49,13 @@ export const AlumnosInscripcionScreen = () => {
     };  
     
     const handleChangeSubjects = event => {
-        // setDivision(event.target.value);
-        // console.log("cambié")
-        // console.log(courses.length)
-        // console.log(event)
         const id = parseInt(event.target.name)
-        // console.log(event.target.checked)
         const isFounded = subjects.find(subject => subject === id);
-        // console.log(isFounded);
         if (!isFounded && event.target.checked) {
-            /* setSubjects(...subjects, {
-                id_c: event.target.id,
-                id_s: user.id
-            }) */
             setSubjects([...subjects, id]);
         } else if(isFounded && !event.target.checked) {
             setSubjects(subjects.filter(subject => subject !== id));
         }
-        
-        /* if (subjects.length >= 0) {
-            document.getElementById('register__submit').disabled = false;
-        } else {
-            document.getElementById('register__submit').disabled = true;
-        } */
-
     };  
 
     const addStudentRoll = async(subj) => {
@@ -83,7 +65,6 @@ export const AlumnosInscripcionScreen = () => {
         })
         .then((res) => {
             console.log(res);
-            // setCourses(data.courses);
         })
         .catch((err) => {
             console.log(err);
@@ -91,26 +72,14 @@ export const AlumnosInscripcionScreen = () => {
 
         return petition;
 
-        /* if (subj + 1 === subjects.length) {
-            clearInterval();
-        } */
     }
 
     const onSubmit = (e) => {
         e.preventDefault();
-        // TODO: do a for and add one by one the subjects to student
         if (subjects.length >= 1) {
             document.getElementById("student__inscription__error").hidden = true;
-            // console.log(subjects)
-            // I must send: user.id and subjects[i]
-            // Do the for
             subjects.forEach(subj => {
                 const res = addStudentRoll(subj)
-                console.log(res);
-                // console.log("foreach", subj)
-                // setInterval(() => {
-                    
-                // }, 2000);
             })
 
             navigate('/alumnos/materias', {
@@ -125,18 +94,17 @@ export const AlumnosInscripcionScreen = () => {
     
     return (
         <div>
-            <section id="student__inscription__home">
-                <h1 id="student__inscription__home-title">Inscripciones</h1>
+            <section className="student__inscription__home">
+                <h1 className="student__inscription__home-title">Inscripciones</h1>
             </section>
-            <section id="student__inscription__board">
-                <div id="student__inscription__board-week">
-                    <div id="student__inscription__board-padding">
+            <section className="student__inscription__board">
+                <div className="student__inscription__board-week">
+                    <div className="student__inscription__board-padding">
                         <h2 className="pt-3">Hola, {user && user.name}</h2>
                         <h2>Inscripción a materias</h2>
-                        <form id="student__inscription__form" onSubmit={handleSubmit(onSubmit)}>
-                            {/* TODO: Change id for class */}
-                            <h4 id="student__inscription__title">Seleccione el año</h4>
-                            <select name="grade" {...register('grade')} onChange={handleChangeGrade} id="student__inscription__dropdown" className="w-100 mb-2 input">
+                        <form className="student__inscription__form text-center" onSubmit={handleSubmit(onSubmit)}>
+                            <h4 className="student__inscription__title">Seleccione el año</h4>
+                            <select name="grade" {...register('grade')} onChange={handleChangeGrade} className="student__inscription__dropdown w-100 mb-2 input">
                                 {/* <option value="0">-- Seleccione el año --</option> */}
                                 <option value={1}>1ero</option>
                                 <option value={2}>2do</option>
@@ -145,9 +113,8 @@ export const AlumnosInscripcionScreen = () => {
                                 <option value={5}>5to</option>
                                 <option value={6}>6to</option>
                             </select>
-                            {/* TODO: Change id for class */}
-                            <h4 id="student__inscription__title">Seleccione el curso</h4>
-                            <select name="division" {...register('division')} onChange={handleChangeDivision} id="student__inscription__dropdown" className="w-100 mb-2 input">
+                            <h4 className="student__inscription__title">Seleccione el curso</h4>
+                            <select name="division" {...register('division')} onChange={handleChangeDivision} className="student__inscription__dropdown w-100 mb-2 input">
                                 {/* <option value="0">-- Seleccione el curso --</option> */}
                                 <option value="a">A</option>
                                 <option value="b">B</option>
@@ -157,10 +124,13 @@ export const AlumnosInscripcionScreen = () => {
                                 !isLoading
                                 ?   (
                                     (courses && courses.length >= 1)
-                                        ? courses.map( (item, index) => (
-                                            <div key={index}>
-                                                <input type="checkbox" name={item.id} onChange={handleChangeSubjects}/>
-                                                <label htmlFor={item.id}>{item.name}</label>
+                                        ? courses.map( (item, courseIndex) => (
+                                            <div className='text-start student__inscription__courses-container' key={courseIndex}>
+                                                <label htmlFor={item.id}>
+                                                    {item.name}
+                                                    <input type="checkbox" id={item.id} name={item.id} onChange={handleChangeSubjects}/>
+                                                    <span className="checkmark"></span>
+                                                </label>
                                             </div>
                                         ))
                                         : <p>No hay cursos</p>
@@ -170,8 +140,8 @@ export const AlumnosInscripcionScreen = () => {
                                 )
                             }
 
-                            <div id="student__inscription__error" className='text-danger' hidden>No seleccionaste ningún curso</div>
-                            <button type="submit" className="display-block px-4 mx-auto mb-3 btn btn-primary" onClick={onSubmit}>Enviar</button>
+                            <div className="student__inscription__error text-danger" hidden>No seleccionaste ningún curso</div>
+                            <button type="submit" className="display-block px-4 mx-auto mb-3 mt-3 btn btn-primary" onClick={onSubmit}>Inscribirse</button>
                         </form>
                     </div>
                 </div>

@@ -27,14 +27,14 @@ export const AlumnosFaltasScreen = () => {
     
     return (
         <div>
-            <section id="student__absences__home">
-                <h1 id="student__absences__title">Inasistencias</h1>
-                <h2 id="student__absences__subtitle">{user && user.name}</h2>
+            <section className="student__absences__home">
+                <h1 className="student__absences__title">Inasistencias</h1>
+                <h2 className="student__absences__subtitle">{user && user.name}</h2>
             </section>
-            <section id="student__absences__board">
-                <h2 id="student__absences__board-title">Faltas: {totalAbscenses && totalAbscenses}</h2>
-                <div id="student__absences__board-container-table">
-                    <Table responsive striped id="student__absences__board-table">
+            <section className="student__absences__board">
+                <h2 className="student__absences__board-title">Faltas: {totalAbscenses && totalAbscenses}</h2>
+                <div className="student__absences__board-container-table">
+                    <Table responsive striped className="student__absences__board-table">
                         <thead>
                             <tr>
                                 <th className='student__absences__board-th'>#</th>

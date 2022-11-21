@@ -2,7 +2,7 @@
 
 
 
-#teacher__activities__home {
+.teacher__activities__home {
     align-items: center;
     color: white!important;
     justify-content: center;
@@ -12,33 +12,33 @@
     z-index: 3;
     // overflow: hidden;
 
-    #teacher__activities__title {
+    .teacher__activities__title {
         display: flex;
         flex-direction: column;
         position: absolute;
         text-transform: uppercase;
         top: 40%;
 
-        #teacher__activities__title-p1 {
+        .teacher__activities__title-p1 {
             font-size: .8em;
             margin-bottom: .3em;
             // margin-left: .2em;
         }
 
-        #teacher__activities__title-p2 {
+        .teacher__activities__title-p2 {
             font-size: .8em;
             margin-bottom: 3em;
         }
     }
 }
 
-#teacher__activities__activities {
+.teacher__activities__activities {
     background-color: $gray;
     color: white;
     height: auto;
     padding-bottom: 3em;
 
-    #teacher__activities__activities-title {
+    .teacher__activities__activities-title {
         // background-color: green;
         font-size: 2em;
         display: flex;
@@ -49,25 +49,25 @@
         text-transform: uppercase;
         top: 1.7em;
 
-        #teacher__activities__activities-title-p1 {
+        .teacher__activities__activities-title-p1 {
             // background-color: red;
             font-size: .9em;
             margin-bottom: .4em;
         }
         
-        #teacher__activities__activities-title-p2 {
+        .teacher__activities__activities-title-p2 {
             // background-color: red;
             font-size: .6em;
             margin-bottom: .4em;
         }
         
-        #teacher__activities__activities-title-p3 {
+        .teacher__activities__activities-title-p3 {
             // background-color: red;
             font-size: .9em;
         }
     }
 
-    #teacher__activities__activities-container {
+    .teacher__activities__activities-container {
         background-color: $dark-gray;
         margin: 0px auto;
         padding-top: 1em;
@@ -109,17 +109,17 @@
 }
 
 @media(min-width: 340px) {
-    #teacher__activities__home {
-        #teacher__activities__title {
-            #teacher__activities__title-p1,
-            #teacher__activities__title-p2 {
+    .teacher__activities__home {
+        .teacher__activities__title {
+            .teacher__activities__title-p1,
+            .teacher__activities__title-p2 {
                 font-size: .9em;
             }
         }
     }
-    #teacher__activities__activities {
+    .teacher__activities__activities {
 
-        #teacher__activities__activities-container {
+        .teacher__activities__activities-container {
 
             .teacher__activities__form {
                 width: 70%;
@@ -129,17 +129,17 @@
 }
 
 @media(min-width: 450px) {
-    #teacher__activities__home {
-        #teacher__activities__title {
-            #teacher__activities__title-p1,
-            #teacher__activities__title-p2 {
+    .teacher__activities__home {
+        .teacher__activities__title {
+            .teacher__activities__title-p1,
+            .teacher__activities__title-p2 {
                 font-size: 1.1em;
             }
         }
     }
-    #teacher__activities__activities {
+    .teacher__activities__activities {
 
-        #teacher__activities__activities-container {
+        .teacher__activities__activities-container {
 
             .teacher__activities__form {
                 width: 60%;
@@ -149,9 +149,9 @@
 }
 
 @media(min-width: 550px) {
-    #teacher__activities__activities {
+    .teacher__activities__activities {
 
-        #teacher__activities__activities-container {
+        .teacher__activities__activities-container {
 
             .teacher__activities__form {
                 width: 50%;
@@ -161,9 +161,9 @@
 }
 
 @media(min-width: 650px) {
-    #teacher__activities__activities {
+    .teacher__activities__activities {
 
-        #teacher__activities__activities-container {
+        .teacher__activities__activities-container {
 
             .teacher__activities__form {
                 width: 40%;
@@ -173,21 +173,21 @@
 }
 
 @media(min-width: 768px) {
-    #teacher__activities__home {
-        #teacher__activities__title {
-            #teacher__activities__title-p1,
-            #teacher__activities__title-p2 {
+    .teacher__activities__home {
+        .teacher__activities__title {
+            .teacher__activities__title-p1,
+            .teacher__activities__title-p2 {
                 font-size: 1.5em;
             }
         }
     }
 
-    #teacher__activities__activities {
-        #teacher__activities__activities-title {
+    .teacher__activities__activities {
+        .teacher__activities__activities-title {
             font-size: 2.5em;
         }
 
-        #teacher__activities__activities-container {
+        .teacher__activities__activities-container {
             .teacher__activities__activities-name-activity {
                 font-size: 1.2em;
             }
@@ -199,20 +199,20 @@
 }
 
 @media(min-width: 992px) {
-    #teacher__activities__home {
-        #teacher__activities__title {
-            #teacher__activities__title-p1,
-            #teacher__activities__title-p2 {
+    .teacher__activities__home {
+        .teacher__activities__title {
+            .teacher__activities__title-p1,
+            .teacher__activities__title-p2 {
                 font-size: 1.7em;
             }
         }
     }
 
-    #teacher__activities__activities {
-        #teacher__activities__activities-title {
+    .teacher__activities__activities {
+        .teacher__activities__activities-title {
             font-size: 3em;
         }
-        #teacher__activities__activities-container {
+        .teacher__activities__activities-container {
             .teacher__activities__form {
                 width: 30%;
             }
@@ -221,21 +221,21 @@
 }
 
 @media(min-width: 1200px) {
-    #teacher__activities__home {
-        #teacher__activities__title {
-            #teacher__activities__title-p1 {
+    .teacher__activities__home {
+        .teacher__activities__title {
+            .teacher__activities__title-p1 {
                 font-size: 72px;
                 margin-bottom: .2em;
             }
 
-            #teacher__activities__title-p2 {
+            .teacher__activities__title-p2 {
                 font-size: 72px;
             }
         }
     }
 
-    #teacher__activities__activities {
-        #teacher__activities__activities-container {
+    .teacher__activities__activities {
+        .teacher__activities__activities-container {
             .teacher__activities__form {
                 width: 25%;
             }

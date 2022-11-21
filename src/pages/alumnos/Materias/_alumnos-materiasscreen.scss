@@ -2,7 +2,7 @@
 
 
 
-#student__subjects__home {
+.student__subjects__home {
     align-items: center;
     color: white!important;
     justify-content: center;
@@ -12,7 +12,7 @@
     z-index: 3;
     // overflow: hidden;
 
-    #student__subjects__title {
+    .student__subjects__title {
         font-size: 2em;
         position: absolute;
         text-transform: uppercase;
@@ -20,14 +20,14 @@
     }
 }
 
-#student__subjects__board {
+.student__subjects__board {
     background-color: $gray;
     color: white;
     height: auto;
     padding-top: 3em;
     padding-bottom: 3em;
 
-    #student__subjects__board-week {
+    .student__subjects__board-week {
         background-color: $dark-gray;
         margin: 0px auto;
         text-align: center;
@@ -35,7 +35,7 @@
         // position: relative;
         width: 80%;
 
-        #student__subjects__board-padding {
+        .student__subjects__board-padding {
             display: flex;
             flex-direction: column;
             flex-wrap: wrap;
@@ -59,23 +59,23 @@
 }
 
 @media(min-width: 350px) {
-    #student__subjects__home {
-        #student__subjects__title {
+    .student__subjects__home {
+        .student__subjects__title {
             font-size: 3em;
         }
     }
 }
 
 @media(min-width: 500px) {
-    #student__subjects__home {
-        #student__subjects__title {
+    .student__subjects__home {
+        .student__subjects__title {
             font-size: 4.5em;
         }
     }
 
-    #student__subjects__board {
-        #student__subjects__board-week {
-            #student__subjects__board-padding {
+    .student__subjects__board {
+        .student__subjects__board-week {
+            .student__subjects__board-padding {
                 .student__subjects__accordion {
                     width: 20em;
 

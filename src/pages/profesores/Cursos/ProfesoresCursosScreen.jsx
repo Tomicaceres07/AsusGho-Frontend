@@ -240,14 +240,42 @@ export const ProfesoresCursosScreen = () => {
     )
   }
 
+  const getClasses = () => {
+    setIsLoading(true);
+    axios
+      .post("/api/read/person_roll", { id_p: user.id })
+      .then(({ data }) => {
+        setYears(Object.keys(data.class));
+        setClasses(Object.values(data.class));
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  const desrollClass = (class_id) => {
+    axios
+      .post("/api/delete/person_roll", {
+        id: user.id,
+        id_c: class_id
+      })
+      .then(({ data }) => {
+        getClasses();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <div>
-      <section id="teacher__subjects__home">
-        <h1 id="teacher__subjects__title">Cursos</h1>
+      <section className="teacher__subjects__home">
+        <h1 className="teacher__subjects__title">Cursos</h1>
       </section>
-      <section id="teacher__subjects__board">
-        <div id="teacher__subjects__board-week">
-          <div id="teacher__subjects__board-padding">
+      <section className="teacher__subjects__board">
+        <div className="teacher__subjects__board-week">
+          <div className="teacher__subjects__board-padding">
             {!isLoading ? (
               years && years.length ? (
                 <Accordion
@@ -275,7 +303,7 @@ export const ProfesoresCursosScreen = () => {
                                 <p className='mt-4'>No hay material</p>
                               ))}
                               <hr className="my-4"/>
-                              <button className="btn btn-dark teacher__subjects__accordion-button-exit">Salir</button>
+                              <button className="btn btn-dark teacher__subjects__accordion-button-exit"  onClick={() => desrollClass(classItem.id)}>Salir</button>
                           </Accordion.Body>
                         </Accordion.Item>
                       ))}
@@ -376,9 +404,6 @@ export const ProfesoresCursosScreen = () => {
                     </h5>
                   )
                 }
-              <div id="teacher__subjects__error" className="text-danger" hidden>
-                No seleccionaste ningún curso
-              </div>
             </form>
           </div>
         </div>
