@@ -140,7 +140,7 @@ export const AlumnosInscripcionScreen = () => {
                                 )
                             }
 
-                            <div className="student__inscription__error text-danger" hidden>No seleccionaste ningún curso</div>
+                            <div id='student__inscription__error' className="text-danger" hidden>No seleccionaste ningún curso</div>
                             <button type="submit" className="display-block px-4 mx-auto mb-3 mt-3 btn btn-primary" onClick={onSubmit}>Inscribirse</button>
                         </form>
                     </div>

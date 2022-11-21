@@ -218,7 +218,7 @@ export const ProfesoresCursosScreen = () => {
           <div key={`activity-${activityIndex}`}>
             <h4 className="mt-3">{activity.title}</h4>
             <button
-              className="btn btn-success"
+              className="btn btn-success my-2 mx-2"
               onClick={() =>
                 onDownload(activity.pdf_id)
               }
@@ -226,7 +226,7 @@ export const ProfesoresCursosScreen = () => {
               Descargar
             </button>{" "}
             <button
-              className="btn btn-danger"
+              className="btn btn-danger my-2 mx-2"
               onClick={() =>
                 onDelete(activity.pdf_id, id)
               }

@@ -47,6 +47,44 @@ export const ProfesoresFormulariosScreen = () => {
           console.log(err);
         })
   }, [])
+
+  // This is for Read Teachers PDFs after upload one
+  const getTeachersPDFs = () => {
+    setIsLoadingTeachers(true); 
+    // type false is for teachers
+    axios.post('/api/pdf/arrread', {"type":false})
+      .then(({data}) => {
+        setFormsTeachers(data.element);
+        setIsLoadingTeachers(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+  
+  const getAllPDFs = () => {
+    setIsLoadingTeachers(true); 
+    // type false is for teachers
+    axios.post('/api/pdf/arrread', {"type":false})
+      .then(({data}) => {
+        setFormsTeachers(data.element);
+        setIsLoadingTeachers(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+
+    setIsLoadingAlumns(true); 
+    // type true is for alumns
+    axios.post('/api/pdf/arrread', {"type":true})
+      .then(({data}) => {
+        setFormsAlumns(data.element);
+        setIsLoadingAlumns(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
   
 
   // This is for Upload PDFs
@@ -85,8 +123,12 @@ export const ProfesoresFormulariosScreen = () => {
   }
 
   const changeHandler = (event) => {
-    setSelectedFile(event.target.files[0]);
-    setIsFilePicked(true);
+    console.log(event.target.files[0])
+    setError(false);
+    if (event.target.files[0] !== undefined) {
+      setSelectedFile(event.target.files[0]);
+      setIsFilePicked(true);
+    }
   };
 
   const handleSubmission = async () => {
@@ -104,9 +146,12 @@ export const ProfesoresFormulariosScreen = () => {
         })
         .catch((err) => {
             console.log(err);
-        })
+        });
 
-    error && window.location.reload();
+
+      (user.p_type === 0)
+        ? getTeachersPDFs()
+        : (user.p_type === 1) && getAllPDFs()
   };
 
   
@@ -137,7 +182,10 @@ export const ProfesoresFormulariosScreen = () => {
     axios.post('/api/pdf/delete', {"id":id})
         .then(({data}) => {
           console.log(data);
-          window.location.reload();
+          (user.p_type === 0)
+            ? getTeachersPDFs()
+            : (user.p_type === 1) && getAllPDFs()
+          setError(false);
         })
         .catch((err) => {
           console.log(err);
@@ -241,15 +289,15 @@ export const ProfesoresFormulariosScreen = () => {
                   <h5>Ya existe un PDF con el mismo nombre.</h5>
                 )
               }
-              {isFilePicked && (
+              {isFilePicked && selectedFile?.name && (
                 <div>
-                  <p>Nombre del archivo: {selectedFile.name}</p>
+                  <p>Nombre del archivo: {selectedFile?.name && selectedFile?.name}</p>
                 </div>
               )}
               {
                 isFilePicked && (
                   <div>
-                    <button className="btn btn-success" onClick={handleSubmission}>Agregar</button>
+                    <button className="btn btn-success mb-3" onClick={handleSubmission}>Agregar</button>
                   </div>
                 )
               }

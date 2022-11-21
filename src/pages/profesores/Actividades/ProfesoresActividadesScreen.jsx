@@ -92,7 +92,7 @@ export const ProfesoresActividadesScreen = () => {
                                 activities && activities.length !== 0
                                 ?   (
                                     activities.map( (item, index) => (
-                                        <div key={ index } className="d-flex justify-content-between w-50 mx-auto">
+                                        <div key={ index } className="teacher__activities__activity-container">
                                             <li className="teacher__activities__activities-name-activity">
                                                 { item.date } - { item.text }
                                             </li>

@@ -318,9 +318,9 @@ export const ProfesoresFaltasScreen = () => {
 
               {/* Add Form */}
               {actualEmail ? (
-                <div className="mx-auto w-25">
+                <div className="teacher__absenses__add-form-container text-center mx-auto">
                   <h2 className="text-center mt-4">Agregar Falta</h2>
-                  <p className="text-center">{actualEmail}</p>
+                  <p className="teacher__absences__people-mail text-center">{actualEmail}</p>
                   <form className="mx-auto">
                     <h4 className="mt-2">Seleccione la cantidad</h4>
                     <select
