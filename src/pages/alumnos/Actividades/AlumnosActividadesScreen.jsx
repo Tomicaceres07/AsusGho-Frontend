@@ -18,7 +18,6 @@ export const AlumnosActividadesScreen = () => {
         axios.post('/api/message/read', {'type': user.type})
         .then(({data}) => {
             setActivities(data.element);
-            console.log(data.element);
             setIsLoading(false); 
         })
         .catch((err) => {
@@ -28,12 +27,12 @@ export const AlumnosActividadesScreen = () => {
 
     return (
         <div>
-            <section id="student__activities__home">
-                <h1 id="student__activities__title"><span id="student__activities__title-p1">Actividades</span><span id="student__activities__title-p2">Extracurriculares</span></h1>
+            <section className="student__activities__home">
+                <h1 className="student__activities__title"><span className="student__activities__title-p1">Actividades</span><span className="student__activities__title-p2">Extracurriculares</span></h1>
             </section>
-            <section id="student__activities__activities">
-                <h2 id="student__activities__activities-title"><span id="student__activities__activities-title-p1">Calendario</span><span id="student__activities__activities-title-p2">De</span><span id="student__activities__activities-title-p3">Actividades</span></h2>
-                <div id="student__activities__activities-container">
+            <section className="student__activities__activities">
+                <h2 className="student__activities__activities-title"><span className="student__activities__activities-title-p1">Calendario</span><span className="student__activities__activities-title-p2">De</span><span className="student__activities__activities-title-p3">Actividades</span></h2>
+                <div className="student__activities__activities-container">
                     <ul className="student__activities__activities-ul">
                         {
                             !isLoading 

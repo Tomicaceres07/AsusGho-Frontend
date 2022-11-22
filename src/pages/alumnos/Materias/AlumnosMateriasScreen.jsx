@@ -32,7 +32,7 @@ export const AlumnosMateriasScreen = () => {
   }, [user.id]);
 
   const redirect = () => {
-    navigate("/alumnos/perfil", {
+    navigate("/alumnos/inscripcion", {
       replace: true,
     });
   };
@@ -80,16 +80,43 @@ export const AlumnosMateriasScreen = () => {
     saveAs(blob, "Actividad.pdf")
   }
 
-  
+  const getClasses = () => {
+    setIsLoading(true);
+    axios
+      .post("/api/read/student_roll", { id_s: user.id })
+      .then(({ data }) => {
+        setYears(Object.keys(data.class));
+        setClasses(Object.values(data.class));
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  const desrollClass = (class_id) => {
+    axios
+      .post("/api/delete/student_roll", {
+        id: user.id,
+        id_c: class_id
+      })
+      .then(({ data }) => {
+        console.log("data ", data);
+        getClasses();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   return (
     <div>
-      <section id="student__subjects__home">
-        <h1 id="student__subjects__title">Materias</h1>
+      <section className="student__subjects__home">
+        <h1 className="student__subjects__title">Materias</h1>
       </section>
-      <section id="student__subjects__board">
-        <div id="student__subjects__board-week">
-          <div id="student__subjects__board-padding" className="d-flex">
+      <section className="student__subjects__board">
+        <div className="student__subjects__board-week">
+          <div className="student__subjects__board-padding d-flex">
             {!isLoading ? (
               years && years.length ? (
                 <Accordion
@@ -108,14 +135,14 @@ export const AlumnosMateriasScreen = () => {
                           onClick={() => getPdfClass(classItem.id)}
                         >
                           <Accordion.Header>{classItem.name}</Accordion.Header>
-                          <Accordion.Body>
+                          <Accordion.Body className="pt-0">
                             {activities &&
                               activities.id === classItem.id &&
                               (activities.activities.length ? (
                                 activities.activities.map(
                                   (activity, activityIndex) => (
                                     <div key={`activity-${activityIndex}`}>
-                                      <h4>{activity.title}</h4>
+                                      <h4 className="mt-3">{activity.title}</h4>
                                       <button
                                         className="btn btn-success"
                                         onClick={() =>
@@ -129,8 +156,10 @@ export const AlumnosMateriasScreen = () => {
                                   )
                                 )
                               ) : (
-                                <div>No hay material</div>
+                                <p className='mt-4'>No hay material</p>
                               ))}
+                              <hr className="my-4"/>
+                              <button className="btn btn-dark teacher__subjects__accordion-button-exit" onClick={() => desrollClass(classItem.id)}>Salir</button>
                           </Accordion.Body>
                         </Accordion.Item>
                       ))}
@@ -142,7 +171,7 @@ export const AlumnosMateriasScreen = () => {
                   <h4 className="student__subjects__board-subject">
                     No estás inscripto a ninguna materia
                   </h4>
-                  <button onClick={redirect}>Inscribirse</button>
+                  <button className="btn btn-success" onClick={redirect}>Inscribirse</button>
                 </div>
               )
             ) : (

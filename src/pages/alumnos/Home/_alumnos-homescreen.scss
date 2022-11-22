@@ -2,7 +2,7 @@
 
 
 
-#student__home__home {
+.student__home__home {
     align-items: center;
     color: white!important;
     justify-content: center;
@@ -12,25 +12,25 @@
     z-index: 3;
     // overflow: hidden;
 
-    #student__home__title {
+    .student__home__title {
         display: flex;
         flex-direction: column;
         position: absolute;
         text-transform: uppercase;
         top: 40%;
 
-        #student__home__title-p1 {
+        .student__home__title-p1 {
             margin-bottom: 1.4em;
             margin-left: .2em;
         }
 
-        #student__home__title-p2 {
+        .student__home__title-p2 {
             font-size: 1.5em;
             margin-bottom: 3em;
         }
     }
     
-    #student__home__subtitle {
+    .student__home__subtitle {
         font-size: 1.3em;
         margin-left: .2em;
         position: absolute;
@@ -38,16 +38,16 @@
     }
 }
 
-#student__home__board, 
-#student__home__menu {
+.student__home__board, 
+.student__home__menu {
     background-color: $gray;
     color: white;
     height: fit-content;
     min-height: 100vh;
     padding-bottom: 2em;
 
-    #student__home__board-title,
-    #student__home__menu-title {
+    .student__home__board-title,
+    .student__home__menu-title {
         font-size: 2.5em;
         padding: 50px;
         text-align: center;
@@ -55,7 +55,7 @@
         top: 1.7em;
     }
 
-    #student__home__board-week {
+    .student__home__board-week {
         background-color: $dark-gray;
         margin: 0px auto;
         text-align: center;
@@ -63,7 +63,7 @@
         // position: relative;
         width: 240px;
 
-        #student__home__board-padding {
+        .student__home__board-padding {
             padding: 3em;
 
             .student__home__board-day {
@@ -71,23 +71,23 @@
             }
 
             .student__home__board-task {
-                margin-bottom: 30px;
+                margin-bottom: 20px;
             }
 
-            #student__home__last-task {
+            .student__home__last-task {
                 margin-bottom: 0px!important;
             }
         }
     }
 
-    #student__home__menu-week {
+    .student__home__menu-week {
         background-color: white;
         border-radius: 20px;
         margin: 0px auto;
         text-align: center;
         width: 70vw;
 
-        #student__home__menu-table {
+        .student__home__menu-table {
 
             .student__home__menu-th {
                 width: 120px;
@@ -112,24 +112,24 @@
 
 
 @media(min-width: 576px) {
-    #student__home__board {
-        #student__home__board-week {
+    .student__home__board {
+        .student__home__board-week {
             width: 300px;
         }
     }
 }
 
 @media(min-width: 992px) {
-    #student__home__home {
+    .student__home__home {
         width: 76%;
 
-        #student__home__subtitle {
+        .student__home__subtitle {
             font-size: 1.5em;
         }
     }
 
-    #student__home__board{
-        #student__home__board-week{
+    .student__home__board{
+        .student__home__board-week{
             width: 350px;
         }
     }
@@ -137,14 +137,14 @@
 
 
 @media(min-width: 1200px) {
-    #student__home__home {
-        #student__home__title {
-            #student__home__title-p1 {
+    .student__home__home {
+        .student__home__title {
+            .student__home__title-p1 {
                 font-size: 72px;
                 margin-bottom: .2em;
             }
     
-            #student__home__title-p2 {
+            .student__home__title-p2 {
                 font-size: 112px;
             }
         }

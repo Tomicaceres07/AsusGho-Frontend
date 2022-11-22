@@ -20,11 +20,6 @@ export const AlumnosHomeScreen = () => {
     await axios.post('/api/message_week/read', {"type": true})
       .then(({data}) => {
           setActivities(data.element);
-          // console.log(data)
-          /* if (data.status === 200) {
-            getMenu();
-          } */
-          // console.log(data.element);
       })
       .catch((err) => {
           console.log(err);
@@ -36,7 +31,6 @@ export const AlumnosHomeScreen = () => {
     await axios.get('/api/menu')
     .then(({data}) => {
         setMenu(data.menu.menu);
-        // console.log(data.menu.menu);
     })
     .catch((err) => {
         console.log(err);
@@ -52,15 +46,14 @@ export const AlumnosHomeScreen = () => {
   
   return (
     <div>
-      <section id="student__home__home">
-        <h1 id="student__home__title"><span id="student__home__title-p1">Liceo Militar</span><span id="student__home__title-p2">General Paz</span></h1>
-        <h2 id="student__home__subtitle">Bienvenido, {user && user.name}</h2>
+      <section className="student__home__home">
+        <h1 className="student__home__title"><span className="student__home__title-p1">Liceo Militar</span><span className="student__home__title-p2">General Paz</span></h1>
+        <h2 className="student__home__subtitle">Bienvenido, {user && user.name}</h2>
       </section>
-      <section id="student__home__board">
-        <h2 id="student__home__board-title">Tablero</h2>
-        <div id="student__home__board-week">
-          <div id="student__home__board-padding">
-            {/* TODO: make this dinamically */}
+      <section className="student__home__board">
+        <h2 className="student__home__board-title">Tablero</h2>
+        <div className="student__home__board-week">
+          <div className="student__home__board-padding">
               {
                 activities && activities.length !== 0
                 ?   (
@@ -101,24 +94,14 @@ export const AlumnosHomeScreen = () => {
                       <Spinner animation="border" variant="light" />
                     )
               }
-              {/* <h4 className="student__home__board-day">Lunes</h4>
-              <p className="student__home__board-task">Examen Matemática</p>
-              <h4 className="student__home__board-day">Martes</h4>
-              <p className="student__home__board-task">Acto de Malvinas</p>
-              <h4 className="student__home__board-day">Miercoles</h4>
-              <p className="student__home__board-task">Feriado</p>
-              <h4 className="student__home__board-day">Jueves</h4>
-              <p className="student__home__board-task">Visita a la UCC</p>
-              <h4 className="student__home__board-day">Viernes</h4>
-              <p id="student__home__last-task">Presentación informática</p> */}
           </div>
         </div>
       </section>
       <div className="student__home__separator"></div>
-      <section id="student__home__menu">
-        <h2 id="student__home__menu-title">Menú</h2>
-        <div id="student__home__menu-week">
-          <Table responsive striped id="student__home__menu-table">
+      <section className="student__home__menu">
+        <h2 className="student__home__menu-title">Menú</h2>
+        <div className="student__home__menu-week">
+          <Table responsive striped className="student__home__menu-table">
               <thead>
                   <tr>
                       <th className='student__home__menu-th'>Semana</th>
@@ -131,8 +114,8 @@ export const AlumnosHomeScreen = () => {
               </thead>
               <tbody>
                   {
-                    [0, 1, 2, 3].map(week => (
-                      <tr className='student__home__menu-tr'>
+                    [0, 1, 2, 3].map((week, weekIndex) => (
+                      <tr className='student__home__menu-tr' key={weekIndex}>
                           <td>{week+1}</td>
                           <td>{ menu && menu.LUNES[week] }</td>
                           <td>{ menu && menu.MARTES[week] }</td>

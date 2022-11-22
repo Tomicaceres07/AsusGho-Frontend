@@ -14,14 +14,12 @@ export const ProfesoresActividadesScreen = () => {
     const { register, handleSubmit, resetField } = useForm();
     const [activities, setActivities] = useState();
     const [isLoading, setIsLoading] = useState(true);
-    // console.log(moment().format('DD/MM/YYYY'))
 
     useEffect(() => {
         setIsLoading(true); 
         axios.post('/api/message/read', {'type': user.type})
         .then(({data}) => {
             setActivities(data.element);
-            console.log(data.element);
             setIsLoading(false);
         })
         .catch((err) => {
@@ -31,7 +29,6 @@ export const ProfesoresActividadesScreen = () => {
 
 
     const onAdd = (data) => {
-        console.log(data);
         const date = moment(data.date).format('DD/MM/YYYY')
         axios.post('/api/message/write', {
             'date': date,
@@ -39,7 +36,6 @@ export const ProfesoresActividadesScreen = () => {
             'type': user.type
         })
         .then(({data}) => {
-            console.log(data.msj.msj);
             if (data.msj.msj === 'DB correctly') {
                 setIsLoading(true); 
                 axios.post('/api/message/read', {'type': user.type})
@@ -69,7 +65,6 @@ export const ProfesoresActividadesScreen = () => {
                 axios.post('/api/message/read', {'type': user.type})
                 .then(({data}) => {
                     setActivities(data.element);
-                    console.log(data.element);
                     setIsLoading(false);
                 })
                 .catch((err) => {
@@ -84,12 +79,12 @@ export const ProfesoresActividadesScreen = () => {
 
     return (
         <div>
-            <section id="teacher__activities__home">
-                <h1 id="teacher__activities__title"><span id="teacher__activities__title-p1">Actividades</span><span id="teacher__activities__title-p2">Extracurriculares</span></h1>
+            <section className="teacher__activities__home">
+                <h1 className="teacher__activities__title"><span className="teacher__activities__title-p1">Actividades</span><span className="teacher__activities__title-p2">Extracurriculares</span></h1>
             </section>
-            <section id="teacher__activities__activities">
-                <h2 id="teacher__activities__activities-title"><span id="teacher__activities__activities-title-p1">Calendario</span><span id="teacher__activities__activities-title-p2">De</span><span id="teacher__activities__activities-title-p3">Actividades</span></h2>
-                <div id="teacher__activities__activities-container">
+            <section className="teacher__activities__activities">
+                <h2 className="teacher__activities__activities-title"><span className="teacher__activities__activities-title-p1">Calendario</span><span className="teacher__activities__activities-title-p2">De</span><span className="teacher__activities__activities-title-p3">Actividades</span></h2>
+                <div className="teacher__activities__activities-container">
                     <ul className="teacher__activities__activities-ul">
                         {
                             !isLoading 
@@ -97,7 +92,7 @@ export const ProfesoresActividadesScreen = () => {
                                 activities && activities.length !== 0
                                 ?   (
                                     activities.map( (item, index) => (
-                                        <div key={ index } className="d-flex justify-content-between w-50 mx-auto">
+                                        <div key={ index } className="teacher__activities__activity-container">
                                             <li className="teacher__activities__activities-name-activity">
                                                 { item.date } - { item.text }
                                             </li>

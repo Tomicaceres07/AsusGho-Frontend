@@ -19,13 +19,7 @@ export const ProfesoresHomeScreen = () => {
   const getActivities = async() => {
     await axios.post('/api/message_week/read', {"type": user.type})
       .then((data) => {
-          console.log(data.data.element)
           setActivities(data.data.element);
-          // console.log(data)
-          /* if (data.status === 200) {
-            getMenu();
-          } */
-          // console.log(data.element);
       })
       .catch((err) => {
           console.log(err);
@@ -37,7 +31,6 @@ export const ProfesoresHomeScreen = () => {
     await axios.get('/api/menu')
     .then(({data}) => {
         setMenu(data.menu.menu);
-        // console.log(data.menu.menu);
     })
     .catch((err) => {
         console.log(err);
@@ -53,14 +46,14 @@ export const ProfesoresHomeScreen = () => {
   
   return (
     <div>
-      <section id="teacher__home__home">
-        <h1 id="teacher__home__title"><span id="teacher__home__title-p1">Liceo Militar</span><span id="teacher__home__title-p2">General Paz</span></h1>
-        <h2 id="teacher__home__subtitle">Bienvenido, {user && user.name}</h2>
+      <section className="teacher__home__home">
+        <h1 className="teacher__home__title"><span className="teacher__home__title-p1">Liceo Militar</span><span className="teacher__home__title-p2">General Paz</span></h1>
+        <h2 className="teacher__home__subtitle">Bienvenido, {user && user.name}</h2>
       </section>
-      <section id="teacher__home__board">
-        <h2 id="teacher__home__board-title">Tablero</h2>
-        <div id="teacher__home__board-week">
-          <div id="teacher__home__board-padding">
+      <section className="teacher__home__board">
+        <h2 className="teacher__home__board-title">Tablero</h2>
+        <div className="teacher__home__board-week">
+          <div className="teacher__home__board-padding">
             {/* TODO: make this dinamically */}
             {
                 activities && activities.length !== 0
@@ -102,24 +95,14 @@ export const ProfesoresHomeScreen = () => {
                       <Spinner animation="border" variant="light" />
                     )
               }
-              {/* <h4 className="teacher__home__board-day">Lunes</h4>
-              <p className="teacher__home__board-task">Examen Matemática</p>
-              <h4 className="teacher__home__board-day">Martes</h4>
-              <p className="teacher__home__board-task">Acto de Malvinas</p>
-              <h4 className="teacher__home__board-day">Miercoles</h4>
-              <p className="teacher__home__board-task">Feriado</p>
-              <h4 className="teacher__home__board-day">Jueves</h4>
-              <p className="teacher__home__board-task">Visita a la UCC</p>
-              <h4 className="teacher__home__board-day">Viernes</h4>
-              <p id="teacher__home__last-task">Presentación informática</p> */}
           </div>
         </div>
       </section>
       <div className="teacher__home__separator"></div>
-      <section id="teacher__home__menu">
-        <h2 id="teacher__home__menu-title">Menú</h2>
-        <div id="teacher__home__menu-week">
-          <Table responsive striped id="teacher__home__menu-table">
+      <section className="teacher__home__menu">
+        <h2 className="teacher__home__menu-title">Menú</h2>
+        <div className="teacher__home__menu-week">
+          <Table responsive striped className="teacher__home__menu-table">
               <thead>
                   <tr>
                       <th className='teacher__home__menu-th'>Semana</th>
@@ -131,38 +114,18 @@ export const ProfesoresHomeScreen = () => {
                   </tr>
               </thead>
               <tbody>
-                    <tr className='teacher__home__menu-tr'>
-                        <td>1</td>
-                        <td>{ menu && menu.LUNES[0] }</td>
-                        <td>{ menu && menu.MARTES[0] }</td>
-                        <td>{ menu && menu.MIERCOLES[0] }</td>
-                        <td>{ menu && menu.JUEVES[0] }</td>
-                        <td>{ menu && menu.VIERNES[0] }</td>
-                    </tr>
-                    <tr className='teacher__home__menu-tr'>
-                        <td>2</td>
-                        <td>{ menu && menu.LUNES[1] }</td>
-                        <td>{ menu && menu.MARTES[1] }</td>
-                        <td>{ menu && menu.MIERCOLES[1] }</td>
-                        <td>{ menu && menu.JUEVES[1] }</td>
-                        <td>{ menu && menu.VIERNES[1] }</td>
-                    </tr>
-                    <tr className='teacher__home__menu-tr'>
-                        <td>3</td>
-                        <td>{ menu && menu.LUNES[2] }</td>
-                        <td>{ menu && menu.MARTES[2] }</td>
-                        <td>{ menu && menu.MIERCOLES[2] }</td>
-                        <td>{ menu && menu.JUEVES[2] }</td>
-                        <td>{ menu && menu.VIERNES[2] }</td>
-                    </tr>
-                    <tr className='teacher__home__menu-tr'>
-                        <td>4</td>
-                        <td>{ menu && menu.LUNES[3] }</td>
-                        <td>{ menu && menu.MARTES[3] }</td>
-                        <td>{ menu && menu.MIERCOLES[3] }</td>
-                        <td>{ menu && menu.JUEVES[3] }</td>
-                        <td>{ menu && menu.VIERNES[3] }</td>
-                    </tr>
+                  {
+                    [0, 1, 2, 3].map((week, weekIndex) => (
+                      <tr className='teacher__home__menu-tr' key={weekIndex}>
+                          <td>{week+1}</td>
+                          <td>{ menu && menu.LUNES[week] }</td>
+                          <td>{ menu && menu.MARTES[week] }</td>
+                          <td>{ menu && menu.MIERCOLES[week] }</td>
+                          <td>{ menu && menu.JUEVES[week] }</td>
+                          <td>{ menu && menu.VIERNES[week] }</td>
+                      </tr>
+                    ))
+                  }
               </tbody>
           </Table>
         </div>

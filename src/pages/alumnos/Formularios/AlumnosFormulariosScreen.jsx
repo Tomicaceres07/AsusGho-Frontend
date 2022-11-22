@@ -13,11 +13,10 @@ const axios = require('axios').default;
 
     useEffect(() => {
       setIsLoading(true); 
+      // type true is for alumns
       axios.post('/api/pdf/arrread', {"type":true})
           .then(({data}) => {
             setForms(data.element);
-            console.log(data.element);
-            console.log(data.element.length);
             setIsLoading(false); 
           })
           .catch((err) => {
@@ -50,12 +49,12 @@ const axios = require('axios').default;
 
     return (
       <div>
-        <section id="student__forms__home">
-          <h1 id="student__forms__title">Formularios</h1>
+        <section className="student__forms__home">
+          <h1 className="student__forms__title">Formularios</h1>
         </section>
-        <section id="student__forms__board">
-          <div id="student__forms__board-week">
-            <div id="student__forms__board-padding">
+        <section className="student__forms__board">
+          <div className="student__forms__board-week">
+            <div className="student__forms__board-padding">
               {
                   !isLoading
                   ?   (forms && (
