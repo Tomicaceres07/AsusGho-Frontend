@@ -32,6 +32,8 @@ export const ProfesoresCursosScreen = () => {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  const [errorExtension, setErrorExtension] = useState(false);
+
 
   const navigate = useNavigate();
 
@@ -77,9 +79,19 @@ export const ProfesoresCursosScreen = () => {
   };
 
   const changeHandler = (event) => {
-    setSelectedFile(event.target.files[0]);
-    setIsFilePicked(true);
     setUploadedSuccessfully(false);
+
+    if (event.target.files[0] !== undefined) {
+      if (event.target.files[0].type === 'application/pdf') {
+        setErrorExtension(false);
+        setSelectedFile(event.target.files[0]);
+        setIsFilePicked(true);
+      } else {
+        setErrorExtension(true);
+        setSelectedFile();
+        setIsFilePicked();
+      }
+    }
   };
 
   // This is for read PDF
@@ -390,6 +402,11 @@ export const ProfesoresCursosScreen = () => {
                   <p>Nombre del archivo: {selectedFile && selectedFile.name}</p>
                 </div>
               )}
+              {
+                errorExtension && (
+                  <h5 className="text-danger">Formato aceptado: .pdf</h5>
+                )
+              }
               {hasGrade() && hasSubject() && title && isFilePicked && (
                 <div>
                   <button className="btn btn-success" onClick={onSubmit}>

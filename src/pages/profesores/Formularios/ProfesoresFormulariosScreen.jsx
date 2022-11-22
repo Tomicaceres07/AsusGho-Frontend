@@ -18,7 +18,8 @@ export const ProfesoresFormulariosScreen = () => {
   
   const [person, setPerson] = useState(false);
 
-  const [error, setError] = useState(false);
+  const [errorExists, setErrorExists] = useState(false);
+  const [errorExtension, setErrorExtension] = useState(false);
 
   //  This is for Read Teachers PDFs 
   useEffect(() => {
@@ -107,7 +108,7 @@ export const ProfesoresFormulariosScreen = () => {
     const { data } = petition;
 
     if (data.msj === 'pdf already exist') {
-      setError(true)
+      setErrorExists(true)
       return null;
     }
     const id = data.id[0][0];
@@ -124,10 +125,19 @@ export const ProfesoresFormulariosScreen = () => {
 
   const changeHandler = (event) => {
     console.log(event.target.files[0])
-    setError(false);
+    console.log(event.target.files[0].type)
+    setErrorExists(false);
+    
     if (event.target.files[0] !== undefined) {
-      setSelectedFile(event.target.files[0]);
-      setIsFilePicked(true);
+      if (event.target.files[0].type === 'application/pdf') {
+        setErrorExtension(false);
+        setSelectedFile(event.target.files[0]);
+        setIsFilePicked(true);
+      } else {
+        setErrorExtension(true);
+        setSelectedFile();
+        setIsFilePicked();
+      }
     }
   };
 
@@ -185,7 +195,7 @@ export const ProfesoresFormulariosScreen = () => {
           (user.p_type === 0)
             ? getTeachersPDFs()
             : (user.p_type === 1) && getAllPDFs()
-          setError(false);
+          setErrorExists(false);
         })
         .catch((err) => {
           console.log(err);
@@ -285,8 +295,13 @@ export const ProfesoresFormulariosScreen = () => {
               <label className="btn btn-primary my-2" htmlFor="teacher__forms__input-file">Seleccionar Archivo</label>
               <input type="file" name="file" onChange={changeHandler} id="teacher__forms__input-file" className='mw-100' hidden/>
               {
-                error && (
-                  <h5>Ya existe un PDF con el mismo nombre.</h5>
+                errorExists && (
+                  <h5 className='text-danger'>Ya existe un PDF con el mismo nombre.</h5>
+                )
+              }
+              {
+                errorExtension && (
+                  <h5 className='text-danger'>Formato aceptado: .pdf</h5>
                 )
               }
               {isFilePicked && selectedFile?.name && (

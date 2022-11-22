@@ -15,6 +15,10 @@ export const ProfesoresHomeScreen = () => {
   const [ activities, setActivities ] = useState();
   const [ menu, setMenu ] = useState();
 
+  const [selectedFile, setSelectedFile] = useState();
+  const [isFilePicked, setIsFilePicked] = useState(false);
+
+  const [error, setError] = useState(false);
 
   const getActivities = async() => {
     await axios.post('/api/message_week/read', {"type": user.type})
@@ -44,6 +48,38 @@ export const ProfesoresHomeScreen = () => {
       getMenu();
   }, [])
   
+
+  // This is for add Menu
+  const changeHandler = (event) => {
+    setError(false);
+    if (event.target.files[0] !== undefined) {
+      // Check if it's an excel format
+      if (event.target.files[0].type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || event.target.files[0].type === 'application/vnd.ms-excel') {
+        setSelectedFile(event.target.files[0]);
+        setIsFilePicked(true);
+      } else {
+        setError(true);
+        setSelectedFile();
+        setIsFilePicked();
+      }
+    }
+  };
+
+  const addMenu = () => {
+    const formData = new FormData();
+
+    formData.append('file', selectedFile);
+
+    axios.post('/api/add_menu', formData)
+        .then((res) => {
+          console.log(res);
+          getMenu();
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+  };
+  
   return (
     <div>
       <section className="teacher__home__home">
@@ -54,7 +90,6 @@ export const ProfesoresHomeScreen = () => {
         <h2 className="teacher__home__board-title">Tablero</h2>
         <div className="teacher__home__board-week">
           <div className="teacher__home__board-padding">
-            {/* TODO: make this dinamically */}
             {
                 activities && activities.length !== 0
                 ?   (
@@ -129,6 +164,33 @@ export const ProfesoresHomeScreen = () => {
               </tbody>
           </Table>
         </div>
+        {
+          user.p_type === 1 && (
+            <div className='text-center mt-5'>
+              <hr />
+              <h2>Agregar Menú</h2>
+              <label className="btn btn-primary my-2" htmlFor="teacher__forms__input-file">Seleccionar Archivo</label>
+              <input type="file" name="file" onChange={changeHandler} id="teacher__forms__input-file" className='mw-100' hidden/>
+              {
+                error && (
+                  <h5 className='text-danger'>Formatos aceptados: .xslx y .xsl</h5>
+                )
+              }
+              {isFilePicked && selectedFile?.name && (
+                <div>
+                  <p>Nombre del archivo: {selectedFile?.name && selectedFile?.name}</p>
+                </div>
+              )}
+              {
+                isFilePicked && (
+                  <div>
+                    <button className="btn btn-success mb-3" onClick={addMenu}>Agregar</button>
+                  </div>
+                )
+              }
+            </div>
+          )
+        }
       </section>
     </div>
   );
