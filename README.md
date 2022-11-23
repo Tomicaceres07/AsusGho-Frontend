@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+# Sistema Web para el Liceo Militar General Paz
+---
+Este sistema fue pensado para el colegio Liceo Militar General Paz de Córdoba.
+## ¿Qué te permite este sistema?
+La idea de este sistema es facilitar la comunicación entre los alumnos, profesores y directivos de este colegio.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Se puede usar en PC, Tablets o Celulares.
 
-## Available Scripts
+Se compone de 2 secciones principalmente: Alumnos y Profesores. 
+#### Alumnos
+Los alumnos al iniciar sesión con su email educacional podrán:
+- Ver las actividades de la semana y próximos meses
+- Ver el menú de comida del mes
+- Ver sus faltas con su fecha, cantidad y justificación
+- Ver y descargar formularios
+- Inscribirse y desinscribirse de materias
+- Ver y descargar actividades de cada materia
+#### Profesores
+Los profesores al iniciar sesión con su email educacional podrán:
+- Ver, agregar y borrar las actividades de la semana y próximos meses
+- Ver el menú de comida del mes
+- Ver sus faltas con su fecha, cantidad y justificación
+- Ver y descargar formularios
+- Agregar formularios a los alumnos
+- Inscribirse y desinscribirse de materias
+- Ver y descargar actividades de cada materia
+- Agregar y borrar actividades según la materia seleccionada
+#### Directivos
+Los directivos al iniciar sesión con su email educacional podrán realizar lo mismo que los profesores, sumando:
+- Agregar menú de comida del mes
+- No pueden ver sus faltas, ya que no lo consideramos necesario
+- Buscar alumnos o profesores según el nombre y agregarles o borrarles faltas
+- Agregar y borrar formularios para alumnos y profesores
+## ¿Qué tecnologías usamos?
+**Para el Frontend:**
+- React 18.1
+- Bootstrap 5.2
+- SASS
 
-In the project directory, you can run:
+**Para el Backend:**
+- Python 3.10
+- Flask 2.1
+- Google OAuth2
 
-### `npm start`
+**Para la Base de Datos:**
+- MySQL 8.0
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+#### Contacto:
+- Caceres Tomás (Frontend Developer)
+[GitHub](https://github.com/Tomicaceres07)
+Email: tomicaceres07@gmail.com
+- Medeot Tomás (Backend Developer)
+[GitHub](https://github.com/TomasMedeot)
+Email: tomimedeot@gmail.com
+##### Desarrollado por AsusGo Team

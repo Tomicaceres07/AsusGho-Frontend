@@ -1,12 +1,5 @@
 import React from "react";
 
-
-export const LayoutNotFound = ( {children} ) => {
-
-
-    return(
-        <>
-            { children }
-        </>
-    )
-}
+export const LayoutNotFound = ({ children }) => {
+  return <>{children}</>;
+};

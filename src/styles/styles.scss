@@ -1,34 +1,32 @@
 // GENERAL
-@import './base/settings';
-@import './base/base';
-
+@import "./base/settings";
+@import "./base/base";
 
 // PAGES
 
 // Login Page
-@import 'pages/login/loginscreen';
-@import 'pages/login/verificarscreen';
+@import "pages/login/loginscreen";
+@import "pages/login/verificarscreen";
 
 // Alumnos Pages
-@import 'pages/alumnos/Home/alumnos-homescreen';
-// @import 'pages/alumnos/Previas/alumnos-previasscreen';
-@import 'pages/alumnos/Actividades/alumnos-actividadesscreen';
-@import 'pages/alumnos/Materias/alumnos-materiasscreen';
-@import 'pages/alumnos/Faltas/alumnos-faltasscreen';
-@import 'pages/alumnos/Formularios/alumnos-formulariosscreen';
-@import 'pages/alumnos/Inscripcion/alumnos-inscripcionscreen';
+@import "pages/alumnos/Home/alumnos-homescreen";
+@import "pages/alumnos/Actividades/alumnos-actividadesscreen";
+@import "pages/alumnos/Materias/alumnos-materiasscreen";
+@import "pages/alumnos/Faltas/alumnos-faltasscreen";
+@import "pages/alumnos/Formularios/alumnos-formulariosscreen";
+@import "pages/alumnos/Inscripcion/alumnos-inscripcionscreen";
 
 // Profes Pages
-@import 'pages/profesores/Home/profesores-homescreen';
-@import 'pages/profesores/Actividades/profesores-actividadesscreen';
-@import 'pages/profesores/Cursos/profesores-cursosscreen';
-@import 'pages/profesores/Faltas/profesores-faltasscreen';
-@import 'pages/profesores/Formularios/profesores-formulariosscreen';
-@import 'pages/profesores/Inscripcion/profesores-inscripcionscreen';
+@import "pages/profesores/Home/profesores-homescreen";
+@import "pages/profesores/Actividades/profesores-actividadesscreen";
+@import "pages/profesores/Cursos/profesores-cursosscreen";
+@import "pages/profesores/Faltas/profesores-faltasscreen";
+@import "pages/profesores/Formularios/profesores-formulariosscreen";
+@import "pages/profesores/Inscripcion/profesores-inscripcionscreen";
 
 // NotFound Page
-@import 'pages/NotFound/notfoundscreen';
+@import "pages/NotFound/notfoundscreen";
 
 // COMPONENTS
-@import 'components/NavBar/navbar';
-@import 'components/Footer/footer';
+@import "components/NavBar/navbar";
+@import "components/Footer/footer";

@@ -1,4 +1,4 @@
-import { saveAs } from 'file-saver';
+import { saveAs } from "file-saver";
 import Spinner from "react-bootstrap/Spinner";
 import Accordion from "react-bootstrap/Accordion";
 import { useNavigate } from "react-router-dom";
@@ -46,7 +46,6 @@ export const AlumnosMateriasScreen = () => {
     axios
       .post("/api/id/course", { id_c: id })
       .then(({ data }) => {
-        console.log("data ", data);
         setActivities({
           id: p_id,
           activities: data.activities,
@@ -58,27 +57,26 @@ export const AlumnosMateriasScreen = () => {
   };
 
   // This is for Download PDFs
-  const getActivity = async(pdf_id) => {
+  const getActivity = async (pdf_id) => {
     const id = pdf_id.toString();
-    console.log(id);
     return axios({
-      method: 'post',
+      method: "post",
       url: "/api/activity/pdf",
       headers: {
-        'Content-Type': 'application/json'
-      }, 
-      responseType: 'arraybuffer',
+        "Content-Type": "application/json",
+      },
+      responseType: "arraybuffer",
       data: {
-        "id": id
-      }
-    })
-  }
+        id: id,
+      },
+    });
+  };
 
-  const onDownload = async(pdf_id) => {
-    const { data } = await getActivity(pdf_id)
-    const blob = new Blob([data], { type: 'application/pdf' })
-    saveAs(blob, "Actividad.pdf")
-  }
+  const onDownload = async (pdf_id) => {
+    const { data } = await getActivity(pdf_id);
+    const blob = new Blob([data], { type: "application/pdf" });
+    saveAs(blob, "Actividad.pdf");
+  };
 
   const getClasses = () => {
     setIsLoading(true);
@@ -92,22 +90,21 @@ export const AlumnosMateriasScreen = () => {
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   const desrollClass = (class_id) => {
     axios
       .post("/api/delete/student_roll", {
         id: user.id,
-        id_c: class_id
+        id_c: class_id,
       })
       .then(({ data }) => {
-        console.log("data ", data);
         getClasses();
       })
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   return (
     <div>
@@ -156,10 +153,15 @@ export const AlumnosMateriasScreen = () => {
                                   )
                                 )
                               ) : (
-                                <p className='mt-4'>No hay material</p>
+                                <p className="mt-4">No hay material</p>
                               ))}
-                              <hr className="my-4"/>
-                              <button className="btn btn-dark teacher__subjects__accordion-button-exit" onClick={() => desrollClass(classItem.id)}>Salir</button>
+                            <hr className="my-4" />
+                            <button
+                              className="btn btn-dark teacher__subjects__accordion-button-exit"
+                              onClick={() => desrollClass(classItem.id)}
+                            >
+                              Salir
+                            </button>
                           </Accordion.Body>
                         </Accordion.Item>
                       ))}
@@ -171,7 +173,9 @@ export const AlumnosMateriasScreen = () => {
                   <h4 className="student__subjects__board-subject">
                     No estás inscripto a ninguna materia
                   </h4>
-                  <button className="btn btn-success" onClick={redirect}>Inscribirse</button>
+                  <button className="btn btn-success" onClick={redirect}>
+                    Inscribirse
+                  </button>
                 </div>
               )
             ) : (
