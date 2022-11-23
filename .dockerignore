@@ -1,7 +1,0 @@
-node_modules
-build
-.dockerignore
-**/.git
-**/.DS_Store
-**/node_modules
-README.md

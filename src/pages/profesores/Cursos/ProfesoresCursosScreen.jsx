@@ -34,7 +34,6 @@ export const ProfesoresCursosScreen = () => {
 
   const [errorExtension, setErrorExtension] = useState(false);
 
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -62,10 +61,6 @@ export const ProfesoresCursosScreen = () => {
 
   const hasSubject = () => subject !== "0";
 
-  /* const hasTitle = () => {
-    return title !== "";
-  }; */
-
   // Form to Upload PDF depending grade and class
   const handleChangeGrade = (event) => {
     setGrade(event.target.value);
@@ -82,7 +77,7 @@ export const ProfesoresCursosScreen = () => {
     setUploadedSuccessfully(false);
 
     if (event.target.files[0] !== undefined) {
-      if (event.target.files[0].type === 'application/pdf') {
+      if (event.target.files[0].type === "application/pdf") {
         setErrorExtension(false);
         setSelectedFile(event.target.files[0]);
         setIsFilePicked(true);
@@ -96,7 +91,7 @@ export const ProfesoresCursosScreen = () => {
 
   // This is for read PDF
   const getPdfClass = (p_id) => {
-    const id = p_id.toString()
+    const id = p_id.toString();
 
     axios
       .post("/api/id/course", { id_c: id })
@@ -106,7 +101,7 @@ export const ProfesoresCursosScreen = () => {
           activities: data.activities,
         });
 
-        return (<RenderActivities id={p_id} />)
+        return <RenderActivities id={p_id} />;
       })
       .catch((err) => {
         console.log(err);
@@ -155,10 +150,10 @@ export const ProfesoresCursosScreen = () => {
     return id;
   };
 
-  const getIdActivity = async(id_c) => {
+  const getIdActivity = async (id_c) => {
     const id = await processIdActivity(id_c);
     return id;
-  }
+  };
 
   const getIdCourse = async (grade, subject) => {
     let id = "";
@@ -203,8 +198,6 @@ export const ProfesoresCursosScreen = () => {
           setUploadedSuccessfully(false);
           console.log(err);
         });
-
-      // window.location.reload();
     }
   };
 
@@ -213,7 +206,7 @@ export const ProfesoresCursosScreen = () => {
     axios
       .post("/api/delete/activity", { id: act_id })
       .then(({ data }) => {
-        if (data.status.msj === 'DB correctly') {
+        if (data.status.msj === "DB correctly") {
           getPdfClass(p_class_id);
         }
       })
@@ -222,35 +215,26 @@ export const ProfesoresCursosScreen = () => {
       });
   };
 
-  const RenderActivities = ({id}) => {
-
-    return (
-      activities.activities.map(
-        (activity, activityIndex) => (
-          <div key={`activity-${activityIndex}`}>
-            <h4 className="mt-3">{activity.title}</h4>
-            <button
-              className="btn btn-success my-2 mx-2"
-              onClick={() =>
-                onDownload(activity.pdf_id)
-              }
-            >
-              Descargar
-            </button>{" "}
-            <button
-              className="btn btn-danger my-2 mx-2"
-              onClick={() =>
-                onDelete(activity.pdf_id, id)
-              }
-            >
-              Borrar
-            </button>{" "}
-            <br />
-          </div>
-        )
-      )
-    )
-  }
+  const RenderActivities = ({ id }) => {
+    return activities.activities.map((activity, activityIndex) => (
+      <div key={`activity-${activityIndex}`}>
+        <h4 className="mt-3">{activity.title}</h4>
+        <button
+          className="btn btn-success my-2 mx-2"
+          onClick={() => onDownload(activity.pdf_id)}
+        >
+          Descargar
+        </button>{" "}
+        <button
+          className="btn btn-danger my-2 mx-2"
+          onClick={() => onDelete(activity.pdf_id, id)}
+        >
+          Borrar
+        </button>{" "}
+        <br />
+      </div>
+    ));
+  };
 
   const getClasses = () => {
     setIsLoading(true);
@@ -264,13 +248,13 @@ export const ProfesoresCursosScreen = () => {
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   const desrollClass = (class_id) => {
     axios
       .post("/api/delete/person_roll", {
         id: user.id,
-        id_c: class_id
+        id_c: class_id,
       })
       .then(({ data }) => {
         getClasses();
@@ -278,7 +262,7 @@ export const ProfesoresCursosScreen = () => {
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   return (
     <div>
@@ -306,16 +290,24 @@ export const ProfesoresCursosScreen = () => {
                           onClick={() => getPdfClass(classItem.id)}
                         >
                           <Accordion.Header>{classItem.name}</Accordion.Header>
-                          <Accordion.Body className="pt-0" id={`acc-body${classItem.id}`}>
+                          <Accordion.Body
+                            className="pt-0"
+                            id={`acc-body${classItem.id}`}
+                          >
                             {activities &&
                               activities.id === classItem.id &&
                               (activities.activities.length ? (
                                 <RenderActivities id={classItem.id} />
                               ) : (
-                                <p className='mt-4'>No hay material</p>
+                                <p className="mt-4">No hay material</p>
                               ))}
-                              <hr className="my-4"/>
-                              <button className="btn btn-dark teacher__subjects__accordion-button-exit"  onClick={() => desrollClass(classItem.id)}>Salir</button>
+                            <hr className="my-4" />
+                            <button
+                              className="btn btn-dark teacher__subjects__accordion-button-exit"
+                              onClick={() => desrollClass(classItem.id)}
+                            >
+                              Salir
+                            </button>
                           </Accordion.Body>
                         </Accordion.Item>
                       ))}
@@ -327,7 +319,9 @@ export const ProfesoresCursosScreen = () => {
                   <h4 className="teacher__subjects__board-subject">
                     No estás inscripto a ninguna materia
                   </h4>
-                  <button className="btn btn-success" onClick={redirect}>Inscribirse</button>
+                  <button className="btn btn-success" onClick={redirect}>
+                    Inscribirse
+                  </button>
                 </div>
               )
             ) : (
@@ -402,11 +396,9 @@ export const ProfesoresCursosScreen = () => {
                   <p>Nombre del archivo: {selectedFile && selectedFile.name}</p>
                 </div>
               )}
-              {
-                errorExtension && (
-                  <h5 className="text-danger">Formato aceptado: .pdf</h5>
-                )
-              }
+              {errorExtension && (
+                <h5 className="text-danger">Formato aceptado: .pdf</h5>
+              )}
               {hasGrade() && hasSubject() && title && isFilePicked && (
                 <div>
                   <button className="btn btn-success" onClick={onSubmit}>
@@ -414,13 +406,9 @@ export const ProfesoresCursosScreen = () => {
                   </button>
                 </div>
               )}
-                {
-                  uploadedSuccessfully && (
-                    <h5 className="text-success">
-                      Agregado correctamente
-                    </h5>
-                  )
-                }
+              {uploadedSuccessfully && (
+                <h5 className="text-success">Agregado correctamente</h5>
+              )}
             </form>
           </div>
         </div>

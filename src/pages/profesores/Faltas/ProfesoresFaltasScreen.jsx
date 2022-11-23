@@ -1,7 +1,6 @@
 import Table from "react-bootstrap/Table";
 import { AuthContext } from "context";
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import React, { useContext, useEffect, useState } from "react";
 const axios = require("axios").default;
 
 export const ProfesoresFaltasScreen = () => {
@@ -28,14 +27,12 @@ export const ProfesoresFaltasScreen = () => {
   const [actualEmail, setActualEmail] = useState("");
   const [totalAbsences, setTotalAbsences] = useState("");
 
-
   useEffect(() => {
     if (user.p_type === 0) {
       axios
         .post("/api/get_abs", { email: user.email })
         .then(({ data }) => {
           setAbsences(data.db);
-          console.log(data.db);
         })
         .catch((err) => {
           console.log(err);
@@ -45,13 +42,11 @@ export const ProfesoresFaltasScreen = () => {
 
   // Searcher Form
   const handleChangePerson = (event) => {
-    console.log(event.target.value);
     setPerson(event.target.value);
     setAbsences("");
   };
 
   const handleChangeName = (event) => {
-    console.log(event.target.value);
     setName(event.target.value);
   };
 
@@ -90,11 +85,11 @@ export const ProfesoresFaltasScreen = () => {
   // Add Form
   const handleChangeQuantity = (event) => {
     setQuantity(event.target.value);
-  }
-  
+  };
+
   const handleChangeJustified = (event) => {
     setJustified(event.target.value);
-  }
+  };
 
   const getAbsencesFromEmail = (email, name) => {
     if (name !== undefined) {
@@ -112,18 +107,16 @@ export const ProfesoresFaltasScreen = () => {
       });
   };
 
-
   const addAbsence = (e) => {
     e.preventDefault();
     axios
       .post("/api/abs", {
         email: actualEmail,
         c_abscence: quantity,
-        justified: justified
+        justified: justified,
       })
       .then(({ data }) => {
-          getAbsencesFromEmail(actualEmail);
-          console.log(data);
+        getAbsencesFromEmail(actualEmail);
       })
       .catch((err) => {
         console.log(err);
@@ -227,8 +220,8 @@ export const ProfesoresFaltasScreen = () => {
                     </button>
                   </div>
                 </form>
-                {people && (
-                  peopleFounded ? (
+                {people &&
+                  (peopleFounded ? (
                     <ul className="list-unstyled">
                       {people &&
                         people.map((item, peopleIndex) => (
@@ -246,8 +239,7 @@ export const ProfesoresFaltasScreen = () => {
                     </ul>
                   ) : (
                     <p>No se encontró a nadie</p>
-                  )
-                )}
+                  ))}
                 {totalAbsences === 0 && (
                   <h5 className="teacher__absences__msg-no-abs">
                     {realName} No tiene faltas
@@ -320,7 +312,9 @@ export const ProfesoresFaltasScreen = () => {
               {actualEmail ? (
                 <div className="teacher__absenses__add-form-container text-center mx-auto">
                   <h2 className="text-center mt-4">Agregar Falta</h2>
-                  <p className="teacher__absences__people-mail text-center">{actualEmail}</p>
+                  <p className="teacher__absences__people-mail text-center">
+                    {actualEmail}
+                  </p>
                   <form className="mx-auto">
                     <h4 className="mt-2">Seleccione la cantidad</h4>
                     <select
@@ -342,26 +336,28 @@ export const ProfesoresFaltasScreen = () => {
                       onChange={handleChangeJustified}
                       className="w-100 mb-2 input"
                     >
-                      <option value="0">-- Seleccione si está justificada --</option>
+                      <option value="0">
+                        -- Seleccione si está justificada --
+                      </option>
                       <option value={false}>No</option>
                       <option value={true}>Si</option>
                     </select>
-                    {
-                      (quantity !== "0" && justified !== "0") && (
-                        <div>
-                          <button
-                            className="btn btn-success my-3"
-                            onClick={addAbsence}
-                          >
-                            Agregar
-                          </button>
-                        </div>
-                      )
-                    }
+                    {quantity !== "0" && justified !== "0" && (
+                      <div>
+                        <button
+                          className="btn btn-success my-3"
+                          onClick={addAbsence}
+                        >
+                          Agregar
+                        </button>
+                      </div>
+                    )}
                   </form>
                 </div>
               ) : (
-                <p className="text-center">Selecciona una persona para agregarle faltas</p>
+                <p className="text-center">
+                  Selecciona una persona para agregarle faltas
+                </p>
               )}
             </>
           )
