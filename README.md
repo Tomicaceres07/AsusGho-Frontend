@@ -1,8 +1,8 @@
-# Sistema Web para el Liceo Militar General Paz
+# Aplicación Web para el Liceo Militar General Paz
 ---
-Este sistema fue pensado para el colegio Liceo Militar General Paz de Córdoba.
-## ¿Qué te permite este sistema?
-La idea de este sistema es facilitar la comunicación entre los alumnos, profesores y directivos de este colegio.
+Esta aplicación fue pensada para el colegio Liceo Militar General Paz de Córdoba.
+## ¿Qué te permite esta aplicación?
+La idea de esta aplicación es facilitar la comunicación entre los alumnos, profesores y directivos de este colegio.
 
 Se puede usar en PC, Tablets o Celulares.
 
