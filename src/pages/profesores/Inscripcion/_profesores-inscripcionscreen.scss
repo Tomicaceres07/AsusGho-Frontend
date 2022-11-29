@@ -1,0 +1,145 @@
+.teacher__inscription__home {
+  align-items: center;
+  color: white !important;
+  justify-content: center;
+  margin: 0px auto;
+  min-height: 100vh;
+  width: 82%;
+  z-index: 3;
+
+  .teacher__inscription__home-title {
+    font-size: 1.8em;
+    position: absolute;
+    text-transform: uppercase;
+    top: 45%;
+  }
+}
+
+.teacher__inscription__board {
+  background-color: $gray;
+  color: white;
+  height: auto;
+  padding-top: 3em;
+  padding-bottom: 3em;
+
+  .teacher__inscription__board-week {
+    background-color: $dark-gray;
+    margin: 0px auto;
+    text-align: center;
+    top: 10em;
+    width: 80%;
+
+    .teacher__inscription__board-padding {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 0px auto;
+      padding: 2em;
+      width: 80%;
+    }
+  }
+}
+
+.teacher__inscription__form {
+  border-radius: 5px;
+  color: white;
+  margin: 0px auto;
+  margin-top: 2em;
+  text-align: left;
+
+  .teacher__inscription__title {
+    margin-bottom: 0.5em;
+  }
+}
+
+// Checkboxes
+
+/* Hide the browser's default checkbox */
+input[type="checkbox"] {
+  visibility: hidden;
+}
+
+/* Customize the label (the container) */
+.teacher__inscription__courses-container {
+  margin: 15px;
+  padding-left: 35px;
+  position: relative;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  background-color: #eee;
+  border-radius: 5px;
+  left: 0;
+  height: 25px;
+  position: absolute;
+  top: 0;
+  width: 25px;
+}
+
+/* On mouse-over, add a grey background color */
+.teacher__inscription__courses-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a green background */
+.teacher__inscription__courses-container input:checked ~ .checkmark {
+  background-color: #30ce30;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.teacher__inscription__courses-container input:checked ~ .checkmark:after {
+  display: block;
+}
+.teacher__inscription__courses-container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+// Media Queries
+@media (min-width: 350px) {
+  .teacher__inscription__home {
+    .teacher__inscription__home-title {
+      font-size: 2.5em;
+    }
+  }
+}
+
+@media (min-width: 500px) {
+  .teacher__inscription__home {
+    .teacher__inscription__home-title {
+      font-size: 3em;
+    }
+  }
+}
+
+@media (min-width: 650px) {
+  .teacher__inscription__home {
+    .teacher__inscription__home-title {
+      font-size: 3.5em;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .teacher__inscription__home {
+    .teacher__inscription__home-title {
+      font-size: 4.5em;
+    }
+  }
+}

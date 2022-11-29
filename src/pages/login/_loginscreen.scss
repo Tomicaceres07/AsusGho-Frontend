@@ -1,0 +1,139 @@
+.login__body {
+  background: url("../../assets/portada-login.jpg");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.login__body::before {
+  background-color: rgba(0, 0, 0, 0.425);
+  content: "";
+  height: 100%;
+  position: fixed;
+  width: 100%;
+  z-index: -1000;
+}
+
+.login__container {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  .login__logo {
+    margin: 0px auto;
+    margin-top: 1.8em;
+    width: 6.4em;
+  }
+
+  .login__title {
+    font-size: 1.9rem;
+    margin-top: 2.9em;
+    text-transform: uppercase;
+  }
+
+  .login__subtitle {
+    font-size: 1rem;
+    margin-top: 1em;
+    text-transform: uppercase;
+  }
+
+  .login__button {
+    background-color: #4b677c;
+    border-radius: 3em;
+    color: white;
+    font-size: 1.1em;
+    margin: 0px auto;
+    margin-top: 3.2em;
+    padding: 1em;
+    text-decoration: none;
+    width: 10em;
+  }
+
+  .login__button:hover {
+    background-color: #436c8a;
+    transition: all 0.3s;
+  }
+
+  .login__paragraph {
+    font-size: 0.7em;
+    margin-top: 1em;
+  }
+
+  .login__icons-container {
+    flex-direction: column;
+    margin-top: 7em;
+
+    .login__icon {
+      color: white;
+      margin-top: 5em;
+      margin: 1.5em;
+    }
+
+    .login__icon:hover {
+      color: rgb(228, 228, 228);
+    }
+  }
+}
+
+// Media Queries
+
+@media (min-width: 507px) {
+  .login__container {
+    .login__title {
+      margin-left: 2em;
+      margin-right: 2em;
+    }
+  }
+}
+
+@media (min-width: 672px) {
+  .login__container {
+    .login__title {
+      font-size: 2.4rem;
+    }
+
+    .login__subtitle {
+      font-size: 1.1em;
+    }
+
+    .login__icons-container {
+      margin-top: 4rem;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .login__container {
+    .login__icons-container {
+      margin-top: 6em;
+    }
+  }
+}
+
+@media (min-width: 850px) {
+  .login__container {
+    .login__title {
+      font-size: 2.8rem;
+    }
+
+    .login__button {
+      margin-top: 5em;
+    }
+  }
+}
+
+@media (min-width: 1335px) {
+  .login__body {
+    background-position: unset;
+  }
+}
+
+@media (min-width: 1550px) {
+  .login__container {
+    .login__logo {
+      width: 7.3em;
+    }
+  }
+}

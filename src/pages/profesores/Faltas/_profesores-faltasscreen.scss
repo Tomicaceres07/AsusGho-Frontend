@@ -1,0 +1,190 @@
+.teacher__absences__home {
+  align-items: center;
+  color: white !important;
+  justify-content: center;
+  margin: 0px auto;
+  min-height: 100vh;
+  width: 82%;
+  z-index: 3;
+
+  .teacher__absences__title {
+    font-size: 2em;
+    position: absolute;
+    text-transform: uppercase;
+    top: 45%;
+  }
+
+  .teacher__absences__subtitle {
+    font-size: 1.3em;
+    margin-left: 0.2em;
+    position: absolute;
+    text-transform: uppercase;
+    top: 65%;
+  }
+}
+
+.teacher__absences__board {
+  background-color: $gray;
+  color: white;
+  min-height: 80vh;
+  padding-bottom: 3em;
+  height: fit-content;
+
+  .teacher__absences__searcher-container {
+    margin: 0px auto;
+    text-align: center;
+    width: 60%;
+
+    .teacher__absences__msg-no-abs {
+      background-color: green;
+      color: white;
+      text-align: center;
+    }
+  }
+
+  .teacher__absenses__add-form-container {
+    width: 60%;
+  }
+
+  .teacher__absences__board-title {
+    font-size: 2em;
+    padding: 50px 0px;
+    text-align: center;
+    text-transform: uppercase;
+    top: 1.7em;
+  }
+
+  .teacher__absences__board-container-table {
+    background-color: white;
+    border-radius: 20px;
+    margin: 0px auto;
+    text-align: center;
+    width: 70vw;
+
+    .teacher__absences__board-table {
+      .teacher__absences__board-th {
+        text-transform: uppercase !important;
+        width: 120px;
+      }
+
+      .teacher__absences__board-tr {
+        height: 100px;
+        vertical-align: middle;
+      }
+    }
+
+    .table > :not(caption) > * > * {
+      border-bottom-width: 0px;
+    }
+
+    .teacher__absences__board-unjustified {
+      color: rgb(255, 56, 56);
+    }
+  }
+
+  .teacher__absences__people-button {
+    background: none;
+    border: none;
+    border-bottom: 1px solid transparent;
+    color: white;
+    margin-bottom: 1em;
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+
+  .teacher__absences__people-button:hover {
+    border-bottom: 1px solid white;
+    transition: border-bottom 0.3s ease;
+  }
+
+  .teacher__absences__people-mail {
+    overflow-wrap: break-word;
+  }
+}
+
+// Media Queries
+@media (min-width: 450px) {
+  .teacher__absences__home {
+    .teacher__absences__title {
+      font-size: 3em;
+    }
+    .teacher__absences__subtitle {
+      font-size: 1.5em;
+    }
+  }
+
+  .teacher__absences__board {
+    .teacher__absences__board-title {
+      font-size: 2.5em;
+    }
+  }
+}
+
+@media (min-width: 500px) {
+  .teacher__absences__board {
+    .teacher__absences__board-title {
+      font-size: 2.5em;
+    }
+  }
+}
+
+@media (min-width: 650px) {
+  .teacher__absences__home {
+    .teacher__absences__title {
+      font-size: 3.5em;
+    }
+    .teacher__absences__subtitle {
+      font-size: 2em;
+    }
+  }
+
+  .teacher__absences__board {
+    .teacher__absences__board-title {
+      font-size: 3em;
+    }
+
+    .teacher__absences__searcher-container {
+      width: 50%;
+    }
+
+    .teacher__absenses__add-form-container {
+      width: 50%;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .teacher__absences__home {
+    .teacher__absences__title {
+      font-size: 4em;
+    }
+  }
+
+  .teacher__absences__board {
+    .teacher__absences__searcher-container {
+      width: 40%;
+    }
+
+    .teacher__absenses__add-form-container {
+      width: 40%;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .teacher__absences__home {
+    .teacher__absences__title {
+      font-size: 4.5em;
+    }
+  }
+
+  .teacher__absences__board {
+    .teacher__absences__searcher-container {
+      width: 30%;
+    }
+
+    .teacher__absenses__add-form-container {
+      width: 30%;
+    }
+  }
+}

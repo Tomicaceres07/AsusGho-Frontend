@@ -1,0 +1,90 @@
+.teacher__subjects__home {
+  align-items: center;
+  color: white !important;
+  justify-content: center;
+  margin: 0px auto;
+  min-height: 100vh;
+  width: 82%;
+  z-index: 3;
+
+  .teacher__subjects__title {
+    font-size: 2em;
+    position: absolute;
+    text-transform: uppercase;
+    top: 45%;
+  }
+}
+
+.teacher__subjects__board {
+  background-color: $gray;
+  color: white;
+  height: auto;
+  padding-top: 3em;
+  padding-bottom: 3em;
+
+  .teacher__subjects__board-week {
+    background-color: $dark-gray;
+    margin: 0px auto;
+    text-align: center;
+    top: 10em;
+    width: 80%;
+
+    .teacher__subjects__board-padding {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 2em;
+
+      .teacher__subjects__accordion {
+        width: 100%;
+
+        .teacher__subjects__accordion-year {
+          font-size: 2em;
+        }
+
+        .teacher__subjects__accordion-button-exit {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 1.5em;
+        }
+      }
+    }
+  }
+}
+
+.teacher__subjects__separator {
+  background-color: transparent;
+  height: 20em;
+}
+
+@media (min-width: 350px) {
+  .teacher__subjects__home {
+    .teacher__subjects__title {
+      font-size: 3em;
+    }
+  }
+}
+
+@media (min-width: 500px) {
+  .teacher__subjects__home {
+    .teacher__subjects__title {
+      font-size: 4.5em;
+    }
+  }
+
+  .teacher__subjects__board {
+    .teacher__subjects__board-week {
+      .teacher__subjects__board-padding {
+        .teacher__subjects__accordion {
+          width: 20em;
+
+          .teacher__subjects__accordion-year {
+            font-size: 3em;
+          }
+        }
+      }
+    }
+  }
+}
