@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import jwt_decode from "jwt-decode";
 
 import logo from "assets/logo.png";
 
@@ -6,17 +9,40 @@ const axios = require("axios").default;
 axios.defaults.baseURL = "http://localhost:5000";
 
 export const LoginScreen = () => {
-  const [url, setUrl] = useState();
+  const navigate = useNavigate();
+  // const [url, setUrl] = useState();
 
-  useEffect(() => {
+  function handleCallbackResponse(response) {
+    console.log("Encoded JWT ID token" + response.credential);
+    var userObject = jwt_decode(response.credential)
+    console.log(userObject)
+
     axios
-      .get("/api/login")
-      .then(({ data }) => {
-        setUrl(data.url);
+      .post("/api/login", userObject)
+      .then(({data}) => {
+        // setUrl(data.url);
+        console.log(data.id);
+        navigate(`/verificar/${data.id}`, {
+          replace: true,
+        });
       })
       .catch((err) => {
-        setUrl(err);
+        // setUrl(err);
+        console.log(err);
       });
+  }
+
+  useEffect(() => {
+    /* global google */ 
+    google.accounts.id.initialize({
+      client_id: "110285543009-ai5r02kufp2t7eoph99pkuv9kgu4dlph.apps.googleusercontent.com",
+      callback: handleCallbackResponse
+    })
+
+    google.accounts.id.renderButton(
+      document.getElementById("signInDiv"),
+      { theme: "outline", size: "large" }
+    )
   }, []);
 
   const body = document.querySelector("body");
@@ -27,9 +53,10 @@ export const LoginScreen = () => {
       <img src={logo} alt="Logo" className="login__logo" />
       <h1 className="login__title">Liceo Militar General Paz</h1>
       <h5 className="login__subtitle">Verdad - Equidad - Justicia</h5>
-      <a className="login__button" href={url}>
+      <div id="signInDiv" className="login__google-button"></div>
+      {/* <a className="login__button" href={url}>
         Iniciar sesión
-      </a>
+      </a> */}
       <p className="login__paragraph">Powered by Google&reg;</p>
       <div className="login__icons-container">
         <a
