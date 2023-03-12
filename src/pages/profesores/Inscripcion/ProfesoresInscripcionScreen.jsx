@@ -7,8 +7,20 @@ const axios = require("axios").default;
 
 export const ProfesoresInscripcionScreen = () => {
   const { register, handleSubmit } = useForm();
+  
+  // This is for inscript a subject
   const [grade, setGrade] = useState(1);
   const [division, setDivision] = useState("a");
+
+  // This is for create a subject
+  const [gradeCreate, setGradeCreate] = useState(1);
+  const [divisionCreate, setDivisionCreate] = useState("a");
+  const [title, setTitle] = useState("");
+  const [createdSuccessfully, setCreatedSuccessfully] = useState(false);
+
+  // This is for delete a subject
+  const [deletedSuccessfully, setDeletedSuccessfully] = useState(false);
+
   const [courses, setCourses] = useState();
   const [subjects, setSubjects] = useState([]);
 
@@ -41,6 +53,7 @@ export const ProfesoresInscripcionScreen = () => {
       .forEach((el) => (el.checked = false));
     setGrade(event.target.value);
     setSubjects([]);
+    setDeletedSuccessfully(false);
   };
 
   const handleChangeDivision = (event) => {
@@ -49,6 +62,7 @@ export const ProfesoresInscripcionScreen = () => {
       .forEach((el) => (el.checked = false));
     setDivision(event.target.value);
     setSubjects([]);
+    setDeletedSuccessfully(false);
   };
 
   const handleChangeSubjects = (event) => {
@@ -79,12 +93,60 @@ export const ProfesoresInscripcionScreen = () => {
     return petition;
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const deleteCourse = async (subj) => {
+    const petition = await axios
+      .post("/api/delete/course", {
+        id_c: subj
+      })
+      .then((res) => {
+        setDeletedSuccessfully(true);
+        axios
+          .post("/api/division_year/course", {
+            grade: grade,
+            division: division,
+            id_p: user.id,
+          })
+          .then(({ data }) => {
+            setCourses(data.courses);
+            setSubjects([]);
+            document
+            .querySelectorAll("input[type=checkbox]")
+            .forEach((el) => (el.checked = false));
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    return petition;
+  };
+
+  const handleChangeGradeCreate = (event) => {
+    setGradeCreate(event.target.value);
+    setCreatedSuccessfully(false);
+    setDeletedSuccessfully(false);
+  }
+
+  const handleChangeDivisionCreate = (event) => {
+    setDivisionCreate(event.target.value);
+    setCreatedSuccessfully(false);
+    setDeletedSuccessfully(false);
+  }
+
+  const handleChangeTitleCreate = (event) => {
+    setTitle(event.target.value)
+    setCreatedSuccessfully(false);
+    setDeletedSuccessfully(false);
+  }
+
+  const onSubmit = () => {
     if (subjects.length >= 1) {
       document.getElementById("teacher__inscription__error").hidden = true;
       subjects.forEach((subj) => {
-        const res = addPersonRoll(subj);
+        addPersonRoll(subj);
       });
       navigate("/profesores/cursos", {
         replace: true,
@@ -93,6 +155,46 @@ export const ProfesoresInscripcionScreen = () => {
       document.getElementById("teacher__inscription__error").hidden = false;
     }
   };
+
+  const onCreate = (e) => {
+    e.preventDefault();
+    axios
+      .post("/api/add/course", {
+        name: title,
+        grade: parseInt(gradeCreate),
+        division: divisionCreate
+      })
+      .then(({ data }) => {
+        setCreatedSuccessfully(true);
+        axios
+          .post("/api/division_year/course", {
+            grade: grade,
+            division: division,
+            id_p: user.id,
+          })
+          .then(({ data }) => {
+            setCourses(data.courses);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  const onDelete = (e) => {
+    e.preventDefault();
+    if (subjects.length >= 1) {
+      document.getElementById("teacher__inscription__error").hidden = true;
+      subjects.forEach((subj) => {
+        deleteCourse(subj);
+      });
+    } else {
+      document.getElementById("teacher__inscription__error").hidden = false;
+    }
+  }
 
   return (
     <div>
@@ -170,12 +272,83 @@ export const ProfesoresInscripcionScreen = () => {
               </div>
               <button
                 type="submit"
-                className="display-block px-4 mx-auto mb-3 mt-3 btn btn-primary"
+                className="d-block px-4 mx-auto mb-3 mt-4 btn btn-primary"
                 onClick={onSubmit}
               >
-                Enviar
+                Inscribirse
               </button>
+              {user.p_type === 1 && (
+                <>
+                  <button
+                    className="px-4 mb-3 mt-3 ml-3 btn btn-danger"
+                    onClick={onDelete}
+                  >
+                    Borrar
+                  </button>
+                  {deletedSuccessfully && (
+                    <h5 className="text-success">Borrado correctamente</h5>
+                  )}
+                </>
+              )}
             </form>
+            {/* If it's a director, he can create subjects */}
+            {(user.p_type === 1) && (
+              <>
+                <hr />
+                <h2>Creación de materias</h2>
+                <form
+                  className="teacher__inscription__form text-center"
+                  onSubmit={handleSubmit(onCreate)}
+                >
+                  <h4 className="teacher__inscription__title">Seleccione el año</h4>
+                  <select
+                    name="grade-create"
+                    {...register("grade-create")}
+                    onChange={handleChangeGradeCreate}
+                    className="teacher__inscription__dropdown w-100 mb-2 input"
+                  >
+                    <option value={1}>1ero</option>
+                    <option value={2}>2do</option>
+                    <option value={3}>3ero</option>
+                    <option value={4}>4to</option>
+                    <option value={5}>5to</option>
+                    <option value={6}>6to</option>
+                  </select>
+                  <h4 className="teacher__inscription__title">
+                    Seleccione el curso
+                  </h4>
+                  <select
+                    name="division-create"
+                    {...register("division-create")}
+                    onChange={handleChangeDivisionCreate}
+                    className="teacher__inscription__dropdown w-100 mb-2 input"
+                  >
+                    <option value="a">A</option>
+                    <option value="b">B</option>
+                    <option value="c">C</option>
+                  </select>
+                  <h4>Nombre de la materia</h4>
+                  <input
+                    type="text"
+                    className="w-100"
+                    value={title}
+                    onChange={handleChangeTitleCreate}
+                  />
+                  { title.length > 1 && (
+                    <button
+                      type="submit"
+                      className="display-block mx-auto mb-3 mt-3 btn btn-success"
+                      onClick={onCreate}
+                    >
+                      Crear
+                    </button>
+                  )}
+                </form>
+                {createdSuccessfully && (
+                  <h5 className="text-success">Creado correctamente</h5>
+                )}
+              </>
+              )}
           </div>
         </div>
       </section>

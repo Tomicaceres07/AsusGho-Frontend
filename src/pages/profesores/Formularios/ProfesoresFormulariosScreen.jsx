@@ -112,6 +112,7 @@ export const ProfesoresFormulariosScreen = () => {
       setErrorExists(true);
       return null;
     }
+
     const id = data.id[0][0];
 
     return id;
@@ -217,22 +218,26 @@ export const ProfesoresFormulariosScreen = () => {
                     key={index}
                   >
                     <h4 className="teacher__forms__board-form">
-                      Formulario F{item.id}
+                      Formulario F{index+1}
                     </h4>
                     <p className="teacher__forms__board-text">{item.name}</p>
                     <button
                       className="teacher__forms__board-button-download"
                       onClick={() => onDownload(item.id)}
                     >
-                      Descargar F{item.id}
+                      Descargar F{index+1}
                     </button>{" "}
-                    <br />
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => onDelete(item.id)}
-                    >
-                      Borrar
-                    </button>
+                    {user.p_type === 1 && (
+                      <>
+                        <br />
+                        <button
+                          className="btn btn-danger"
+                          onClick={() => onDelete(item.id)}
+                        >
+                          Borrar
+                        </button>
+                      </>
+                    )}
                   </div>
                 ))
               ) : (
@@ -256,7 +261,7 @@ export const ProfesoresFormulariosScreen = () => {
                         key={index}
                       >
                         <h4 className="teacher__forms__board-form">
-                          Formulario F{item.id}
+                          Formulario F{index+1}
                         </h4>
                         <p className="teacher__forms__board-text">
                           {item.name}
@@ -265,7 +270,7 @@ export const ProfesoresFormulariosScreen = () => {
                           className="teacher__forms__board-button-download"
                           onClick={() => onDownload(item.id)}
                         >
-                          Descargar F{item.id}
+                          Descargar F{index+1}
                         </button>{" "}
                         <br />
                         <button
@@ -285,63 +290,65 @@ export const ProfesoresFormulariosScreen = () => {
               </div>
             </>
           )}
-          <hr />
-          <div className="mw-100">
-            <h2>Agregar Formulario</h2>
-            {user.p_type === 1 && (
-              <form className="mx-auto">
-                <h4 className="mt-2">¿Para quien es?</h4>
-                <select
-                  name="person"
-                  value={person}
-                  onChange={handleChangePerson}
-                  className="mb-2 input"
+          {user.p_type === 1 && (
+            <>
+              <hr />
+              <div className="mw-100">
+                <h2>Agregar Formulario</h2>
+                  <form className="mx-auto">
+                    <h4 className="mt-2">¿Para quien es?</h4>
+                    <select
+                      name="person"
+                      value={person}
+                      onChange={handleChangePerson}
+                      className="mb-2 input"
+                    >
+                      <option value={false}>Profesores</option>
+                      <option value={true}>Alumnos</option>
+                    </select>
+                  </form>
+                <label
+                  className="btn btn-primary my-2"
+                  htmlFor="teacher__forms__input-file"
                 >
-                  <option value={false}>Profesores</option>
-                  <option value={true}>Alumnos</option>
-                </select>
-              </form>
-            )}
-            <label
-              className="btn btn-primary my-2"
-              htmlFor="teacher__forms__input-file"
-            >
-              Seleccionar Archivo
-            </label>
-            <input
-              type="file"
-              name="file"
-              onChange={changeHandler}
-              id="teacher__forms__input-file"
-              className="mw-100"
-              hidden
-            />
-            {errorExists && (
-              <h5 className="text-danger">
-                Ya existe un PDF con el mismo nombre.
-              </h5>
-            )}
-            {errorExtension && (
-              <h5 className="text-danger">Formato aceptado: .pdf</h5>
-            )}
-            {isFilePicked && selectedFile?.name && (
-              <div>
-                <p>
-                  Nombre del archivo: {selectedFile?.name && selectedFile?.name}
-                </p>
+                  Seleccionar Archivo
+                </label>
+                <input
+                  type="file"
+                  name="file"
+                  onChange={changeHandler}
+                  id="teacher__forms__input-file"
+                  className="mw-100"
+                  hidden
+                />
+                {errorExists && (
+                  <h5 className="text-danger">
+                    Ya existe un PDF con el mismo nombre.
+                  </h5>
+                )}
+                {errorExtension && (
+                  <h5 className="text-danger">Formato aceptado: .pdf</h5>
+                )}
+                {isFilePicked && selectedFile?.name && (
+                  <div>
+                    <p>
+                      Nombre del archivo: {selectedFile?.name && selectedFile?.name}
+                    </p>
+                  </div>
+                )}
+                {isFilePicked && (
+                  <div>
+                    <button
+                      className="btn btn-success mb-3"
+                      onClick={handleSubmission}
+                    >
+                      Agregar
+                    </button>
+                  </div>
+                )}
               </div>
-            )}
-            {isFilePicked && (
-              <div>
-                <button
-                  className="btn btn-success mb-3"
-                  onClick={handleSubmission}
-                >
-                  Agregar
-                </button>
-              </div>
-            )}
-          </div>
+            </>
+          )}
         </div>
       </section>
     </div>

@@ -10,13 +10,15 @@ export const ProfesoresActividadesScreen = () => {
   const { user } = authState;
 
   const { register, handleSubmit, resetField } = useForm();
+
   const [activities, setActivities] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
     axios
-      .post("/api/message/read", { type: user.type })
+      // If it's a directive, read activitites from profesors, otherwise, students
+      .post("/api/message/read", { type: (user.p_type == 1) ? user.type : !user.type })
       .then(({ data }) => {
         setActivities(data.element);
         setIsLoading(false);
@@ -28,17 +30,18 @@ export const ProfesoresActividadesScreen = () => {
 
   const onAdd = (data) => {
     const date = moment(data.date).format("DD/MM/YYYY");
+
     axios
       .post("/api/message/write", {
         date: date,
         text: data.text,
-        type: user.type,
+        type: (user.p_type == 1) ? user.type : !user.type,
       })
       .then(({ data }) => {
         if (data.msj.msj === "DB correctly") {
           setIsLoading(true);
           axios
-            .post("/api/message/read", { type: user.type })
+            .post("/api/message/read", { type: (user.p_type == 1) ? user.type : !user.type })
             .then(({ data }) => {
               setActivities(data.element);
               resetField("text");
@@ -63,7 +66,7 @@ export const ProfesoresActividadesScreen = () => {
         if (data.element.msj === "DB correctly") {
           setIsLoading(true);
           axios
-            .post("/api/message/read", { type: user.type })
+            .post("/api/message/read", { type: (user.p_type == 1) ? user.type : !user.type })
             .then(({ data }) => {
               setActivities(data.element);
               setIsLoading(false);
