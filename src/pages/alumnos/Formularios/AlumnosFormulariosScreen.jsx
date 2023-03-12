@@ -60,14 +60,14 @@ export const AlumnosFormulariosScreen = () => {
                     key={index}
                   >
                     <h4 className="student__forms__board-form">
-                      Formulario F{item.id}
+                      Formulario F{index+1}
                     </h4>
                     <p className="student__forms__board-text">{item.name}</p>
                     <button
                       className="student__forms__board-button-download"
                       onClick={() => onDownload(item.id)}
                     >
-                      Descargar F{item.id}
+                      Descargar F{index+1}
                     </button>
                   </div>
                 ))
