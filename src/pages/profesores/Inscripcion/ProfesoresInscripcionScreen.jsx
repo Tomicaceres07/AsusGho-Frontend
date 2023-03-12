@@ -94,13 +94,11 @@ export const ProfesoresInscripcionScreen = () => {
   };
 
   const deleteCourse = async (subj) => {
-    console.log(subj);
     const petition = await axios
       .post("/api/delete/course", {
         id_c: subj
       })
       .then((res) => {
-        console.log(res);
         setDeletedSuccessfully(true);
         axios
           .post("/api/division_year/course", {
@@ -167,7 +165,6 @@ export const ProfesoresInscripcionScreen = () => {
         division: divisionCreate
       })
       .then(({ data }) => {
-        console.log(data);
         setCreatedSuccessfully(true);
         axios
           .post("/api/division_year/course", {
@@ -189,7 +186,6 @@ export const ProfesoresInscripcionScreen = () => {
 
   const onDelete = (e) => {
     e.preventDefault();
-    console.log("click onDelete")
     if (subjects.length >= 1) {
       document.getElementById("teacher__inscription__error").hidden = true;
       subjects.forEach((subj) => {

@@ -100,14 +100,16 @@ export const NavBarProfes = () => {
             >
               Cursos
             </Nav.Link>
-            <Nav.Link
-              as={NavLink}
-              to={"/profesores/faltas"}
-              className="navlink mx-2 text-uppercase"
-              onClick={onLinkClicked}
-            >
-              Faltas
-            </Nav.Link>
+            {(user.email === "profe1@liceopaz.edu.ar" || user.email === "profe3@liceopaz.edu.ar") && (
+              <Nav.Link
+                as={NavLink}
+                to={"/profesores/faltas"}
+                className="navlink mx-2 text-uppercase"
+                onClick={onLinkClicked}
+              >
+                Faltas
+              </Nav.Link>
+            )}
             <Nav.Link
               as={NavLink}
               to={"/profesores/formularios"}

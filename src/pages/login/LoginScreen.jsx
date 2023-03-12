@@ -13,15 +13,12 @@ export const LoginScreen = () => {
   // const [url, setUrl] = useState();
 
   function handleCallbackResponse(response) {
-    console.log("Encoded JWT ID token" + response.credential);
     var userObject = jwt_decode(response.credential)
-    console.log(userObject)
 
     axios
       .post("/api/login", userObject)
       .then(({data}) => {
         // setUrl(data.url);
-        console.log(data.id);
         navigate(`/verificar/${data.id}`, {
           replace: true,
         });

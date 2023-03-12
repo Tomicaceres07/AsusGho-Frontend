@@ -20,8 +20,6 @@ export const ProfesoresActividadesScreen = () => {
       // If it's a directive, read activitites from profesors, otherwise, students
       .post("/api/message/read", { type: (user.p_type == 1) ? user.type : !user.type })
       .then(({ data }) => {
-        console.log(data)
-
         setActivities(data.element);
         setIsLoading(false);
       })

@@ -100,14 +100,16 @@ export const NavBar = () => {
             >
               Materias
             </Nav.Link>
-            <Nav.Link
-              as={NavLink}
-              to={"/alumnos/faltas"}
-              className="navlink mx-2 text-uppercase"
-              onClick={onLinkClicked}
-            >
-              Faltas
-            </Nav.Link>
+            {user.email === "alumno1@alumnos.liceopaz.edu.ar" && (
+              <Nav.Link
+                as={NavLink}
+                to={"/alumnos/faltas"}
+                className="navlink mx-2 text-uppercase"
+                onClick={onLinkClicked}
+              >
+                Faltas
+              </Nav.Link>
+            )}
             <Nav.Link
               as={NavLink}
               to={"/alumnos/formularios"}
