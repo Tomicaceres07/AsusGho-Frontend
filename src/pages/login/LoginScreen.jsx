@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import jwt_decode from "jwt-decode";
@@ -10,7 +10,6 @@ axios.defaults.baseURL = "http://localhost:5000";
 
 export const LoginScreen = () => {
   const navigate = useNavigate();
-  // const [url, setUrl] = useState();
 
   function handleCallbackResponse(response) {
     var userObject = jwt_decode(response.credential)
@@ -18,13 +17,11 @@ export const LoginScreen = () => {
     axios
       .post("/api/login", userObject)
       .then(({data}) => {
-        // setUrl(data.url);
         navigate(`/verificar/${data.id}`, {
           replace: true,
         });
       })
       .catch((err) => {
-        // setUrl(err);
         console.log(err);
       });
   }
@@ -51,9 +48,6 @@ export const LoginScreen = () => {
       <h1 className="login__title">Liceo Militar General Paz</h1>
       <h5 className="login__subtitle">Verdad - Equidad - Justicia</h5>
       <div id="signInDiv" className="login__google-button"></div>
-      {/* <a className="login__button" href={url}>
-        Iniciar sesión
-      </a> */}
       <p className="login__paragraph">Powered by Google&reg;</p>
       <div className="login__icons-container">
         <a

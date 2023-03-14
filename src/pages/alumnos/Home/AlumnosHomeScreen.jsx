@@ -2,7 +2,6 @@ import Spinner from "react-bootstrap/Spinner";
 import Table from "react-bootstrap/Table";
 import { AuthContext } from "context";
 import React, { useContext, useEffect, useState } from "react";
-import { weekDayMapper } from "utils/alumnos/weekDayMapper";
 const axios = require("axios").default;
 
 export const AlumnosHomeScreen = () => {
