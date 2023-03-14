@@ -18,7 +18,7 @@ export const ProfesoresActividadesScreen = () => {
     setIsLoading(true);
     axios
       // If it's a directive, read activitites from profesors, otherwise, students
-      .post("/api/message/read", { type: (user.p_type == 1) ? user.type : !user.type })
+      .post("/api/message/read", { type: (user.p_type === 1) ? user.type : !user.type })
       .then(({ data }) => {
         setActivities(data.element);
         setIsLoading(false);
@@ -26,7 +26,7 @@ export const ProfesoresActividadesScreen = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [user.type]);
+  }, [user.type, user.p_type]);
 
   const onAdd = (data) => {
     const date = moment(data.date).format("DD/MM/YYYY");
@@ -35,13 +35,13 @@ export const ProfesoresActividadesScreen = () => {
       .post("/api/message/write", {
         date: date,
         text: data.text,
-        type: (user.p_type == 1) ? user.type : !user.type,
+        type: (user.p_type === 1) ? user.type : !user.type,
       })
       .then(({ data }) => {
         if (data.msj.msj === "DB correctly") {
           setIsLoading(true);
           axios
-            .post("/api/message/read", { type: (user.p_type == 1) ? user.type : !user.type })
+            .post("/api/message/read", { type: (user.p_type === 1) ? user.type : !user.type })
             .then(({ data }) => {
               setActivities(data.element);
               resetField("text");
@@ -66,7 +66,7 @@ export const ProfesoresActividadesScreen = () => {
         if (data.element.msj === "DB correctly") {
           setIsLoading(true);
           axios
-            .post("/api/message/read", { type: (user.p_type == 1) ? user.type : !user.type })
+            .post("/api/message/read", { type: (user.p_type === 1) ? user.type : !user.type })
             .then(({ data }) => {
               setActivities(data.element);
               setIsLoading(false);
